@@ -16,7 +16,6 @@ require 'spec_helper'
 require 'google/apis/options'
 require 'google/apis/core/base_service'
 require 'google/apis/core/json_representation'
-require 'pry'
 
 RSpec.describe Google::Apis::Core::BaseService do
   include TestHelpers
