@@ -240,7 +240,6 @@ module Google
           # Initiating call
           response = client.delete(@upload_url, nil, request_header)
           handle_resumable_upload_http_response_codes(response)
-
           if !@upload_incomplete && (400..499).include?(response.status.to_i) && response.status.to_i != 404
             @close_io_on_finish = true
             true # method returns true if upload is successfully cancelled
@@ -248,7 +247,6 @@ module Google
             logger.debug { sprintf("Failed to cancel upload session. Response: #{response.status.to_i} - #{response.body}") }
             false
           end
-  
         end
 
         def handle_resumable_upload_http_response_codes(response)
