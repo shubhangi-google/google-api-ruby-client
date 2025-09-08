@@ -149,9 +149,7 @@ module Google
         # Reinitiating resumable upload
         def reinitiate_resumable_upload(client)
           logger.debug { sprintf('Restarting resumable upload command to %s', url) }
-          unless check_resumable_upload client
-            return false
-          end
+          return false unless check_resumable_upload client
           upload_io.pos = @offset
         end
 
