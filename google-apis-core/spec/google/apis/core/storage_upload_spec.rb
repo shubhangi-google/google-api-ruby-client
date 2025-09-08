@@ -166,7 +166,7 @@ RSpec.describe Google::Apis::Core::StorageUploadCommand do
       stub_request(:put, upload_url)
         .to_return(status: 404)
       command.options.upload_chunk_size = 11
-      command.upload_id = upload_id
+      command.upload_id = "wrong_upload_id"
       expect(command.execute(client)).to be_falsy
     end
   end
@@ -248,7 +248,7 @@ RSpec.describe Google::Apis::Core::StorageUploadCommand do
       stub_request(:delete, upload_url)
         .to_return(status: 404)
       command.options.upload_chunk_size = 11
-      command.upload_id = upload_id
+      command.upload_id = "wrong_upload_id"
       command.delete_upload = true
       expect(command.execute(client)).to be_falsy
     end
