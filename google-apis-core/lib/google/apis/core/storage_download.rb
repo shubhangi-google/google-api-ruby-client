@@ -45,7 +45,7 @@ module Google
             logger.debug { sprintf('Resuming download from offset %d', @offset) }
             request_header[RANGE_HEADER] = sprintf('bytes=%d-', @offset)
           end
-
+          Google::Apis.logger.level = Logger::DEBUG
           http_res = client.get(url.to_s, query, request_header) do |request|
             request.options.on_data = proc do |chunk, _size, res|
               # The on_data callback is only invoked on a successful response.
