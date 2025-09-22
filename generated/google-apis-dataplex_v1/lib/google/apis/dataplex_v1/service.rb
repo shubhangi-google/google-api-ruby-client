@@ -546,8 +546,8 @@ module Google
         # @param [String] name
         #   The resource that owns the locations collection, if applicable.
         # @param [Array<String>, String] extra_location_types
-        #   Optional. Do not use this field. It is unsupported and is ignored unless
-        #   explicitly documented otherwise. This is primarily for internal usage.
+        #   Optional. Unless explicitly documented otherwise, don't use this unsupported
+        #   field which is primarily intended for internal usage.
         # @param [String] filter
         #   A filter to narrow down results to a preferred subset. The filtering language
         #   accepts strings like "displayName=tokyo", and is documented in more detail in
@@ -589,7 +589,11 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Looks up an entry by name using the permission on the source system.
+        # Looks up an entry by name using the permission on the source system. Caution:
+        # The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc Metastore
+        # metadata that is stored in Dataplex Universal Catalog is changing. For more
+        # information, see Changes to metadata stored in Dataplex Universal Catalog (
+        # https://cloud.google.com/dataplex/docs/metadata-changes).
         # @param [String] name
         #   Required. The project to which the request should be attributed in the
         #   following form: projects/`project`/locations/`location`.
@@ -3066,7 +3070,10 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Gets an Entry.
+        # Gets an Entry. Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform,
+        # and Dataproc Metastore metadata that is stored in Dataplex Universal Catalog
+        # is changing. For more information, see Changes to metadata stored in Dataplex
+        # Universal Catalog (https://cloud.google.com/dataplex/docs/metadata-changes).
         # @param [String] name
         #   Required. The resource name of the Entry: projects/`project`/locations/`
         #   location`/entryGroups/`entry_group`/entries/`entry`.
@@ -3108,7 +3115,11 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Lists Entries within an EntryGroup.
+        # Lists Entries within an EntryGroup. Caution: The Vertex AI, Bigtable, Spanner,
+        # Pub/Sub, Dataform, and Dataproc Metastore metadata that is stored in Dataplex
+        # Universal Catalog is changing. For more information, see Changes to metadata
+        # stored in Dataplex Universal Catalog (https://cloud.google.com/dataplex/docs/
+        # metadata-changes).
         # @param [String] parent
         #   Required. The resource name of the parent Entry Group: projects/`project`/
         #   locations/`location`/entryGroups/`entry_group`.

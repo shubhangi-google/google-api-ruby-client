@@ -738,6 +738,48 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] region
+        #   The name of the region for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_address_iam_permissions(project, region, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/regions/{region}/addresses/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
+          command.params['project'] = project unless project.nil?
+          command.params['region'] = region unless region.nil?
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
         # Retrieves an aggregated list of autoscalers. To prevent failure, Google
         # recommends that you set the `returnPartialSuccess` parameter to `true`.
         # @param [String] project
@@ -6233,6 +6275,45 @@ module Google
           command.request_object = global_set_labels_request_object
           command.response_representation = Google::Apis::ComputeV1::Operation::Representation
           command.response_class = Google::Apis::ComputeV1::Operation
+          command.params['project'] = project unless project.nil?
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_global_address_iam_permissions(project, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/global/addresses/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
           command.params['project'] = project unless project.nil?
           command.params['resource'] = resource unless resource.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -11966,6 +12047,48 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] zone
+        #   The name of the zone for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_instance_group_iam_permissions(project, zone, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/zones/{zone}/instanceGroups/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
+          command.params['project'] = project unless project.nil?
+          command.params['zone'] = zone unless zone.nil?
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
         # Get Instance settings.
         # @param [String] project
         #   Project ID for this request.
@@ -12562,6 +12685,60 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
+        # Adds one dynamic network interface to an active instance.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] zone
+        #   The name of the zone for this request.
+        # @param [String] instance
+        #   The instance name for this request stored as resource_id. Name should conform
+        #   to RFC1035 or be an unsigned long integer.
+        # @param [Google::Apis::ComputeV1::NetworkInterface] network_interface_object
+        # @param [String] request_id
+        #   An optional request ID to identify requests. Specify a unique request ID so
+        #   that if you must retry your request, the server will know to ignore the
+        #   request if it has already been completed. For example, consider a situation
+        #   where you make an initial request and the request times out. If you make the
+        #   request again with the same request ID, the server can check if original
+        #   operation with the same request ID was received, and if so, will ignore the
+        #   second request. This prevents clients from accidentally creating duplicate
+        #   commitments. The request ID must be a valid UUID with the exception that zero
+        #   UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::Operation] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::Operation]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def add_instance_network_interface(project, zone, instance, network_interface_object = nil, request_id: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/zones/{zone}/instances/{instance}/addNetworkInterface', options)
+          command.request_representation = Google::Apis::ComputeV1::NetworkInterface::Representation
+          command.request_object = network_interface_object
+          command.response_representation = Google::Apis::ComputeV1::Operation::Representation
+          command.response_class = Google::Apis::ComputeV1::Operation
+          command.params['project'] = project unless project.nil?
+          command.params['zone'] = zone unless zone.nil?
+          command.params['instance'] = instance unless instance.nil?
+          command.query['requestId'] = request_id unless request_id.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
         # Adds existing resource policies to an instance. You can only add one policy
         # right now which will be applied to this instance for scheduling live
         # migrations.
@@ -12936,6 +13113,63 @@ module Google
           command.params['instance'] = instance unless instance.nil?
           command.query['accessConfig'] = access_config unless access_config.nil?
           command.query['networkInterface'] = network_interface unless network_interface.nil?
+          command.query['requestId'] = request_id unless request_id.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Deletes one dynamic network interface from an active instance.
+        # InstancesDeleteNetworkInterfaceRequest indicates: - instance from which to
+        # delete, using project+zone+resource_id fields; - dynamic network interface to
+        # be deleted, using network_interface_name field;
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] zone
+        #   The name of the zone for this request.
+        # @param [String] instance
+        #   The instance name for this request stored as resource_id. Name should conform
+        #   to RFC1035 or be an unsigned long integer.
+        # @param [String] network_interface_name
+        #   The name of the dynamic network interface to be deleted from the instance.
+        # @param [String] request_id
+        #   An optional request ID to identify requests. Specify a unique request ID so
+        #   that if you must retry your request, the server will know to ignore the
+        #   request if it has already been completed. For example, consider a situation
+        #   where you make an initial request and the request times out. If you make the
+        #   request again with the same request ID, the server can check if original
+        #   operation with the same request ID was received, and if so, will ignore the
+        #   second request. This prevents clients from accidentally creating duplicate
+        #   commitments. The request ID must be a valid UUID with the exception that zero
+        #   UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::Operation] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::Operation]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def delete_instance_network_interface(project, zone, instance, network_interface_name, request_id: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/zones/{zone}/instances/{instance}/deleteNetworkInterface', options)
+          command.response_representation = Google::Apis::ComputeV1::Operation::Representation
+          command.response_class = Google::Apis::ComputeV1::Operation
+          command.params['project'] = project unless project.nil?
+          command.params['zone'] = zone unless zone.nil?
+          command.params['instance'] = instance unless instance.nil?
+          command.query['networkInterfaceName'] = network_interface_name unless network_interface_name.nil?
           command.query['requestId'] = request_id unless request_id.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -24658,7 +24892,14 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Moves a persistent disk from one zone to another.
+        # Starting September 29, 2025, you can't use the moveDisk API on new projects.
+        # To move a disk to a different region or zone, follow the steps in [Change the
+        # location of a disk](https://`$universe.dns_names.final_documentation_domain`/
+        # compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd). Projects that already
+        # use the moveDisk API can continue usage until September 29, 2026. Starting
+        # November 1, 2025, API responses will include a warning message in the response
+        # body about the upcoming deprecation. You can skip the message to continue
+        # using the service without interruption.
         # @param [String] project
         #   Project ID for this request.
         # @param [Google::Apis::ComputeV1::MoveDiskRequest] move_disk_request_object
@@ -30610,6 +30851,48 @@ module Google
           command.params['region'] = region unless region.nil?
           command.params['instanceGroup'] = instance_group unless instance_group.nil?
           command.query['requestId'] = request_id unless request_id.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] region
+        #   The name of the region for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_region_instance_group_iam_permissions(project, region, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/regions/{region}/instanceGroups/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
+          command.params['project'] = project unless project.nil?
+          command.params['region'] = region unless region.nil?
+          command.params['resource'] = resource unless resource.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -39492,6 +39775,8 @@ module Google
         #   Name of the region of this request.
         # @param [String] service_attachment
         #   Name of the ServiceAttachment resource to return.
+        # @param [Boolean] show_nat_ips
+        #   Indicates whether NAT IPs should be included in the response.
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -39511,13 +39796,14 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_service_attachment(project, region, service_attachment, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+        def get_service_attachment(project, region, service_attachment, show_nat_ips: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
           command = make_simple_command(:get, 'projects/{project}/regions/{region}/serviceAttachments/{serviceAttachment}', options)
           command.response_representation = Google::Apis::ComputeV1::ServiceAttachment::Representation
           command.response_class = Google::Apis::ComputeV1::ServiceAttachment
           command.params['project'] = project unless project.nil?
           command.params['region'] = region unless region.nil?
           command.params['serviceAttachment'] = service_attachment unless service_attachment.nil?
+          command.query['showNatIps'] = show_nat_ips unless show_nat_ips.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -42200,6 +42486,9 @@ module Google
         #   Name of the region scoping this request.
         # @param [String] subnetwork
         #   Name of the Subnetwork resource to return.
+        # @param [Array<String>, String] views
+        #   Defines the extra views returned back in the subnetwork resource. Supported
+        #   values: - WITH_UTILIZATION: Utilization data is included in the response.
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -42219,13 +42508,14 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_subnetwork(project, region, subnetwork, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+        def get_subnetwork(project, region, subnetwork, views: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
           command = make_simple_command(:get, 'projects/{project}/regions/{region}/subnetworks/{subnetwork}', options)
           command.response_representation = Google::Apis::ComputeV1::Subnetwork::Representation
           command.response_class = Google::Apis::ComputeV1::Subnetwork
           command.params['project'] = project unless project.nil?
           command.params['region'] = region unless region.nil?
           command.params['subnetwork'] = subnetwork unless subnetwork.nil?
+          command.query['views'] = views unless views.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -42384,6 +42674,9 @@ module Google
         #   failure. The default value is false. For example, when partial success
         #   behavior is enabled, aggregatedList for a single zone scope either returns all
         #   resources in the zone or no resources, with an error code.
+        # @param [Array<String>, String] views
+        #   Defines the extra views returned back in the subnetwork resource. Supported
+        #   values: - WITH_UTILIZATION: Utilization data is included in the response.
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -42403,7 +42696,7 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_subnetworks(project, region, filter: nil, max_results: nil, order_by: nil, page_token: nil, return_partial_success: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+        def list_subnetworks(project, region, filter: nil, max_results: nil, order_by: nil, page_token: nil, return_partial_success: nil, views: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
           command = make_simple_command(:get, 'projects/{project}/regions/{region}/subnetworks', options)
           command.response_representation = Google::Apis::ComputeV1::SubnetworkList::Representation
           command.response_class = Google::Apis::ComputeV1::SubnetworkList
@@ -42414,6 +42707,7 @@ module Google
           command.query['orderBy'] = order_by unless order_by.nil?
           command.query['pageToken'] = page_token unless page_token.nil?
           command.query['returnPartialSuccess'] = return_partial_success unless return_partial_success.nil?
+          command.query['views'] = views unless views.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -44454,6 +44748,48 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] zone
+        #   The name of the zone for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_target_instance_iam_permissions(project, zone, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/zones/{zone}/targetInstances/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
+          command.params['project'] = project unless project.nil?
+          command.params['zone'] = zone unless zone.nil?
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
         # Adds health check URLs to a target pool.
         # @param [String] project
         #   Project ID for this request.
@@ -45152,6 +45488,48 @@ module Google
           command.params['region'] = region unless region.nil?
           command.params['targetPool'] = target_pool unless target_pool.nil?
           command.query['requestId'] = request_id unless request_id.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Returns permissions that a caller has on the specified resource.
+        # @param [String] project
+        #   Project ID for this request.
+        # @param [String] region
+        #   The name of the region for this request.
+        # @param [String] resource
+        #   Name or id of the resource for this request.
+        # @param [Google::Apis::ComputeV1::TestPermissionsRequest] test_permissions_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [String] user_ip
+        #   Legacy name for parameter that has been superseded by `quotaUser`.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::ComputeV1::TestPermissionsResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::ComputeV1::TestPermissionsResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def test_target_pool_iam_permissions(project, region, resource, test_permissions_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          command = make_simple_command(:post, 'projects/{project}/regions/{region}/targetPools/{resource}/testIamPermissions', options)
+          command.request_representation = Google::Apis::ComputeV1::TestPermissionsRequest::Representation
+          command.request_object = test_permissions_request_object
+          command.response_representation = Google::Apis::ComputeV1::TestPermissionsResponse::Representation
+          command.response_class = Google::Apis::ComputeV1::TestPermissionsResponse
+          command.params['project'] = project unless project.nil?
+          command.params['region'] = region unless region.nil?
+          command.params['resource'] = resource unless resource.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?

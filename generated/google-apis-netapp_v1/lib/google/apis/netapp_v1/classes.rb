@@ -556,6 +556,109 @@ module Google
         end
       end
       
+      # Configuration of the cache volume.
+      class CacheConfig
+        include Google::Apis::Core::Hashable
+      
+        # Optional. Flag indicating whether a CIFS change notification is enabled for
+        # the FlexCache volume.
+        # Corresponds to the JSON property `cifsChangeNotifyEnabled`
+        # @return [Boolean]
+        attr_accessor :cifs_change_notify_enabled
+        alias_method :cifs_change_notify_enabled?, :cifs_change_notify_enabled
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @cifs_change_notify_enabled = args[:cifs_change_notify_enabled] if args.key?(:cifs_change_notify_enabled)
+        end
+      end
+      
+      # Cache Parameters for the volume.
+      class CacheParameters
+        include Google::Apis::Core::Hashable
+      
+        # Configuration of the cache volume.
+        # Corresponds to the JSON property `cacheConfig`
+        # @return [Google::Apis::NetappV1::CacheConfig]
+        attr_accessor :cache_config
+      
+        # Output only. State of the cache volume indicating the peering status.
+        # Corresponds to the JSON property `cacheState`
+        # @return [String]
+        attr_accessor :cache_state
+      
+        # Output only. Copy-paste-able commands to be used on user's ONTAP to accept
+        # peering requests.
+        # Corresponds to the JSON property `command`
+        # @return [String]
+        attr_accessor :command
+      
+        # Optional. Field indicating whether cache volume as global file lock enabled.
+        # Corresponds to the JSON property `enableGlobalFileLock`
+        # @return [Boolean]
+        attr_accessor :enable_global_file_lock
+        alias_method :enable_global_file_lock?, :enable_global_file_lock
+      
+        # Output only. Temporary passphrase generated to accept cluster peering command.
+        # Corresponds to the JSON property `passphrase`
+        # @return [String]
+        attr_accessor :passphrase
+      
+        # Required. Name of the origin volume's ONTAP cluster.
+        # Corresponds to the JSON property `peerClusterName`
+        # @return [String]
+        attr_accessor :peer_cluster_name
+      
+        # Required. List of IC LIF addresses of the origin volume's ONTAP cluster.
+        # Corresponds to the JSON property `peerIpAddresses`
+        # @return [Array<String>]
+        attr_accessor :peer_ip_addresses
+      
+        # Required. Name of the origin volume's SVM.
+        # Corresponds to the JSON property `peerSvmName`
+        # @return [String]
+        attr_accessor :peer_svm_name
+      
+        # Required. Name of the origin volume for the cache volume.
+        # Corresponds to the JSON property `peerVolumeName`
+        # @return [String]
+        attr_accessor :peer_volume_name
+      
+        # Optional. Expiration time for the peering command to be executed on user's
+        # ONTAP.
+        # Corresponds to the JSON property `peeringCommandExpiryTime`
+        # @return [String]
+        attr_accessor :peering_command_expiry_time
+      
+        # Output only. Detailed description of the current cache state.
+        # Corresponds to the JSON property `stateDetails`
+        # @return [String]
+        attr_accessor :state_details
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @cache_config = args[:cache_config] if args.key?(:cache_config)
+          @cache_state = args[:cache_state] if args.key?(:cache_state)
+          @command = args[:command] if args.key?(:command)
+          @enable_global_file_lock = args[:enable_global_file_lock] if args.key?(:enable_global_file_lock)
+          @passphrase = args[:passphrase] if args.key?(:passphrase)
+          @peer_cluster_name = args[:peer_cluster_name] if args.key?(:peer_cluster_name)
+          @peer_ip_addresses = args[:peer_ip_addresses] if args.key?(:peer_ip_addresses)
+          @peer_svm_name = args[:peer_svm_name] if args.key?(:peer_svm_name)
+          @peer_volume_name = args[:peer_volume_name] if args.key?(:peer_volume_name)
+          @peering_command_expiry_time = args[:peering_command_expiry_time] if args.key?(:peering_command_expiry_time)
+          @state_details = args[:state_details] if args.key?(:state_details)
+        end
+      end
+      
       # The request message for Operations.CancelOperation.
       class CancelOperationRequest
         include Google::Apis::Core::Hashable
@@ -1825,6 +1928,39 @@ module Google
         end
       end
       
+      # RestoreBackupFilesRequest restores files from a backup to a volume.
+      class RestoreBackupFilesRequest
+        include Google::Apis::Core::Hashable
+      
+        # Required. The backup resource name, in the format `projects/`project_id`/
+        # locations/`location`/backupVaults/`backup_vault_id`/backups/`backup_id``
+        # Corresponds to the JSON property `backup`
+        # @return [String]
+        attr_accessor :backup
+      
+        # Required. List of files to be restored in the form of their absolute path as
+        # in source volume.
+        # Corresponds to the JSON property `fileList`
+        # @return [Array<String>]
+        attr_accessor :file_list
+      
+        # Optional. Absolute directory path in the destination volume.
+        # Corresponds to the JSON property `restoreDestinationPath`
+        # @return [String]
+        attr_accessor :restore_destination_path
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @backup = args[:backup] if args.key?(:backup)
+          @file_list = args[:file_list] if args.key?(:file_list)
+          @restore_destination_path = args[:restore_destination_path] if args.key?(:restore_destination_path)
+        end
+      end
+      
       # The RestoreParameters if volume is created from a snapshot or backup.
       class RestoreParameters
         include Google::Apis::Core::Hashable
@@ -1914,6 +2050,12 @@ module Google
         # @return [String]
         attr_accessor :allowed_clients
       
+        # Optional. An integer representing the anonymous user ID. Range is 0 to
+        # 4294967295. Required when squash_mode is ROOT_SQUASH or ALL_SQUASH.
+        # Corresponds to the JSON property `anonUid`
+        # @return [Fixnum]
+        attr_accessor :anon_uid
+      
         # Whether Unix root access will be granted.
         # Corresponds to the JSON property `hasRootAccess`
         # @return [String]
@@ -1982,6 +2124,13 @@ module Google
         attr_accessor :nfsv4
         alias_method :nfsv4?, :nfsv4
       
+        # Optional. Defines how user identity squashing is applied for this export rule.
+        # This field is the preferred way to configure squashing behavior and takes
+        # precedence over `has_root_access` if both are provided.
+        # Corresponds to the JSON property `squashMode`
+        # @return [String]
+        attr_accessor :squash_mode
+      
         def initialize(**args)
            update!(**args)
         end
@@ -1990,6 +2139,7 @@ module Google
         def update!(**args)
           @access_type = args[:access_type] if args.key?(:access_type)
           @allowed_clients = args[:allowed_clients] if args.key?(:allowed_clients)
+          @anon_uid = args[:anon_uid] if args.key?(:anon_uid)
           @has_root_access = args[:has_root_access] if args.key?(:has_root_access)
           @kerberos5_read_only = args[:kerberos5_read_only] if args.key?(:kerberos5_read_only)
           @kerberos5_read_write = args[:kerberos5_read_write] if args.key?(:kerberos5_read_write)
@@ -1999,6 +2149,7 @@ module Google
           @kerberos5p_read_write = args[:kerberos5p_read_write] if args.key?(:kerberos5p_read_write)
           @nfsv3 = args[:nfsv3] if args.key?(:nfsv3)
           @nfsv4 = args[:nfsv4] if args.key?(:nfsv4)
+          @squash_mode = args[:squash_mode] if args.key?(:squash_mode)
         end
       end
       
@@ -2614,6 +2765,11 @@ module Google
         # @return [Google::Apis::NetappV1::BackupConfig]
         attr_accessor :backup_config
       
+        # Cache Parameters for the volume.
+        # Corresponds to the JSON property `cacheParameters`
+        # @return [Google::Apis::NetappV1::CacheParameters]
+        attr_accessor :cache_parameters
+      
         # Required. Capacity in GIB of the volume
         # Corresponds to the JSON property `capacityGib`
         # @return [Fixnum]
@@ -2831,6 +2987,7 @@ module Google
         def update!(**args)
           @active_directory = args[:active_directory] if args.key?(:active_directory)
           @backup_config = args[:backup_config] if args.key?(:backup_config)
+          @cache_parameters = args[:cache_parameters] if args.key?(:cache_parameters)
           @capacity_gib = args[:capacity_gib] if args.key?(:capacity_gib)
           @cold_tier_size_gib = args[:cold_tier_size_gib] if args.key?(:cold_tier_size_gib)
           @create_time = args[:create_time] if args.key?(:create_time)

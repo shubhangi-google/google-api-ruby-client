@@ -841,10 +841,16 @@ module Google
         # @return [Google::Apis::WorkloadmanagerV1::AgentStatus]
         attr_accessor :agent_status
       
-        # Required. The instance id where the insight is generated from
+        # Optional. The instance id where the insight is generated from
         # Corresponds to the JSON property `instanceId`
         # @return [String]
         attr_accessor :instance_id
+      
+        # A presentation of OpenShift workload insight. The schema of OpenShift
+        # workloads validation related data.
+        # Corresponds to the JSON property `openShiftValidation`
+        # @return [Google::Apis::WorkloadmanagerV1::OpenShiftValidation]
+        attr_accessor :open_shift_validation
       
         # The schema of SAP system discovery data.
         # Corresponds to the JSON property `sapDiscovery`
@@ -881,6 +887,7 @@ module Google
         def update!(**args)
           @agent_status = args[:agent_status] if args.key?(:agent_status)
           @instance_id = args[:instance_id] if args.key?(:instance_id)
+          @open_shift_validation = args[:open_shift_validation] if args.key?(:open_shift_validation)
           @sap_discovery = args[:sap_discovery] if args.key?(:sap_discovery)
           @sap_validation = args[:sap_validation] if args.key?(:sap_validation)
           @sent_time = args[:sent_time] if args.key?(:sent_time)
@@ -1221,6 +1228,20 @@ module Google
         # Update properties of this object
         def update!(**args)
           @message = args[:message] if args.key?(:message)
+        end
+      end
+      
+      # A presentation of OpenShift workload insight. The schema of OpenShift
+      # workloads validation related data.
+      class OpenShiftValidation
+        include Google::Apis::Core::Hashable
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
         end
       end
       
@@ -2700,7 +2721,7 @@ module Google
         # @return [String]
         attr_accessor :agent_version
       
-        # Required. instance_name lists the human readable name of the instance that the
+        # Optional. instance_name lists the human readable name of the instance that the
         # data comes from.
         # Corresponds to the JSON property `instanceName`
         # @return [String]

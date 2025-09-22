@@ -830,6 +830,16 @@ module Google
         # @return [String]
         attr_accessor :name
       
+        # Config to enabled subscribing to events from other projects in the org.
+        # Corresponds to the JSON property `organizationSubscription`
+        # @return [Google::Apis::EventarcV1::OrganizationSubscription]
+        attr_accessor :organization_subscription
+      
+        # Config to enable subscribing to all events from a list of projects.
+        # Corresponds to the JSON property `projectSubscriptions`
+        # @return [Google::Apis::EventarcV1::ProjectSubscriptions]
+        attr_accessor :project_subscriptions
+      
         # Output only. Server assigned unique identifier for the channel. The value is a
         # UUID4 string and guaranteed to remain unchanged until the resource is deleted.
         # Corresponds to the JSON property `uid`
@@ -856,6 +866,8 @@ module Google
           @labels = args[:labels] if args.key?(:labels)
           @logging_config = args[:logging_config] if args.key?(:logging_config)
           @name = args[:name] if args.key?(:name)
+          @organization_subscription = args[:organization_subscription] if args.key?(:organization_subscription)
+          @project_subscriptions = args[:project_subscriptions] if args.key?(:project_subscriptions)
           @uid = args[:uid] if args.key?(:uid)
           @update_time = args[:update_time] if args.key?(:update_time)
         end
@@ -973,9 +985,10 @@ module Google
       class GoogleCloudEventarcV1PipelineDestinationAuthenticationConfig
         include Google::Apis::Core::Hashable
       
-        # Represents a config used to authenticate with a Google OIDC token using a GCP
-        # service account. Use this authentication method to invoke your Cloud Run and
-        # Cloud Functions destinations or HTTP endpoints that support Google OIDC.
+        # Represents a config used to authenticate with a Google OIDC token using a
+        # Google Cloud service account. Use this authentication method to invoke your
+        # Cloud Run and Cloud Functions destinations or HTTP endpoints that support
+        # Google OIDC.
         # Corresponds to the JSON property `googleOidc`
         # @return [Google::Apis::EventarcV1::GoogleCloudEventarcV1PipelineDestinationAuthenticationConfigOidcToken]
         attr_accessor :google_oidc
@@ -1032,9 +1045,10 @@ module Google
         end
       end
       
-      # Represents a config used to authenticate with a Google OIDC token using a GCP
-      # service account. Use this authentication method to invoke your Cloud Run and
-      # Cloud Functions destinations or HTTP endpoints that support Google OIDC.
+      # Represents a config used to authenticate with a Google OIDC token using a
+      # Google Cloud service account. Use this authentication method to invoke your
+      # Cloud Run and Cloud Functions destinations or HTTP endpoints that support
+      # Google OIDC.
       class GoogleCloudEventarcV1PipelineDestinationAuthenticationConfigOidcToken
         include Google::Apis::Core::Hashable
       
@@ -2113,6 +2127,26 @@ module Google
         end
       end
       
+      # Config to enabled subscribing to events from other projects in the org.
+      class OrganizationSubscription
+        include Google::Apis::Core::Hashable
+      
+        # Required. Enable org level subscription.
+        # Corresponds to the JSON property `enabled`
+        # @return [Boolean]
+        attr_accessor :enabled
+        alias_method :enabled?, :enabled
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @enabled = args[:enabled] if args.key?(:enabled)
+        end
+      end
+      
       # A representation of the Pipeline resource.
       class Pipeline
         include Google::Apis::Core::Hashable
@@ -2334,6 +2368,28 @@ module Google
           @bindings = args[:bindings] if args.key?(:bindings)
           @etag = args[:etag] if args.key?(:etag)
           @version = args[:version] if args.key?(:version)
+        end
+      end
+      
+      # Config to enable subscribing to all events from a list of projects.
+      class ProjectSubscriptions
+        include Google::Apis::Core::Hashable
+      
+        # Required. A list of projects to receive events from. All the projects must be
+        # in the same org. The listed projects should have the format project/`
+        # identifier` where identifier can be either the project id for project number.
+        # A single list may contain both formats. At most 100 projects can be listed.
+        # Corresponds to the JSON property `list`
+        # @return [Array<String>]
+        attr_accessor :list
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @list = args[:list] if args.key?(:list)
         end
       end
       

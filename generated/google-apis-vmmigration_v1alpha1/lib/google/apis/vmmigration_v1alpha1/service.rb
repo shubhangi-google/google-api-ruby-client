@@ -85,8 +85,8 @@ module Google
         # @param [String] name
         #   The resource that owns the locations collection, if applicable.
         # @param [Array<String>, String] extra_location_types
-        #   Optional. Do not use this field. It is unsupported and is ignored unless
-        #   explicitly documented otherwise. This is primarily for internal usage.
+        #   Optional. Unless explicitly documented otherwise, don't use this unsupported
+        #   field which is primarily intended for internal usage.
         # @param [String] filter
         #   A filter to narrow down results to a preferred subset. The filtering language
         #   accepts strings like `"displayName=tokyo"`, and is documented in more detail
@@ -582,7 +582,7 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Initiates the cancellation of a running clone job.
+        # Initiates the cancellation of a running ImageImportJob.
         # @param [String] name
         #   Required. The image import job id.
         # @param [Google::Apis::VmmigrationV1alpha1::CancelImageImportJobRequest] cancel_image_import_job_request_object

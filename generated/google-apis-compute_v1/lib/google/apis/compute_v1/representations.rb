@@ -3658,6 +3658,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class NetworkProfileProfileType
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class NetworkProfilesListResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
         
@@ -5296,6 +5302,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class RouterParams
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class RouterStatus
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -6274,6 +6286,24 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class SubnetworkUtilizationDetails
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class SubnetworkUtilizationDetailsIpv4Utilization
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class SubnetworkUtilizationDetailsIpv6Utilization
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class SubnetworksExpandIpCidrRangeRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -7150,6 +7180,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class VpnTunnelCipherSuite
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class VpnTunnelList
         class Representation < Google::Apis::Core::JsonRepresentation; end
         
@@ -7164,6 +7200,18 @@ module Google
         
           include Google::Apis::Core::JsonObjectSupport
         end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class VpnTunnelPhase1Algorithms
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class VpnTunnelPhase2Algorithms
+        class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
@@ -11561,6 +11609,8 @@ module Google
       class InstanceParams
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :request_valid_for_duration, as: 'requestValidForDuration', class: Google::Apis::ComputeV1::Duration, decorator: Google::Apis::ComputeV1::Duration::Representation
+      
           hash :resource_manager_tags, as: 'resourceManagerTags'
         end
       end
@@ -12807,6 +12857,7 @@ module Google
           collection :region_infos, as: 'regionInfos', class: Google::Apis::ComputeV1::InterconnectLocationRegionInfo, decorator: Google::Apis::ComputeV1::InterconnectLocationRegionInfo::Representation
       
           property :self_link, as: 'selfLink'
+          collection :single_region_production_critical_peer_locations, as: 'singleRegionProductionCriticalPeerLocations'
           property :status, as: 'status'
           property :supports_pzs, as: 'supportsPzs'
         end
@@ -12921,6 +12972,7 @@ module Google
           property :lacp, as: 'lacp'
           property :max_lag_size100_gbps, as: 'maxLagSize100Gbps'
           property :max_lag_size10_gbps, as: 'maxLagSize10Gbps'
+          property :max_lag_size400_gbps, as: 'maxLagSize400Gbps'
           property :name, as: 'name'
           property :peeringdb_facility_id, as: 'peeringdbFacilityId'
           collection :permitted_connections, as: 'permittedConnections', class: Google::Apis::ComputeV1::InterconnectRemoteLocationPermittedConnections, decorator: Google::Apis::ComputeV1::InterconnectRemoteLocationPermittedConnections::Representation
@@ -14013,9 +14065,11 @@ module Google
           property :network_attachment, as: 'networkAttachment'
           property :network_ip, as: 'networkIP'
           property :nic_type, as: 'nicType'
+          property :parent_nic_name, as: 'parentNicName'
           property :queue_count, as: 'queueCount'
           property :stack_type, as: 'stackType'
           property :subnetwork, as: 'subnetwork'
+          property :vlan, as: 'vlan'
         end
       end
       
@@ -14128,6 +14182,8 @@ module Google
           property :location, as: 'location', class: Google::Apis::ComputeV1::NetworkProfileLocation, decorator: Google::Apis::ComputeV1::NetworkProfileLocation::Representation
       
           property :name, as: 'name'
+          property :profile_type, as: 'profileType', class: Google::Apis::ComputeV1::NetworkProfileProfileType, decorator: Google::Apis::ComputeV1::NetworkProfileProfileType::Representation
+      
           property :self_link, as: 'selfLink'
           property :self_link_with_id, as: 'selfLinkWithId'
         end
@@ -14172,6 +14228,16 @@ module Google
           collection :subnetwork_purposes, as: 'subnetworkPurposes'
           collection :subnetwork_stack_types, as: 'subnetworkStackTypes'
           property :unicast, as: 'unicast'
+        end
+      end
+      
+      class NetworkProfileProfileType
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :network_type, as: 'networkType'
+          property :rdma_subtype, as: 'rdmaSubtype'
+          property :ull_subtype, as: 'ullSubtype'
+          property :vpc_subtype, as: 'vpcSubtype'
         end
       end
       
@@ -16110,6 +16176,7 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :backend_service, as: 'backendService'
+          property :mirror_percent, as: 'mirrorPercent'
         end
       end
       
@@ -16927,6 +16994,8 @@ module Google
           collection :nats, as: 'nats', class: Google::Apis::ComputeV1::RouterNat, decorator: Google::Apis::ComputeV1::RouterNat::Representation
       
           property :network, as: 'network'
+          property :params, as: 'params', class: Google::Apis::ComputeV1::RouterParams, decorator: Google::Apis::ComputeV1::RouterParams::Representation
+      
           property :region, as: 'region'
           property :self_link, as: 'selfLink'
         end
@@ -17165,6 +17234,13 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :name, as: 'name'
+        end
+      end
+      
+      class RouterParams
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          hash :resource_manager_tags, as: 'resourceManagerTags'
         end
       end
       
@@ -17435,6 +17511,7 @@ module Google
       
           property :preemptible, as: 'preemptible'
           property :provisioning_model, as: 'provisioningModel'
+          property :skip_guest_os_shutdown, as: 'skipGuestOsShutdown'
           property :termination_time, as: 'terminationTime'
         end
       end
@@ -17971,6 +18048,7 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :consumer_network, as: 'consumerNetwork'
           property :endpoint, as: 'endpoint'
+          collection :nat_ips, as: 'natIps'
           property :propagated_connection_count, as: 'propagatedConnectionCount'
           property :psc_connection_id, :numeric_string => true, as: 'pscConnectionId'
           property :status, as: 'status'
@@ -18933,6 +19011,8 @@ module Google
           property :state, as: 'state'
           collection :system_reserved_external_ipv6_ranges, as: 'systemReservedExternalIpv6Ranges'
           collection :system_reserved_internal_ipv6_ranges, as: 'systemReservedInternalIpv6Ranges'
+          property :utilization_details, as: 'utilizationDetails', class: Google::Apis::ComputeV1::SubnetworkUtilizationDetails, decorator: Google::Apis::ComputeV1::SubnetworkUtilizationDetails::Representation
+      
         end
       end
       
@@ -19026,6 +19106,39 @@ module Google
           property :ip_cidr_range, as: 'ipCidrRange'
           property :range_name, as: 'rangeName'
           property :reserved_internal_range, as: 'reservedInternalRange'
+        end
+      end
+      
+      class SubnetworkUtilizationDetails
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :external_ipv6_instance_utilization, as: 'externalIpv6InstanceUtilization', class: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization, decorator: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization::Representation
+      
+          property :external_ipv6_lb_utilization, as: 'externalIpv6LbUtilization', class: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization, decorator: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization::Representation
+      
+          property :internal_ipv6_utilization, as: 'internalIpv6Utilization', class: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization, decorator: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv6Utilization::Representation
+      
+          collection :ipv4_utilizations, as: 'ipv4Utilizations', class: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv4Utilization, decorator: Google::Apis::ComputeV1::SubnetworkUtilizationDetailsIpv4Utilization::Representation
+      
+        end
+      end
+      
+      class SubnetworkUtilizationDetailsIpv4Utilization
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :range_name, as: 'rangeName'
+          property :total_allocated_ip, :numeric_string => true, as: 'totalAllocatedIp'
+          property :total_free_ip, :numeric_string => true, as: 'totalFreeIp'
+        end
+      end
+      
+      class SubnetworkUtilizationDetailsIpv6Utilization
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :total_allocated_ip, as: 'totalAllocatedIp', class: Google::Apis::ComputeV1::Uint128, decorator: Google::Apis::ComputeV1::Uint128::Representation
+      
+          property :total_free_ip, as: 'totalFreeIp', class: Google::Apis::ComputeV1::Uint128, decorator: Google::Apis::ComputeV1::Uint128::Representation
+      
         end
       end
       
@@ -20528,6 +20641,8 @@ module Google
       class VpnTunnel
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :cipher_suite, as: 'cipherSuite', class: Google::Apis::ComputeV1::VpnTunnelCipherSuite, decorator: Google::Apis::ComputeV1::VpnTunnelCipherSuite::Representation
+      
           property :creation_timestamp, as: 'creationTimestamp'
           property :description, as: 'description'
           property :detailed_status, as: 'detailedStatus'
@@ -20588,6 +20703,16 @@ module Google
         end
       end
       
+      class VpnTunnelCipherSuite
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :phase1, as: 'phase1', class: Google::Apis::ComputeV1::VpnTunnelPhase1Algorithms, decorator: Google::Apis::ComputeV1::VpnTunnelPhase1Algorithms::Representation
+      
+          property :phase2, as: 'phase2', class: Google::Apis::ComputeV1::VpnTunnelPhase2Algorithms, decorator: Google::Apis::ComputeV1::VpnTunnelPhase2Algorithms::Representation
+      
+        end
+      end
+      
       class VpnTunnelList
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -20617,6 +20742,25 @@ module Google
               property :value, as: 'value'
             end
           end
+        end
+      end
+      
+      class VpnTunnelPhase1Algorithms
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :dh, as: 'dh'
+          collection :encryption, as: 'encryption'
+          collection :integrity, as: 'integrity'
+          collection :prf, as: 'prf'
+        end
+      end
+      
+      class VpnTunnelPhase2Algorithms
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :encryption, as: 'encryption'
+          collection :integrity, as: 'integrity'
+          collection :pfs, as: 'pfs'
         end
       end
       
