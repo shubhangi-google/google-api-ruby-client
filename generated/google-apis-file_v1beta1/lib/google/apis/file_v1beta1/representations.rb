@@ -416,6 +416,7 @@ module Google
           collection :nfs_export_options, as: 'nfsExportOptions', class: Google::Apis::FileV1beta1::NfsExportOptions, decorator: Google::Apis::FileV1beta1::NfsExportOptions::Representation
       
           property :source_backup, as: 'sourceBackup'
+          property :source_backupdr_backup, as: 'sourceBackupdrBackup'
         end
       end
       
@@ -622,6 +623,7 @@ module Google
           property :next_page_token, as: 'nextPageToken'
           collection :operations, as: 'operations', class: Google::Apis::FileV1beta1::Operation, decorator: Google::Apis::FileV1beta1::Operation::Representation
       
+          collection :unreachable, as: 'unreachable'
         end
       end
       

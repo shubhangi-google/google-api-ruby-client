@@ -5095,9 +5095,10 @@ module Google
         # `. * Custom hyperlinks using the format `<`url`|`rendered_text`>` where the
         # first string is the URL and the second is the rendered text—for example, ``. *
         # Custom emoji using the format `:`emoji_name`:`—for example, `:smile:`. This
-        # doesn't apply to Unicode emoji, such as `U+1F600` for a grinning face emoji.
-        # For more information, see [View text formatting sent in a message](https://
-        # developers.google.com/workspace/chat/format-messages#
+        # doesn't apply to Unicode emoji, such as `U+1F600` for a grinning face emoji. *
+        # Bullet list items using asterisks (`*`)—for example, `* item`. For more
+        # information, see [View text formatting sent in a message](https://developers.
+        # google.com/workspace/chat/format-messages#
         # view_text_formatting_sent_in_a_message)
         # Corresponds to the JSON property `formattedText`
         # @return [String]
@@ -5401,6 +5402,13 @@ module Google
       class PermissionSetting
         include Google::Apis::Core::Hashable
       
+        # Optional. Whether space managers `ROLE_ASSISTANT_MANAGER`) have this
+        # permission.
+        # Corresponds to the JSON property `assistantManagersAllowed`
+        # @return [Boolean]
+        attr_accessor :assistant_managers_allowed
+        alias_method :assistant_managers_allowed?, :assistant_managers_allowed
+      
         # Optional. Whether space owners (`ROLE_MANAGER`) have this permission.
         # Corresponds to the JSON property `managersAllowed`
         # @return [Boolean]
@@ -5419,6 +5427,7 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @assistant_managers_allowed = args[:assistant_managers_allowed] if args.key?(:assistant_managers_allowed)
           @managers_allowed = args[:managers_allowed] if args.key?(:managers_allowed)
           @members_allowed = args[:members_allowed] if args.key?(:members_allowed)
         end
@@ -5931,8 +5940,9 @@ module Google
         # customer` is the `id` from the [Admin SDK customer resource](https://
         # developers.google.com/admin-sdk/directory/reference/rest/v1/customers).
         # Private apps can also use the `customers/my_customer` alias to create the
-        # space in the same Google Workspace organization as the app. For DMs, this
-        # field isn't populated.
+        # space in the same Google Workspace organization as the app. This field isn't
+        # populated for direct messages (DMs) or when the space is created by non-Google
+        # Workspace users.
         # Corresponds to the JSON property `customer`
         # @return [String]
         attr_accessor :customer

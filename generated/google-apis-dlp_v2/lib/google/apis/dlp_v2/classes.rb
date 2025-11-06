@@ -67,15 +67,14 @@ module Google
         attr_accessor :publish_findings_to_cloud_data_catalog
       
         # Publish findings of a DlpJob to Dataplex Universal Catalog as a `sensitive-
-        # data-protection-job-result` aspect. To learn more about aspects, see [Send
-        # inspection results to Dataplex Universal Catalog as aspects](https://cloud.
-        # google.com/sensitive-data-protection/docs/add-aspects-inspection-job). Aspects
-        # are persisted in Dataplex Universal Catalog storage and are governed by
-        # service-specific policies for Dataplex Universal Catalog. For more information,
-        # see [Service Specific Terms](https://cloud.google.com/terms/service-terms).
-        # Only a single instance of this action can be specified. This action is allowed
-        # only if all resources being scanned are BigQuery tables. Compatible with:
-        # Inspect
+        # data-protection-job-result` aspect. For more information, see [Send inspection
+        # results to Dataplex Universal Catalog as aspects](https://cloud.google.com/
+        # sensitive-data-protection/docs/add-aspects-inspection-job). Aspects are stored
+        # in Dataplex Universal Catalog storage and are governed by service-specific
+        # policies for Dataplex Universal Catalog. For more information, see [Service
+        # Specific Terms](https://cloud.google.com/terms/service-terms). Only a single
+        # instance of this action can be specified. This action is allowed only if all
+        # resources being scanned are BigQuery tables. Compatible with: Inspect
         # Corresponds to the JSON property `publishFindingsToDataplexCatalog`
         # @return [Google::Apis::DlpV2::GooglePrivacyDlpV2PublishFindingsToDataplexCatalog]
         attr_accessor :publish_findings_to_dataplex_catalog
@@ -2848,9 +2847,8 @@ module Google
       class GooglePrivacyDlpV2DataSourceType
         include Google::Apis::Core::Hashable
       
-        # Output only. An identifying string to the type of resource being profiled.
-        # Current values: * google/bigquery/table * google/project * google/sql/table *
-        # google/gcs/bucket
+        # An identifying string to the type of resource being profiled. Current values: *
+        # google/bigquery/table * google/project * google/sql/table * google/gcs/bucket
         # Corresponds to the JSON property `dataSource`
         # @return [String]
         attr_accessor :data_source
@@ -4385,7 +4383,7 @@ module Google
         # @return [Google::Apis::DlpV2::GooglePrivacyDlpV2AllOtherResources]
         attr_accessor :others
       
-        # Identifies a single Vertex AI dataset.
+        # Identifies a single Vertex AI resource. Currently only datasets are supported.
         # Corresponds to the JSON property `vertexDatasetResourceReference`
         # @return [Google::Apis::DlpV2::GooglePrivacyDlpV2VertexDatasetResourceReference]
         attr_accessor :vertex_dataset_resource_reference
@@ -8552,15 +8550,14 @@ module Google
       end
       
       # Publish findings of a DlpJob to Dataplex Universal Catalog as a `sensitive-
-      # data-protection-job-result` aspect. To learn more about aspects, see [Send
-      # inspection results to Dataplex Universal Catalog as aspects](https://cloud.
-      # google.com/sensitive-data-protection/docs/add-aspects-inspection-job). Aspects
-      # are persisted in Dataplex Universal Catalog storage and are governed by
-      # service-specific policies for Dataplex Universal Catalog. For more information,
-      # see [Service Specific Terms](https://cloud.google.com/terms/service-terms).
-      # Only a single instance of this action can be specified. This action is allowed
-      # only if all resources being scanned are BigQuery tables. Compatible with:
-      # Inspect
+      # data-protection-job-result` aspect. For more information, see [Send inspection
+      # results to Dataplex Universal Catalog as aspects](https://cloud.google.com/
+      # sensitive-data-protection/docs/add-aspects-inspection-job). Aspects are stored
+      # in Dataplex Universal Catalog storage and are governed by service-specific
+      # policies for Dataplex Universal Catalog. For more information, see [Service
+      # Specific Terms](https://cloud.google.com/terms/service-terms). Only a single
+      # instance of this action can be specified. This action is allowed only if all
+      # resources being scanned are BigQuery tables. Compatible with: Inspect
       class GooglePrivacyDlpV2PublishFindingsToDataplexCatalog
         include Google::Apis::Core::Hashable
       
@@ -9012,6 +9009,14 @@ module Google
         # @return [Google::Apis::DlpV2::GooglePrivacyDlpV2ByteContentItem]
         attr_accessor :byte_item
       
+        # The full resource name of the de-identification template to use. Settings in
+        # the main `image_redaction_configs` field override the corresponding settings
+        # in this de-identification template. The request fails if the type of the
+        # template's deidentify_config is not image_transformations.
+        # Corresponds to the JSON property `deidentifyTemplate`
+        # @return [String]
+        attr_accessor :deidentify_template
+      
         # The configuration for specifying what content to redact from images.
         # Corresponds to the JSON property `imageRedactionConfigs`
         # @return [Array<Google::Apis::DlpV2::GooglePrivacyDlpV2ImageRedactionConfig>]
@@ -9029,6 +9034,16 @@ module Google
         # @return [Google::Apis::DlpV2::GooglePrivacyDlpV2InspectConfig]
         attr_accessor :inspect_config
       
+        # The full resource name of the inspection template to use. Settings in the main
+        # `inspect_config` field override the corresponding settings in this inspection
+        # template. The merge behavior is as follows: - Singular field: The main field's
+        # value replaces the value of the corresponding field in the template. -
+        # Repeated fields: The field values are appended to the list defined in the
+        # template. - Sub-messages and groups: The fields are recursively merged.
+        # Corresponds to the JSON property `inspectTemplate`
+        # @return [String]
+        attr_accessor :inspect_template
+      
         # Deprecated. This field has no effect.
         # Corresponds to the JSON property `locationId`
         # @return [String]
@@ -9041,9 +9056,11 @@ module Google
         # Update properties of this object
         def update!(**args)
           @byte_item = args[:byte_item] if args.key?(:byte_item)
+          @deidentify_template = args[:deidentify_template] if args.key?(:deidentify_template)
           @image_redaction_configs = args[:image_redaction_configs] if args.key?(:image_redaction_configs)
           @include_findings = args[:include_findings] if args.key?(:include_findings)
           @inspect_config = args[:inspect_config] if args.key?(:inspect_config)
+          @inspect_template = args[:inspect_template] if args.key?(:inspect_template)
           @location_id = args[:location_id] if args.key?(:location_id)
         end
       end
@@ -11471,12 +11488,13 @@ module Google
         end
       end
       
-      # Identifies a single Vertex AI dataset.
+      # Identifies a single Vertex AI resource. Currently only datasets are supported.
       class GooglePrivacyDlpV2VertexDatasetResourceReference
         include Google::Apis::Core::Hashable
       
-        # Required. The name of the dataset resource. If set within a project-level
-        # configuration, the specified resource must be within the project.
+        # Required. The name of the Vertex AI resource. If set within a project-level
+        # configuration, the specified resource must be within the project. Examples: * `
+        # projects/`project`/locations/`location`/datasets/`dataset``
         # Corresponds to the JSON property `datasetResourceName`
         # @return [String]
         attr_accessor :dataset_resource_name

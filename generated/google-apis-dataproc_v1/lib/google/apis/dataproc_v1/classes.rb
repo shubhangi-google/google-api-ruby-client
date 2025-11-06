@@ -3016,7 +3016,7 @@ module Google
       
         # Optional. Resource manager tags (https://cloud.google.com/resource-manager/
         # docs/tags/tags-creating-and-managing) to add to all instances (see Use secure
-        # tags in Dataproc (https://cloud.google.com/dataproc/docs/guides/attach-secure-
+        # tags in Dataproc (https://cloud.google.com/dataproc/docs/guides/use-secure-
         # tags)).
         # Corresponds to the JSON property `resourceManagerTags`
         # @return [Hash<String,String>]
@@ -5009,6 +5009,13 @@ module Google
         # @return [Array<Google::Apis::DataprocV1::Operation>]
         attr_accessor :operations
       
+        # Unordered list. Unreachable resources. Populated when the request sets
+        # ListOperationsRequest.return_partial_success and reads across collections e.g.
+        # when attempting to list all resources across all supported locations.
+        # Corresponds to the JSON property `unreachable`
+        # @return [Array<String>]
+        attr_accessor :unreachable
+      
         def initialize(**args)
            update!(**args)
         end
@@ -5017,6 +5024,7 @@ module Google
         def update!(**args)
           @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
           @operations = args[:operations] if args.key?(:operations)
+          @unreachable = args[:unreachable] if args.key?(:unreachable)
         end
       end
       
@@ -6312,7 +6320,9 @@ module Google
         include Google::Apis::Core::Hashable
       
         # Optional. HCFS URIs of archives to be extracted into the working directory of
-        # each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip.
+        # each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip.Note:
+        # Spark applications must be deployed in cluster mode (https://spark.apache.org/
+        # docs/latest/cluster-overview.html) for correct environment propagation.
         # Corresponds to the JSON property `archiveUris`
         # @return [Array<String>]
         attr_accessor :archive_uris
@@ -6820,6 +6830,15 @@ module Google
         # @return [String]
         attr_accessor :cluster_uuid
       
+        # Optional. Whether the request is submitted by Dataproc super user. If true,
+        # IAM will check 'dataproc.clusters.repair' permission instead of 'dataproc.
+        # clusters.update' permission. This is to give Dataproc superuser the ability to
+        # repair clusters without granting the overly broad update permission.
+        # Corresponds to the JSON property `dataprocSuperUser`
+        # @return [Boolean]
+        attr_accessor :dataproc_super_user
+        alias_method :dataproc_super_user?, :dataproc_super_user
+      
         # Optional. Timeout for graceful YARN decommissioning. Graceful decommissioning
         # facilitates the removal of cluster nodes without interrupting jobs in progress.
         # The timeout specifies the amount of time to wait for jobs finish before
@@ -6862,6 +6881,7 @@ module Google
         def update!(**args)
           @cluster = args[:cluster] if args.key?(:cluster)
           @cluster_uuid = args[:cluster_uuid] if args.key?(:cluster_uuid)
+          @dataproc_super_user = args[:dataproc_super_user] if args.key?(:dataproc_super_user)
           @graceful_decommission_timeout = args[:graceful_decommission_timeout] if args.key?(:graceful_decommission_timeout)
           @node_pools = args[:node_pools] if args.key?(:node_pools)
           @parent_operation_id = args[:parent_operation_id] if args.key?(:parent_operation_id)
@@ -11385,13 +11405,14 @@ module Google
       class UsageMetrics
         include Google::Apis::Core::Hashable
       
-        # Optional. Accelerator type being used, if any
+        # Optional. DEPRECATED Accelerator type being used, if any
         # Corresponds to the JSON property `acceleratorType`
         # @return [String]
         attr_accessor :accelerator_type
       
-        # Optional. Accelerator usage in (milliAccelerator x seconds) (see Dataproc
-        # Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
+        # Optional. DEPRECATED Accelerator usage in (milliAccelerator x seconds) (see
+        # Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/
+        # pricing)).
         # Corresponds to the JSON property `milliAcceleratorSeconds`
         # @return [Fixnum]
         attr_accessor :milli_accelerator_seconds
@@ -11402,11 +11423,6 @@ module Google
         # Corresponds to the JSON property `milliDcuSeconds`
         # @return [Fixnum]
         attr_accessor :milli_dcu_seconds
-      
-        # Optional. Slot usage in (milliSlot x seconds).
-        # Corresponds to the JSON property `milliSlotSeconds`
-        # @return [Fixnum]
-        attr_accessor :milli_slot_seconds
       
         # Optional. Shuffle storage usage in (GB x seconds) (see Dataproc Serverless
         # pricing (https://cloud.google.com/dataproc-serverless/pricing)).
@@ -11428,7 +11444,6 @@ module Google
           @accelerator_type = args[:accelerator_type] if args.key?(:accelerator_type)
           @milli_accelerator_seconds = args[:milli_accelerator_seconds] if args.key?(:milli_accelerator_seconds)
           @milli_dcu_seconds = args[:milli_dcu_seconds] if args.key?(:milli_dcu_seconds)
-          @milli_slot_seconds = args[:milli_slot_seconds] if args.key?(:milli_slot_seconds)
           @shuffle_storage_gb_seconds = args[:shuffle_storage_gb_seconds] if args.key?(:shuffle_storage_gb_seconds)
           @update_time = args[:update_time] if args.key?(:update_time)
         end
@@ -11463,11 +11478,6 @@ module Google
         # @return [Fixnum]
         attr_accessor :milli_dcu_premium
       
-        # Optional. Milli (one-thousandth) Slot usage of the workload.
-        # Corresponds to the JSON property `milliSlot`
-        # @return [Fixnum]
-        attr_accessor :milli_slot
-      
         # Optional. Shuffle Storage in gigabytes (GB). (see Dataproc Serverless pricing (
         # https://cloud.google.com/dataproc-serverless/pricing))
         # Corresponds to the JSON property `shuffleStorageGb`
@@ -11496,7 +11506,6 @@ module Google
           @milli_accelerator = args[:milli_accelerator] if args.key?(:milli_accelerator)
           @milli_dcu = args[:milli_dcu] if args.key?(:milli_dcu)
           @milli_dcu_premium = args[:milli_dcu_premium] if args.key?(:milli_dcu_premium)
-          @milli_slot = args[:milli_slot] if args.key?(:milli_slot)
           @shuffle_storage_gb = args[:shuffle_storage_gb] if args.key?(:shuffle_storage_gb)
           @shuffle_storage_gb_premium = args[:shuffle_storage_gb_premium] if args.key?(:shuffle_storage_gb_premium)
           @snapshot_time = args[:snapshot_time] if args.key?(:snapshot_time)
@@ -11977,6 +11986,12 @@ module Google
       class YarnApplication
         include Google::Apis::Core::Hashable
       
+        # Optional. The cumulative memory usage of the application for a job, measured
+        # in mb-seconds.
+        # Corresponds to the JSON property `memoryMbSeconds`
+        # @return [Fixnum]
+        attr_accessor :memory_mb_seconds
+      
         # Required. The application name.
         # Corresponds to the JSON property `name`
         # @return [String]
@@ -12000,16 +12015,24 @@ module Google
         # @return [String]
         attr_accessor :tracking_url
       
+        # Optional. The cumulative CPU time consumed by the application for a job,
+        # measured in vcore-seconds.
+        # Corresponds to the JSON property `vcoreSeconds`
+        # @return [Fixnum]
+        attr_accessor :vcore_seconds
+      
         def initialize(**args)
            update!(**args)
         end
       
         # Update properties of this object
         def update!(**args)
+          @memory_mb_seconds = args[:memory_mb_seconds] if args.key?(:memory_mb_seconds)
           @name = args[:name] if args.key?(:name)
           @progress = args[:progress] if args.key?(:progress)
           @state = args[:state] if args.key?(:state)
           @tracking_url = args[:tracking_url] if args.key?(:tracking_url)
+          @vcore_seconds = args[:vcore_seconds] if args.key?(:vcore_seconds)
         end
       end
     end

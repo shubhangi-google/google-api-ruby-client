@@ -685,6 +685,11 @@ module Google
         # @return [String]
         attr_accessor :database_version
       
+        # Configuration for Dataplex integration.
+        # Corresponds to the JSON property `dataplexConfig`
+        # @return [Google::Apis::AlloydbV1alpha::DataplexConfig]
+        attr_accessor :dataplex_config
+      
         # Output only. Delete time stamp
         # Corresponds to the JSON property `deleteTime`
         # @return [String]
@@ -740,6 +745,12 @@ module Google
         # Corresponds to the JSON property `maintenanceUpdatePolicy`
         # @return [Google::Apis::AlloydbV1alpha::MaintenanceUpdatePolicy]
         attr_accessor :maintenance_update_policy
+      
+        # Input only. Policy to use to automatically select the maintenance version to
+        # which to update the cluster's instances.
+        # Corresponds to the JSON property `maintenanceVersionSelectionPolicy`
+        # @return [String]
+        attr_accessor :maintenance_version_selection_policy
       
         # Subset of the source instance configuration that is available when reading the
         # cluster resource.
@@ -872,6 +883,7 @@ module Google
           @continuous_backup_info = args[:continuous_backup_info] if args.key?(:continuous_backup_info)
           @create_time = args[:create_time] if args.key?(:create_time)
           @database_version = args[:database_version] if args.key?(:database_version)
+          @dataplex_config = args[:dataplex_config] if args.key?(:dataplex_config)
           @delete_time = args[:delete_time] if args.key?(:delete_time)
           @display_name = args[:display_name] if args.key?(:display_name)
           @encryption_config = args[:encryption_config] if args.key?(:encryption_config)
@@ -882,6 +894,7 @@ module Google
           @labels = args[:labels] if args.key?(:labels)
           @maintenance_schedule = args[:maintenance_schedule] if args.key?(:maintenance_schedule)
           @maintenance_update_policy = args[:maintenance_update_policy] if args.key?(:maintenance_update_policy)
+          @maintenance_version_selection_policy = args[:maintenance_version_selection_policy] if args.key?(:maintenance_version_selection_policy)
           @migration_source = args[:migration_source] if args.key?(:migration_source)
           @name = args[:name] if args.key?(:name)
           @network = args[:network] if args.key?(:network)
@@ -1346,6 +1359,28 @@ module Google
           @field_delimiter = args[:field_delimiter] if args.key?(:field_delimiter)
           @quote_character = args[:quote_character] if args.key?(:quote_character)
           @table = args[:table] if args.key?(:table)
+        end
+      end
+      
+      # Configuration for Dataplex integration.
+      class DataplexConfig
+        include Google::Apis::Core::Hashable
+      
+        # Dataplex is enabled by default for resources such as clusters and instances.
+        # This flag controls the integration of AlloyDB PG resources (like databases,
+        # schemas, and tables) with Dataplex."
+        # Corresponds to the JSON property `enabled`
+        # @return [Boolean]
+        attr_accessor :enabled
+        alias_method :enabled?, :enabled
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @enabled = args[:enabled] if args.key?(:enabled)
         end
       end
       

@@ -3256,6 +3256,12 @@ module Google
         # @return [Fixnum]
         attr_accessor :structured_storage_size_bytes
       
+        # The total amount of versioned storage used by versioned FHIR resources of this
+        # resource type in the store.
+        # Corresponds to the JSON property `versionedStorageSizeBytes`
+        # @return [Fixnum]
+        attr_accessor :versioned_storage_size_bytes
+      
         def initialize(**args)
            update!(**args)
         end
@@ -3265,6 +3271,7 @@ module Google
           @count = args[:count] if args.key?(:count)
           @resource_type = args[:resource_type] if args.key?(:resource_type)
           @structured_storage_size_bytes = args[:structured_storage_size_bytes] if args.key?(:structured_storage_size_bytes)
+          @versioned_storage_size_bytes = args[:versioned_storage_size_bytes] if args.key?(:versioned_storage_size_bytes)
         end
       end
       
@@ -4998,6 +5005,13 @@ module Google
         # @return [Array<Google::Apis::HealthcareV1beta1::Operation>]
         attr_accessor :operations
       
+        # Unordered list. Unreachable resources. Populated when the request sets `
+        # ListOperationsRequest.return_partial_success` and reads across collections e.g.
+        # when attempting to list all resources across all supported locations.
+        # Corresponds to the JSON property `unreachable`
+        # @return [Array<String>]
+        attr_accessor :unreachable
+      
         def initialize(**args)
            update!(**args)
         end
@@ -5006,6 +5020,7 @@ module Google
         def update!(**args)
           @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
           @operations = args[:operations] if args.key?(:operations)
+          @unreachable = args[:unreachable] if args.key?(:unreachable)
         end
       end
       

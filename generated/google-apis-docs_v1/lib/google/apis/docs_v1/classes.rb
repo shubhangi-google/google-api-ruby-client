@@ -1091,6 +1091,25 @@ module Google
         end
       end
       
+      # Represents document-level format settings.
+      class DocumentFormat
+        include Google::Apis::Core::Hashable
+      
+        # Whether the document has pages or is pageless.
+        # Corresponds to the JSON property `documentMode`
+        # @return [String]
+        attr_accessor :document_mode
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @document_mode = args[:document_mode] if args.key?(:document_mode)
+        end
+      end
+      
       # The style of the document.
       class DocumentStyle
         include Google::Apis::Core::Hashable
@@ -1100,22 +1119,30 @@ module Google
         # @return [Google::Apis::DocsV1::Background]
         attr_accessor :background
       
-        # The ID of the default footer. If not set, there's no default footer. This
-        # property is read-only.
+        # The ID of the default footer. If not set, there's no default footer. If
+        # DocumentMode is PAGELESS, this property will not be rendered. This property is
+        # read-only.
         # Corresponds to the JSON property `defaultFooterId`
         # @return [String]
         attr_accessor :default_footer_id
       
-        # The ID of the default header. If not set, there's no default header. This
-        # property is read-only.
+        # The ID of the default header. If not set, there's no default header. If
+        # DocumentMode is PAGELESS, this property will not be rendered. This property is
+        # read-only.
         # Corresponds to the JSON property `defaultHeaderId`
         # @return [String]
         attr_accessor :default_header_id
       
+        # Represents document-level format settings.
+        # Corresponds to the JSON property `documentFormat`
+        # @return [Google::Apis::DocsV1::DocumentFormat]
+        attr_accessor :document_format
+      
         # The ID of the footer used only for even pages. The value of
         # use_even_page_header_footer determines whether to use the default_footer_id or
         # this value for the footer on even pages. If not set, there's no even page
-        # footer. This property is read-only.
+        # footer. If DocumentMode is PAGELESS, this property will not be rendered. This
+        # property is read-only.
         # Corresponds to the JSON property `evenPageFooterId`
         # @return [String]
         attr_accessor :even_page_footer_id
@@ -1123,7 +1150,8 @@ module Google
         # The ID of the header used only for even pages. The value of
         # use_even_page_header_footer determines whether to use the default_header_id or
         # this value for the header on even pages. If not set, there's no even page
-        # header. This property is read-only.
+        # header. If DocumentMode is PAGELESS, this property will not be rendered. This
+        # property is read-only.
         # Corresponds to the JSON property `evenPageHeaderId`
         # @return [String]
         attr_accessor :even_page_header_id
@@ -1132,7 +1160,8 @@ module Google
         # footer for the first page does not exist. The value of
         # use_first_page_header_footer determines whether to use the default_footer_id
         # or this value for the footer on the first page. If not set, there's no first
-        # page footer. This property is read-only.
+        # page footer. If DocumentMode is PAGELESS, this property will not be rendered.
+        # This property is read-only.
         # Corresponds to the JSON property `firstPageFooterId`
         # @return [String]
         attr_accessor :first_page_footer_id
@@ -1141,13 +1170,15 @@ module Google
         # header for the first page does not exist. The value of
         # use_first_page_header_footer determines whether to use the default_header_id
         # or this value for the header on the first page. If not set, there's no first
-        # page header. This property is read-only.
+        # page header. If DocumentMode is PAGELESS, this property will not be rendered.
+        # This property is read-only.
         # Corresponds to the JSON property `firstPageHeaderId`
         # @return [String]
         attr_accessor :first_page_header_id
       
         # Optional. Indicates whether to flip the dimensions of the page_size, which
-        # allows changing the page orientation between portrait and landscape.
+        # allows changing the page orientation between portrait and landscape. If
+        # DocumentMode is PAGELESS, this property will not be rendered.
         # Corresponds to the JSON property `flipPageOrientation`
         # @return [Boolean]
         attr_accessor :flip_page_orientation
@@ -1183,7 +1214,8 @@ module Google
         # @return [Google::Apis::DocsV1::Dimension]
         attr_accessor :margin_top
       
-        # The page number from which to start counting the number of pages.
+        # The page number from which to start counting the number of pages. If
+        # DocumentMode is PAGELESS, this property will not be rendered.
         # Corresponds to the JSON property `pageNumberStart`
         # @return [Fixnum]
         attr_accessor :page_number_start
@@ -1196,19 +1228,22 @@ module Google
         # Indicates whether DocumentStyle margin_header, SectionStyle margin_header and
         # DocumentStyle margin_footer, SectionStyle margin_footer are respected. When
         # false, the default values in the Docs editor for header and footer margin is
-        # used. This property is read-only.
+        # used. If DocumentMode is PAGELESS, this property will not be rendered. This
+        # property is read-only.
         # Corresponds to the JSON property `useCustomHeaderFooterMargins`
         # @return [Boolean]
         attr_accessor :use_custom_header_footer_margins
         alias_method :use_custom_header_footer_margins?, :use_custom_header_footer_margins
       
         # Indicates whether to use the even page header / footer IDs for the even pages.
+        # If DocumentMode is PAGELESS, this property will not be rendered.
         # Corresponds to the JSON property `useEvenPageHeaderFooter`
         # @return [Boolean]
         attr_accessor :use_even_page_header_footer
         alias_method :use_even_page_header_footer?, :use_even_page_header_footer
       
         # Indicates whether to use the first page header / footer IDs for the first page.
+        # If DocumentMode is PAGELESS, this property will not be rendered.
         # Corresponds to the JSON property `useFirstPageHeaderFooter`
         # @return [Boolean]
         attr_accessor :use_first_page_header_footer
@@ -1223,6 +1258,7 @@ module Google
           @background = args[:background] if args.key?(:background)
           @default_footer_id = args[:default_footer_id] if args.key?(:default_footer_id)
           @default_header_id = args[:default_header_id] if args.key?(:default_header_id)
+          @document_format = args[:document_format] if args.key?(:document_format)
           @even_page_footer_id = args[:even_page_footer_id] if args.key?(:even_page_footer_id)
           @even_page_header_id = args[:even_page_header_id] if args.key?(:even_page_header_id)
           @first_page_footer_id = args[:first_page_footer_id] if args.key?(:first_page_footer_id)
@@ -4862,14 +4898,16 @@ module Google
       
         # The ID of the default footer. If unset, the value inherits from the previous
         # SectionBreak's SectionStyle. If the value is unset in the first SectionBreak,
-        # it inherits from DocumentStyle's default_footer_id. This property is read-only.
+        # it inherits from DocumentStyle's default_footer_id. If DocumentMode is
+        # PAGELESS, this property will not be rendered. This property is read-only.
         # Corresponds to the JSON property `defaultFooterId`
         # @return [String]
         attr_accessor :default_footer_id
       
         # The ID of the default header. If unset, the value inherits from the previous
         # SectionBreak's SectionStyle. If the value is unset in the first SectionBreak,
-        # it inherits from DocumentStyle's default_header_id. This property is read-only.
+        # it inherits from DocumentStyle's default_header_id. If DocumentMode is
+        # PAGELESS, this property will not be rendered. This property is read-only.
         # Corresponds to the JSON property `defaultHeaderId`
         # @return [String]
         attr_accessor :default_header_id
@@ -4879,7 +4917,8 @@ module Google
         # even pages in the section. If it is false, the footers on even pages use the
         # default_footer_id. If unset, the value inherits from the previous SectionBreak'
         # s SectionStyle. If the value is unset in the first SectionBreak, it inherits
-        # from DocumentStyle's even_page_footer_id. This property is read-only.
+        # from DocumentStyle's even_page_footer_id. If DocumentMode is PAGELESS, this
+        # property will not be rendered. This property is read-only.
         # Corresponds to the JSON property `evenPageFooterId`
         # @return [String]
         attr_accessor :even_page_footer_id
@@ -4889,7 +4928,8 @@ module Google
         # even pages in the section. If it is false, the headers on even pages use the
         # default_header_id. If unset, the value inherits from the previous SectionBreak'
         # s SectionStyle. If the value is unset in the first SectionBreak, it inherits
-        # from DocumentStyle's even_page_header_id. This property is read-only.
+        # from DocumentStyle's even_page_header_id. If DocumentMode is PAGELESS, this
+        # property will not be rendered. This property is read-only.
         # Corresponds to the JSON property `evenPageHeaderId`
         # @return [String]
         attr_accessor :even_page_header_id
@@ -4899,8 +4939,9 @@ module Google
         # first page of the section. If it's false, the footer on the first page of the
         # section uses the default_footer_id. If unset, the value inherits from the
         # previous SectionBreak's SectionStyle. If the value is unset in the first
-        # SectionBreak, it inherits from DocumentStyle's first_page_footer_id. This
-        # property is read-only.
+        # SectionBreak, it inherits from DocumentStyle's first_page_footer_id. If
+        # DocumentMode is PAGELESS, this property will not be rendered. This property is
+        # read-only.
         # Corresponds to the JSON property `firstPageFooterId`
         # @return [String]
         attr_accessor :first_page_footer_id
@@ -4910,8 +4951,9 @@ module Google
         # first page of the section. If it's false, the header on the first page of the
         # section uses the default_header_id. If unset, the value inherits from the
         # previous SectionBreak's SectionStyle. If the value is unset in the first
-        # SectionBreak, it inherits from DocumentStyle's first_page_header_id. This
-        # property is read-only.
+        # SectionBreak, it inherits from DocumentStyle's first_page_header_id. If
+        # DocumentMode is PAGELESS, this property will not be rendered. This property is
+        # read-only.
         # Corresponds to the JSON property `firstPageHeaderId`
         # @return [String]
         attr_accessor :first_page_header_id
@@ -4919,8 +4961,9 @@ module Google
         # Optional. Indicates whether to flip the dimensions of DocumentStyle's
         # page_size for this section, which allows changing the page orientation between
         # portrait and landscape. If unset, the value inherits from DocumentStyle's
-        # flip_page_orientation. When updating this property, setting a concrete value
-        # is required. Unsetting this property results in a 400 bad request error.
+        # flip_page_orientation. If DocumentMode is PAGELESS, this property will not be
+        # rendered. When updating this property, setting a concrete value is required.
+        # Unsetting this property results in a 400 bad request error.
         # Corresponds to the JSON property `flipPageOrientation`
         # @return [Boolean]
         attr_accessor :flip_page_orientation
@@ -4959,8 +5002,9 @@ module Google
         # The page number from which to start counting the number of pages for this
         # section. If unset, page numbering continues from the previous section. If the
         # value is unset in the first SectionBreak, refer to DocumentStyle's
-        # page_number_start. When updating this property, setting a concrete value is
-        # required. Unsetting this property results in a 400 bad request error.
+        # page_number_start. If DocumentMode is PAGELESS, this property will not be
+        # rendered. When updating this property, setting a concrete value is required.
+        # Unsetting this property results in a 400 bad request error.
         # Corresponds to the JSON property `pageNumberStart`
         # @return [Fixnum]
         attr_accessor :page_number_start
@@ -4973,9 +5017,10 @@ module Google
         # Indicates whether to use the first page header / footer IDs for the first page
         # of the section. If unset, it inherits from DocumentStyle's
         # use_first_page_header_footer for the first section. If the value is unset for
-        # subsequent sectors, it should be interpreted as false. When updating this
-        # property, setting a concrete value is required. Unsetting this property
-        # results in a 400 bad request error.
+        # subsequent sectors, it should be interpreted as false. If DocumentMode is
+        # PAGELESS, this property will not be rendered. When updating this property,
+        # setting a concrete value is required. Unsetting this property results in a 400
+        # bad request error.
         # Corresponds to the JSON property `useFirstPageHeaderFooter`
         # @return [Boolean]
         attr_accessor :use_first_page_header_footer
@@ -5573,6 +5618,15 @@ module Google
       class TabProperties
         include Google::Apis::Core::Hashable
       
+        # Optional. The emoji icon displayed with the tab. A valid emoji icon is
+        # represented by a non-empty Unicode string. Any set of characters that don't
+        # represent a single emoji is invalid. If an emoji is invalid, a 400 bad request
+        # error is returned. If this value is unset or empty, the tab will display the
+        # default tab icon.
+        # Corresponds to the JSON property `iconEmoji`
+        # @return [String]
+        attr_accessor :icon_emoji
+      
         # The zero-based index of the tab within the parent.
         # Corresponds to the JSON property `index`
         # @return [Fixnum]
@@ -5606,6 +5660,7 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @icon_emoji = args[:icon_emoji] if args.key?(:icon_emoji)
           @index = args[:index] if args.key?(:index)
           @nesting_level = args[:nesting_level] if args.key?(:nesting_level)
           @parent_tab_id = args[:parent_tab_id] if args.key?(:parent_tab_id)

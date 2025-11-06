@@ -46,6 +46,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class CycleOptions
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class Duration
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -143,6 +149,12 @@ module Google
       end
       
       class IntentPayload
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class IntentPayloadIntentOptions
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -349,10 +361,20 @@ module Google
       class CreateSubscriptionIntent
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :cycle_options, as: 'cycleOptions', class: Google::Apis::PaymentsresellersubscriptionV1::CycleOptions, decorator: Google::Apis::PaymentsresellersubscriptionV1::CycleOptions::Representation
+      
           property :parent, as: 'parent'
           property :subscription, as: 'subscription', class: Google::Apis::PaymentsresellersubscriptionV1::Subscription, decorator: Google::Apis::PaymentsresellersubscriptionV1::Subscription::Representation
       
           property :subscription_id, as: 'subscriptionId'
+        end
+      end
+      
+      class CycleOptions
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :initial_cycle_duration, as: 'initialCycleDuration', class: Google::Apis::PaymentsresellersubscriptionV1::Duration, decorator: Google::Apis::PaymentsresellersubscriptionV1::Duration::Representation
+      
         end
       end
       
@@ -497,6 +519,15 @@ module Google
       
           property :entitle_intent, as: 'entitleIntent', class: Google::Apis::PaymentsresellersubscriptionV1::EntitleSubscriptionIntent, decorator: Google::Apis::PaymentsresellersubscriptionV1::EntitleSubscriptionIntent::Representation
       
+          property :intent_options, as: 'intentOptions', class: Google::Apis::PaymentsresellersubscriptionV1::IntentPayloadIntentOptions, decorator: Google::Apis::PaymentsresellersubscriptionV1::IntentPayloadIntentOptions::Representation
+      
+        end
+      end
+      
+      class IntentPayloadIntentOptions
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :enable_offer_override, as: 'enableOfferOverride'
         end
       end
       
@@ -622,6 +653,8 @@ module Google
       class ResumeSubscriptionRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :cycle_options, as: 'cycleOptions', class: Google::Apis::PaymentsresellersubscriptionV1::CycleOptions, decorator: Google::Apis::PaymentsresellersubscriptionV1::CycleOptions::Representation
+      
         end
       end
       
@@ -694,6 +727,7 @@ module Google
           property :line_item_index, as: 'lineItemIndex'
           collection :line_item_promotion_specs, as: 'lineItemPromotionSpecs', class: Google::Apis::PaymentsresellersubscriptionV1::SubscriptionPromotionSpec, decorator: Google::Apis::PaymentsresellersubscriptionV1::SubscriptionPromotionSpec::Representation
       
+          property :name, as: 'name'
           property :one_time_recurrence_details, as: 'oneTimeRecurrenceDetails', class: Google::Apis::PaymentsresellersubscriptionV1::SubscriptionLineItemOneTimeRecurrenceDetails, decorator: Google::Apis::PaymentsresellersubscriptionV1::SubscriptionLineItemOneTimeRecurrenceDetails::Representation
       
           property :product, as: 'product'

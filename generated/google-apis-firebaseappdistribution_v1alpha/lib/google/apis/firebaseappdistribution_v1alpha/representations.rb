@@ -106,7 +106,31 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleFirebaseAppdistroV1alphaBatchUpdateTestCasesRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaBatchUpdateTestCasesResponse
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleFirebaseAppdistroV1alphaCancelReleaseTestResponse
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaClearTestCaseCacheRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaClearTestCaseCacheResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -322,6 +346,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleFirebaseAppdistroV1alphaUpdateTestCaseRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleProtobufEmpty
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -465,7 +495,37 @@ module Google
         end
       end
       
+      class GoogleFirebaseAppdistroV1alphaBatchUpdateTestCasesRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :requests, as: 'requests', class: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaUpdateTestCaseRequest, decorator: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaUpdateTestCaseRequest::Representation
+      
+        end
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaBatchUpdateTestCasesResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :test_cases, as: 'testCases', class: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestCase, decorator: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestCase::Representation
+      
+        end
+      end
+      
       class GoogleFirebaseAppdistroV1alphaCancelReleaseTestResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+        end
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaClearTestCaseCacheRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :test_devices, as: 'testDevices', class: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestDevice, decorator: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestDevice::Representation
+      
+        end
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaClearTestCaseCacheResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
         end
@@ -504,6 +564,7 @@ module Google
           property :crawl_graph_uri, as: 'crawlGraphUri'
           property :device, as: 'device', class: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestDevice, decorator: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestDevice::Representation
       
+          property :execution_type, as: 'executionType'
           property :failed_reason, as: 'failedReason'
           property :inconclusive_reason, as: 'inconclusiveReason'
           property :results_storage_path, as: 'resultsStoragePath'
@@ -829,6 +890,15 @@ module Google
           property :name, as: 'name'
           property :platform, as: 'platform'
           property :udid, as: 'udid'
+        end
+      end
+      
+      class GoogleFirebaseAppdistroV1alphaUpdateTestCaseRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :allow_missing, as: 'allowMissing'
+          property :test_case, as: 'testCase', class: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestCase, decorator: Google::Apis::FirebaseappdistributionV1alpha::GoogleFirebaseAppdistroV1alphaTestCase::Representation
+      
         end
       end
       

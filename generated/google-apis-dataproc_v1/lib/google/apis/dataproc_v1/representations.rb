@@ -2845,6 +2845,7 @@ module Google
           property :next_page_token, as: 'nextPageToken'
           collection :operations, as: 'operations', class: Google::Apis::DataprocV1::Operation, decorator: Google::Apis::DataprocV1::Operation::Representation
       
+          collection :unreachable, as: 'unreachable'
         end
       end
       
@@ -3321,6 +3322,7 @@ module Google
           property :cluster, as: 'cluster', class: Google::Apis::DataprocV1::ClusterToRepair, decorator: Google::Apis::DataprocV1::ClusterToRepair::Representation
       
           property :cluster_uuid, as: 'clusterUuid'
+          property :dataproc_super_user, as: 'dataprocSuperUser'
           property :graceful_decommission_timeout, as: 'gracefulDecommissionTimeout'
           collection :node_pools, as: 'nodePools', class: Google::Apis::DataprocV1::NodePool, decorator: Google::Apis::DataprocV1::NodePool::Representation
       
@@ -4552,7 +4554,6 @@ module Google
           property :accelerator_type, as: 'acceleratorType'
           property :milli_accelerator_seconds, :numeric_string => true, as: 'milliAcceleratorSeconds'
           property :milli_dcu_seconds, :numeric_string => true, as: 'milliDcuSeconds'
-          property :milli_slot_seconds, :numeric_string => true, as: 'milliSlotSeconds'
           property :shuffle_storage_gb_seconds, :numeric_string => true, as: 'shuffleStorageGbSeconds'
           property :update_time, as: 'updateTime'
         end
@@ -4565,7 +4566,6 @@ module Google
           property :milli_accelerator, :numeric_string => true, as: 'milliAccelerator'
           property :milli_dcu, :numeric_string => true, as: 'milliDcu'
           property :milli_dcu_premium, :numeric_string => true, as: 'milliDcuPremium'
-          property :milli_slot, :numeric_string => true, as: 'milliSlot'
           property :shuffle_storage_gb, :numeric_string => true, as: 'shuffleStorageGb'
           property :shuffle_storage_gb_premium, :numeric_string => true, as: 'shuffleStorageGbPremium'
           property :snapshot_time, as: 'snapshotTime'
@@ -4705,10 +4705,12 @@ module Google
       class YarnApplication
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :memory_mb_seconds, :numeric_string => true, as: 'memoryMbSeconds'
           property :name, as: 'name'
           property :progress, as: 'progress'
           property :state, as: 'state'
           property :tracking_url, as: 'trackingUrl'
+          property :vcore_seconds, :numeric_string => true, as: 'vcoreSeconds'
         end
       end
     end

@@ -832,6 +832,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class Status
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class SyncFlags
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -2060,6 +2066,8 @@ module Google
           property :partial_result, as: 'partialResult'
           collection :rows, as: 'rows', class: Google::Apis::SqladminV1::Row, decorator: Google::Apis::SqladminV1::Row::Representation
       
+          property :status, as: 'status', class: Google::Apis::SqladminV1::Status, decorator: Google::Apis::SqladminV1::Status::Representation
+      
         end
       end
       
@@ -2155,6 +2163,7 @@ module Google
           property :advanced_machine_features, as: 'advancedMachineFeatures', class: Google::Apis::SqladminV1::AdvancedMachineFeatures, decorator: Google::Apis::SqladminV1::AdvancedMachineFeatures::Representation
       
           collection :authorized_gae_applications, as: 'authorizedGaeApplications'
+          property :auto_upgrade_enabled, as: 'autoUpgradeEnabled'
           property :availability_type, as: 'availabilityType'
           property :backup_configuration, as: 'backupConfiguration', class: Google::Apis::SqladminV1::BackupConfiguration, decorator: Google::Apis::SqladminV1::BackupConfiguration::Representation
       
@@ -2163,6 +2172,7 @@ module Google
       
           property :connector_enforcement, as: 'connectorEnforcement'
           property :crash_safe_replication_enabled, as: 'crashSafeReplicationEnabled'
+          property :data_api_access, as: 'dataApiAccess'
           property :data_cache_config, as: 'dataCacheConfig', class: Google::Apis::SqladminV1::DataCacheConfig, decorator: Google::Apis::SqladminV1::DataCacheConfig::Representation
       
           property :data_disk_provisioned_iops, :numeric_string => true, as: 'dataDiskProvisionedIops'
@@ -2244,6 +2254,8 @@ module Google
           property :metadata, as: 'metadata', class: Google::Apis::SqladminV1::Metadata, decorator: Google::Apis::SqladminV1::Metadata::Representation
       
           collection :results, as: 'results', class: Google::Apis::SqladminV1::QueryResult, decorator: Google::Apis::SqladminV1::QueryResult::Representation
+      
+          property :status, as: 'status', class: Google::Apis::SqladminV1::Status, decorator: Google::Apis::SqladminV1::Status::Representation
       
         end
       end
@@ -2438,6 +2450,15 @@ module Google
         end
       end
       
+      class Status
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :code, as: 'code'
+          collection :details, as: 'details'
+          property :message, as: 'message'
+        end
+      end
+      
       class SyncFlags
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -2488,6 +2509,7 @@ module Google
           property :dual_password_type, as: 'dualPasswordType'
           property :etag, as: 'etag'
           property :host, as: 'host'
+          property :iam_email, as: 'iamEmail'
           property :iam_status, as: 'iamStatus'
           property :instance, as: 'instance'
           property :kind, as: 'kind'

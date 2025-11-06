@@ -190,6 +190,24 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudAiplatformV1beta1FunctionResponseBlob
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudAiplatformV1beta1FunctionResponseFileData
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudAiplatformV1beta1FunctionResponsePart
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudAiplatformV1beta1GenerateContentRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -322,6 +340,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudAiplatformV1beta1ImageConfigImageOutputOptions
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudAiplatformV1beta1LogprobsResult
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -347,6 +371,12 @@ module Google
       end
       
       class GoogleCloudAiplatformV1beta1ModelArmorConfig
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudAiplatformV1beta1MultiSpeakerVoiceConfig
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -460,6 +490,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudAiplatformV1beta1SpeakerVoiceConfig
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudAiplatformV1beta1SpeechConfig
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -473,6 +509,12 @@ module Google
       end
       
       class GoogleCloudAiplatformV1beta1ToolCodeExecution
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudAiplatformV1beta1ToolComputerUse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -833,7 +875,37 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :id, as: 'id'
           property :name, as: 'name'
+          collection :parts, as: 'parts', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponsePart, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponsePart::Representation
+      
           hash :response, as: 'response'
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1FunctionResponseBlob
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :data, :base64 => true, as: 'data'
+          property :display_name, as: 'displayName'
+          property :mime_type, as: 'mimeType'
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1FunctionResponseFileData
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :display_name, as: 'displayName'
+          property :file_uri, as: 'fileUri'
+          property :mime_type, as: 'mimeType'
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1FunctionResponsePart
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :file_data, as: 'fileData', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponseFileData, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponseFileData::Representation
+      
+          property :inline_data, as: 'inlineData', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponseBlob, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1FunctionResponseBlob::Representation
+      
         end
       end
       
@@ -1097,6 +1169,17 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :aspect_ratio, as: 'aspectRatio'
+          property :image_output_options, as: 'imageOutputOptions', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ImageConfigImageOutputOptions, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ImageConfigImageOutputOptions::Representation
+      
+          property :person_generation, as: 'personGeneration'
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1ImageConfigImageOutputOptions
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :compression_quality, as: 'compressionQuality'
+          property :mime_type, as: 'mimeType'
         end
       end
       
@@ -1140,6 +1223,14 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :prompt_template_name, as: 'promptTemplateName'
           property :response_template_name, as: 'responseTemplateName'
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1MultiSpeakerVoiceConfig
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :speaker_voice_configs, as: 'speakerVoiceConfigs', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1SpeakerVoiceConfig, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1SpeakerVoiceConfig::Representation
+      
         end
       end
       
@@ -1347,10 +1438,21 @@ module Google
         end
       end
       
+      class GoogleCloudAiplatformV1beta1SpeakerVoiceConfig
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :speaker, as: 'speaker'
+          property :voice_config, as: 'voiceConfig', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1VoiceConfig, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1VoiceConfig::Representation
+      
+        end
+      end
+      
       class GoogleCloudAiplatformV1beta1SpeechConfig
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :language_code, as: 'languageCode'
+          property :multi_speaker_voice_config, as: 'multiSpeakerVoiceConfig', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1MultiSpeakerVoiceConfig, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1MultiSpeakerVoiceConfig::Representation
+      
           property :voice_config, as: 'voiceConfig', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1VoiceConfig, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1VoiceConfig::Representation
       
         end
@@ -1360,6 +1462,8 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :code_execution, as: 'codeExecution', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ToolCodeExecution, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ToolCodeExecution::Representation
+      
+          property :computer_use, as: 'computerUse', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ToolComputerUse, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1ToolComputerUse::Representation
       
           property :enterprise_web_search, as: 'enterpriseWebSearch', class: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1EnterpriseWebSearch, decorator: Google::Apis::FirebasemlV2beta::GoogleCloudAiplatformV1beta1EnterpriseWebSearch::Representation
       
@@ -1381,6 +1485,14 @@ module Google
       class GoogleCloudAiplatformV1beta1ToolCodeExecution
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+        end
+      end
+      
+      class GoogleCloudAiplatformV1beta1ToolComputerUse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :environment, as: 'environment'
+          collection :excluded_predefined_functions, as: 'excludedPredefinedFunctions'
         end
       end
       

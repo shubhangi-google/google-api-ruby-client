@@ -33,6 +33,14 @@ module Google
         attr_accessor :low_latency_journey_synthesis
         alias_method :low_latency_journey_synthesis?, :low_latency_journey_synthesis
       
+        # Optional. Input only. If true, relaxes safety filters for Gemini TTS. Only
+        # supported for accounts linked to Invoiced (Offline) Cloud billing accounts.
+        # Otherwise, will return result google.rpc.Code.INVALID_ARGUMENT.
+        # Corresponds to the JSON property `relaxSafetyFilters`
+        # @return [Boolean]
+        attr_accessor :relax_safety_filters
+        alias_method :relax_safety_filters?, :relax_safety_filters
+      
         def initialize(**args)
            update!(**args)
         end
@@ -40,6 +48,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @low_latency_journey_synthesis = args[:low_latency_journey_synthesis] if args.key?(:low_latency_journey_synthesis)
+          @relax_safety_filters = args[:relax_safety_filters] if args.key?(:relax_safety_filters)
         end
       end
       
@@ -265,6 +274,13 @@ module Google
         # @return [Array<Google::Apis::TexttospeechV1::Operation>]
         attr_accessor :operations
       
+        # Unordered list. Unreachable resources. Populated when the request sets `
+        # ListOperationsRequest.return_partial_success` and reads across collections e.g.
+        # when attempting to list all resources across all supported locations.
+        # Corresponds to the JSON property `unreachable`
+        # @return [Array<String>]
+        attr_accessor :unreachable
+      
         def initialize(**args)
            update!(**args)
         end
@@ -273,6 +289,7 @@ module Google
         def update!(**args)
           @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
           @operations = args[:operations] if args.key?(:operations)
+          @unreachable = args[:unreachable] if args.key?(:unreachable)
         end
       end
       

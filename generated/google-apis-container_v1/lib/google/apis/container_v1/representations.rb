@@ -754,6 +754,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class NodeKernelModuleLoading
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class NodeKubeletConfig
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -1289,6 +1295,12 @@ module Google
       end
       
       class WorkloadPolicyConfig
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class WritableCgroups
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1958,6 +1970,8 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :private_registry_access_config, as: 'privateRegistryAccessConfig', class: Google::Apis::ContainerV1::PrivateRegistryAccessConfig, decorator: Google::Apis::ContainerV1::PrivateRegistryAccessConfig::Representation
       
+          property :writable_cgroups, as: 'writableCgroups', class: Google::Apis::ContainerV1::WritableCgroups, decorator: Google::Apis::ContainerV1::WritableCgroups::Representation
+      
         end
       end
       
@@ -2404,6 +2418,8 @@ module Google
           property :cgroup_mode, as: 'cgroupMode'
           property :hugepages, as: 'hugepages', class: Google::Apis::ContainerV1::HugepagesConfig, decorator: Google::Apis::ContainerV1::HugepagesConfig::Representation
       
+          property :node_kernel_module_loading, as: 'nodeKernelModuleLoading', class: Google::Apis::ContainerV1::NodeKernelModuleLoading, decorator: Google::Apis::ContainerV1::NodeKernelModuleLoading::Representation
+      
           hash :sysctls, as: 'sysctls'
           property :transparent_hugepage_defrag, as: 'transparentHugepageDefrag'
           property :transparent_hugepage_enabled, as: 'transparentHugepageEnabled'
@@ -2485,6 +2501,7 @@ module Google
       class MaintenanceExclusionOptions
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :end_time_behavior, as: 'endTimeBehavior'
           property :scope, as: 'scope'
         end
       end
@@ -2751,6 +2768,13 @@ module Google
       
           property :node_kubelet_config, as: 'nodeKubeletConfig', class: Google::Apis::ContainerV1::NodeKubeletConfig, decorator: Google::Apis::ContainerV1::NodeKubeletConfig::Representation
       
+        end
+      end
+      
+      class NodeKernelModuleLoading
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :policy, as: 'policy'
         end
       end
       
@@ -3751,6 +3775,13 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :allow_net_admin, as: 'allowNetAdmin'
           property :autopilot_compatibility_auditing_enabled, as: 'autopilotCompatibilityAuditingEnabled'
+        end
+      end
+      
+      class WritableCgroups
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :enabled, as: 'enabled'
         end
       end
     end

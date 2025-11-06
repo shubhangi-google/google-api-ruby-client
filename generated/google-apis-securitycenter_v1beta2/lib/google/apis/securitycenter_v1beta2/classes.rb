@@ -939,6 +939,12 @@ module Google
         # @return [String]
         attr_accessor :data_profile
       
+        # Type of information detected by SDP. Info type includes name, version and
+        # sensitivity of the detected information type.
+        # Corresponds to the JSON property `infoTypes`
+        # @return [Array<Google::Apis::SecuritycenterV1beta2::InfoType>]
+        attr_accessor :info_types
+      
         # The resource hierarchy level at which the data profile was generated.
         # Corresponds to the JSON property `parentType`
         # @return [String]
@@ -951,6 +957,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @data_profile = args[:data_profile] if args.key?(:data_profile)
+          @info_types = args[:info_types] if args.key?(:info_types)
           @parent_type = args[:parent_type] if args.key?(:parent_type)
         end
       end
@@ -5093,6 +5100,12 @@ module Google
         # @return [String]
         attr_accessor :data_profile
       
+        # Type of information detected by SDP. Info type includes name, version and
+        # sensitivity of the detected information type.
+        # Corresponds to the JSON property `infoTypes`
+        # @return [Array<Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2InfoType>]
+        attr_accessor :info_types
+      
         # The resource hierarchy level at which the data profile was generated.
         # Corresponds to the JSON property `parentType`
         # @return [String]
@@ -5105,6 +5118,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @data_profile = args[:data_profile] if args.key?(:data_profile)
+          @info_types = args[:info_types] if args.key?(:info_types)
           @parent_type = args[:parent_type] if args.key?(:parent_type)
         end
       end
@@ -6886,6 +6900,42 @@ module Google
         end
       end
       
+      # Type of information detected by the API.
+      class GoogleCloudSecuritycenterV2InfoType
+        include Google::Apis::Core::Hashable
+      
+        # Name of the information type. Either a name of your choosing when creating a
+        # CustomInfoType, or one of the names listed at https://cloud.google.com/
+        # sensitive-data-protection/docs/infotypes-reference when specifying a built-in
+        # type. When sending Cloud DLP results to Data Catalog, infoType names should
+        # conform to the pattern `[A-Za-z0-9$_-]`1,64``.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Score is calculated from of all elements in the data profile. A higher level
+        # means the data is more sensitive.
+        # Corresponds to the JSON property `sensitivityScore`
+        # @return [Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2SensitivityScore]
+        attr_accessor :sensitivity_score
+      
+        # Optional version name for this InfoType.
+        # Corresponds to the JSON property `version`
+        # @return [String]
+        attr_accessor :version
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @name = args[:name] if args.key?(:name)
+          @sensitivity_score = args[:sensitivity_score] if args.key?(:sensitivity_score)
+          @version = args[:version] if args.key?(:version)
+        end
+      end
+      
       # IP rule information.
       class GoogleCloudSecuritycenterV2IpRule
         include Google::Apis::Core::Hashable
@@ -7277,6 +7327,11 @@ module Google
       class GoogleCloudSecuritycenterV2IssueResourceApplication
         include Google::Apis::Core::Hashable
       
+        # Consumer provided attributes for the application
+        # Corresponds to the JSON property `attributes`
+        # @return [Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes]
+        attr_accessor :attributes
+      
         # The resource name of an Application. Format: `projects/`host-project-id`/
         # locations/`location`/applications/`application-id``
         # Corresponds to the JSON property `name`
@@ -7289,7 +7344,108 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @attributes = args[:attributes] if args.key?(:attributes)
           @name = args[:name] if args.key?(:name)
+        end
+      end
+      
+      # Consumer provided attributes for the application
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes
+        include Google::Apis::Core::Hashable
+      
+        # Business team that ensures user needs are met and value is delivered
+        # Corresponds to the JSON property `businessOwners`
+        # @return [Array<Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo>]
+        attr_accessor :business_owners
+      
+        # Criticality of the Application, Service, or Workload
+        # Corresponds to the JSON property `criticality`
+        # @return [Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality]
+        attr_accessor :criticality
+      
+        # Developer team that owns development and coding.
+        # Corresponds to the JSON property `developerOwners`
+        # @return [Array<Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo>]
+        attr_accessor :developer_owners
+      
+        # Environment of the Application, Service, or Workload
+        # Corresponds to the JSON property `environment`
+        # @return [Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment]
+        attr_accessor :environment
+      
+        # Operator team that ensures runtime and operations.
+        # Corresponds to the JSON property `operatorOwners`
+        # @return [Array<Google::Apis::SecuritycenterV1beta2::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo>]
+        attr_accessor :operator_owners
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @business_owners = args[:business_owners] if args.key?(:business_owners)
+          @criticality = args[:criticality] if args.key?(:criticality)
+          @developer_owners = args[:developer_owners] if args.key?(:developer_owners)
+          @environment = args[:environment] if args.key?(:environment)
+          @operator_owners = args[:operator_owners] if args.key?(:operator_owners)
+        end
+      end
+      
+      # Contact information of stakeholders.
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo
+        include Google::Apis::Core::Hashable
+      
+        # Email address of the contacts.
+        # Corresponds to the JSON property `email`
+        # @return [String]
+        attr_accessor :email
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @email = args[:email] if args.key?(:email)
+        end
+      end
+      
+      # Criticality of the Application, Service, or Workload
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality
+        include Google::Apis::Core::Hashable
+      
+        # Criticality Type.
+        # Corresponds to the JSON property `type`
+        # @return [String]
+        attr_accessor :type
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @type = args[:type] if args.key?(:type)
+        end
+      end
+      
+      # Environment of the Application, Service, or Workload
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment
+        include Google::Apis::Core::Hashable
+      
+        # Environment Type.
+        # Corresponds to the JSON property `type`
+        # @return [String]
+        attr_accessor :type
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @type = args[:type] if args.key?(:type)
         end
       end
       
@@ -8958,6 +9114,26 @@ module Google
         end
       end
       
+      # Score is calculated from of all elements in the data profile. A higher level
+      # means the data is more sensitive.
+      class GoogleCloudSecuritycenterV2SensitivityScore
+        include Google::Apis::Core::Hashable
+      
+        # The sensitivity score applied to the resource.
+        # Corresponds to the JSON property `score`
+        # @return [String]
+        attr_accessor :score
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @score = args[:score] if args.key?(:score)
+        end
+      end
+      
       # Identity delegation history of an authenticated service account.
       class GoogleCloudSecuritycenterV2ServiceAccountDelegationInfo
         include Google::Apis::Core::Hashable
@@ -9333,6 +9509,42 @@ module Google
           @ip_addresses = args[:ip_addresses] if args.key?(:ip_addresses)
           @signatures = args[:signatures] if args.key?(:signatures)
           @uris = args[:uris] if args.key?(:uris)
+        end
+      end
+      
+      # Type of information detected by the API.
+      class InfoType
+        include Google::Apis::Core::Hashable
+      
+        # Name of the information type. Either a name of your choosing when creating a
+        # CustomInfoType, or one of the names listed at https://cloud.google.com/
+        # sensitive-data-protection/docs/infotypes-reference when specifying a built-in
+        # type. When sending Cloud DLP results to Data Catalog, infoType names should
+        # conform to the pattern `[A-Za-z0-9$_-]`1,64``.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Score is calculated from of all elements in the data profile. A higher level
+        # means the data is more sensitive.
+        # Corresponds to the JSON property `sensitivityScore`
+        # @return [Google::Apis::SecuritycenterV1beta2::SensitivityScore]
+        attr_accessor :sensitivity_score
+      
+        # Optional version name for this InfoType.
+        # Corresponds to the JSON property `version`
+        # @return [String]
+        attr_accessor :version
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @name = args[:name] if args.key?(:name)
+          @sensitivity_score = args[:sensitivity_score] if args.key?(:sensitivity_score)
+          @version = args[:version] if args.key?(:version)
         end
       end
       
@@ -10696,6 +10908,26 @@ module Google
           @posture_deployment = args[:posture_deployment] if args.key?(:posture_deployment)
           @posture_deployment_resource = args[:posture_deployment_resource] if args.key?(:posture_deployment_resource)
           @revision_id = args[:revision_id] if args.key?(:revision_id)
+        end
+      end
+      
+      # Score is calculated from of all elements in the data profile. A higher level
+      # means the data is more sensitive.
+      class SensitivityScore
+        include Google::Apis::Core::Hashable
+      
+        # The sensitivity score applied to the resource.
+        # Corresponds to the JSON property `score`
+        # @return [String]
+        attr_accessor :score
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @score = args[:score] if args.key?(:score)
         end
       end
       

@@ -657,31 +657,58 @@ module Google
       
         # Optional. The metadata provided here is included as part of the `
         # metadata_context` (of type `google.protobuf.Struct`) in the `ProcessingRequest`
-        # message sent to the extension server. The metadata is available under the
-        # namespace `com.google....`. For example: `com.google.lb_traffic_extension.
-        # lbtrafficextension1.chain1.ext1`. The following variables are supported in the
-        # metadata: ``forwarding_rule_id`` - substituted with the forwarding rule's
-        # fully qualified resource name. This field must not be set for plugin
-        # extensions. Setting it results in a validation error. You can set metadata at
-        # either the resource level or the extension level. The extension level metadata
-        # is recommended because you can pass a different set of metadata through each
-        # extension to the backend. This field is subject to following limitations: *
-        # The total size of the metadata must be less than 1KiB. * The total number of
-        # keys in the metadata must be less than 16. * The length of each key must be
-        # less than 64 characters. * The length of each value must be less than 1024
-        # characters. * All values must be strings.
+        # message sent to the extension server. For `AuthzExtension` resources, the
+        # metadata is available under the namespace `com.google.authz_extension.`. For
+        # other types of extensions, the metadata is available under the namespace `com.
+        # google....`. For example: `com.google.lb_traffic_extension.lbtrafficextension1.
+        # chain1.ext1`. The following variables are supported in the metadata: ``
+        # forwarding_rule_id`` - substituted with the forwarding rule's fully qualified
+        # resource name. This field must not be set for plugin extensions. Setting it
+        # results in a validation error. You can set metadata at either the resource
+        # level or the extension level. The extension level metadata is recommended
+        # because you can pass a different set of metadata through each extension to the
+        # backend. This field is subject to following limitations: * The total size of
+        # the metadata must be less than 1KiB. * The total number of keys in the
+        # metadata must be less than 16. * The length of each key must be less than 64
+        # characters. * The length of each value must be less than 1024 characters. *
+        # All values must be strings.
         # Corresponds to the JSON property `metadata`
         # @return [Hash<String,Object>]
         attr_accessor :metadata
       
-        # Required. The name for this extension. The name is logged as part of the HTTP
+        # Optional. The name for this extension. The name is logged as part of the HTTP
         # request logs. The name must conform with RFC-1034, is restricted to lower-
         # cased letters, numbers and hyphens, and can have a maximum length of 63
         # characters. Additionally, the first character must be a letter and the last a
-        # letter or a number.
+        # letter or a number. This field is required except for AuthzExtension.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
+      
+        # Optional. Configures the send mode for request body processing. The field can
+        # only be set if `supported_events` includes `REQUEST_BODY`. If `
+        # supported_events` includes `REQUEST_BODY`, but `request_body_send_mode` is
+        # unset, the default value `STREAMED` is used. When this field is set to `
+        # FULL_DUPLEX_STREAMED`, `supported_events` must include both `REQUEST_BODY` and
+        # `REQUEST_TRAILERS`. This field can be set only for `LbTrafficExtension` and `
+        # LbRouteExtension` resources, and only when the `service` field of the
+        # extension points to a `BackendService`. Only `FULL_DUPLEX_STREAMED` mode is
+        # supported for `LbRouteExtension` resources.
+        # Corresponds to the JSON property `requestBodySendMode`
+        # @return [String]
+        attr_accessor :request_body_send_mode
+      
+        # Optional. Configures the send mode for response processing. If unspecified,
+        # the default value `STREAMED` is used. The field can only be set if `
+        # supported_events` includes `RESPONSE_BODY`. If `supported_events` includes `
+        # RESPONSE_BODY`, but `response_body_send_mode` is unset, the default value `
+        # STREAMED` is used. When this field is set to `FULL_DUPLEX_STREAMED`, `
+        # supported_events` must include both `RESPONSE_BODY` and `RESPONSE_TRAILERS`.
+        # This field can be set only for `LbTrafficExtension` resources, and only when
+        # the `service` field of the extension points to a `BackendService`.
+        # Corresponds to the JSON property `responseBodySendMode`
+        # @return [String]
+        attr_accessor :response_body_send_mode
       
         # Required. The reference to the service that runs the extension. To configure a
         # callout extension, `service` must be a fully-qualified reference to a [backend
@@ -706,7 +733,9 @@ module Google
         # required. For the `LbRouteExtension` resource, this field is optional. If
         # unspecified, `REQUEST_HEADERS` event is assumed as supported. For the `
         # LbEdgeExtension` resource, this field is required and must only contain `
-        # REQUEST_HEADERS` event.
+        # REQUEST_HEADERS` event. For the `AuthzExtension` resource, this field is
+        # optional. `REQUEST_HEADERS` is the only supported event. If unspecified, `
+        # REQUEST_HEADERS` event is assumed as supported.
         # Corresponds to the JSON property `supportedEvents`
         # @return [Array<String>]
         attr_accessor :supported_events
@@ -730,6 +759,8 @@ module Google
           @forward_headers = args[:forward_headers] if args.key?(:forward_headers)
           @metadata = args[:metadata] if args.key?(:metadata)
           @name = args[:name] if args.key?(:name)
+          @request_body_send_mode = args[:request_body_send_mode] if args.key?(:request_body_send_mode)
+          @response_body_send_mode = args[:response_body_send_mode] if args.key?(:response_body_send_mode)
           @service = args[:service] if args.key?(:service)
           @supported_events = args[:supported_events] if args.key?(:supported_events)
           @timeout = args[:timeout] if args.key?(:timeout)
@@ -2341,6 +2372,80 @@ module Google
         end
       end
       
+      # `LbEdgeExtension` is a resource that lets the extension service influence the
+      # selection of backend services and Cloud CDN cache keys by modifying request
+      # headers.
+      class LbEdgeExtension
+        include Google::Apis::Core::Hashable
+      
+        # Output only. The timestamp when the resource was created.
+        # Corresponds to the JSON property `createTime`
+        # @return [String]
+        attr_accessor :create_time
+      
+        # Optional. A human-readable description of the resource.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # Required. A set of ordered extension chains that contain the match conditions
+        # and extensions to execute. Match conditions for each extension chain are
+        # evaluated in sequence for a given request. The first extension chain that has
+        # a condition that matches the request is executed. Any subsequent extension
+        # chains do not execute. Limited to 5 extension chains per resource.
+        # Corresponds to the JSON property `extensionChains`
+        # @return [Array<Google::Apis::NetworkservicesV1::ExtensionChain>]
+        attr_accessor :extension_chains
+      
+        # Required. A list of references to the forwarding rules to which this service
+        # extension is attached. At least one forwarding rule is required. Only one `
+        # LbEdgeExtension` resource can be associated with a forwarding rule.
+        # Corresponds to the JSON property `forwardingRules`
+        # @return [Array<String>]
+        attr_accessor :forwarding_rules
+      
+        # Optional. Set of labels associated with the `LbEdgeExtension` resource. The
+        # format must comply with [the requirements for labels](https://cloud.google.com/
+        # compute/docs/labeling-resources#requirements) for Google Cloud resources.
+        # Corresponds to the JSON property `labels`
+        # @return [Hash<String,String>]
+        attr_accessor :labels
+      
+        # Required. All forwarding rules referenced by this extension must share the
+        # same load balancing scheme. Supported values: `EXTERNAL_MANAGED`.
+        # Corresponds to the JSON property `loadBalancingScheme`
+        # @return [String]
+        attr_accessor :load_balancing_scheme
+      
+        # Required. Identifier. Name of the `LbEdgeExtension` resource in the following
+        # format: `projects/`project`/locations/`location`/lbEdgeExtensions/`
+        # lb_edge_extension``.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Output only. The timestamp when the resource was updated.
+        # Corresponds to the JSON property `updateTime`
+        # @return [String]
+        attr_accessor :update_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @create_time = args[:create_time] if args.key?(:create_time)
+          @description = args[:description] if args.key?(:description)
+          @extension_chains = args[:extension_chains] if args.key?(:extension_chains)
+          @forwarding_rules = args[:forwarding_rules] if args.key?(:forwarding_rules)
+          @labels = args[:labels] if args.key?(:labels)
+          @load_balancing_scheme = args[:load_balancing_scheme] if args.key?(:load_balancing_scheme)
+          @name = args[:name] if args.key?(:name)
+          @update_time = args[:update_time] if args.key?(:update_time)
+        end
+      end
+      
       # `LbRouteExtension` is a resource that lets you control where traffic is routed
       # to for a given request.
       class LbRouteExtension
@@ -2730,6 +2835,37 @@ module Google
         end
       end
       
+      # Message for response to listing `LbEdgeExtension` resources.
+      class ListLbEdgeExtensionsResponse
+        include Google::Apis::Core::Hashable
+      
+        # The list of `LbEdgeExtension` resources.
+        # Corresponds to the JSON property `lbEdgeExtensions`
+        # @return [Array<Google::Apis::NetworkservicesV1::LbEdgeExtension>]
+        attr_accessor :lb_edge_extensions
+      
+        # A token identifying a page of results that the server returns.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        # Locations that could not be reached.
+        # Corresponds to the JSON property `unreachable`
+        # @return [Array<String>]
+        attr_accessor :unreachable
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @lb_edge_extensions = args[:lb_edge_extensions] if args.key?(:lb_edge_extensions)
+          @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
+          @unreachable = args[:unreachable] if args.key?(:unreachable)
+        end
+      end
+      
       # Message for response to listing `LbRouteExtension` resources.
       class ListLbRouteExtensionsResponse
         include Google::Apis::Core::Hashable
@@ -2900,6 +3036,13 @@ module Google
         # @return [Array<Google::Apis::NetworkservicesV1::Operation>]
         attr_accessor :operations
       
+        # Unordered list. Unreachable resources. Populated when the request sets `
+        # ListOperationsRequest.return_partial_success` and reads across collections e.g.
+        # when attempting to list all resources across all supported locations.
+        # Corresponds to the JSON property `unreachable`
+        # @return [Array<String>]
+        attr_accessor :unreachable
+      
         def initialize(**args)
            update!(**args)
         end
@@ -2908,6 +3051,7 @@ module Google
         def update!(**args)
           @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
           @operations = args[:operations] if args.key?(:operations)
+          @unreachable = args[:unreachable] if args.key?(:unreachable)
         end
       end
       

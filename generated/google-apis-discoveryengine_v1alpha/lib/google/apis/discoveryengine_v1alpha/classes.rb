@@ -1800,77 +1800,6 @@ module Google
         end
       end
       
-      # The resource level alert config. Used in: * UserLicense * EngineUserData The
-      # AlertPolicyConfig in data connector is of same usage. No easy way to migrate.
-      class GoogleCloudDiscoveryengineV1AlertPolicyResourceConfig
-        include Google::Apis::Core::Hashable
-      
-        # Optional. The enrollment state of each alert.
-        # Corresponds to the JSON property `alertEnrollments`
-        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1AlertPolicyResourceConfigAlertEnrollment>]
-        attr_accessor :alert_enrollments
-      
-        # Immutable. The fully qualified resource name of the AlertPolicy.
-        # Corresponds to the JSON property `alertPolicy`
-        # @return [String]
-        attr_accessor :alert_policy
-      
-        # Optional. The contact details for each alert policy.
-        # Corresponds to the JSON property `contactDetails`
-        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1ContactDetails>]
-        attr_accessor :contact_details
-      
-        # Optional. The language code used for notifications
-        # Corresponds to the JSON property `languageCode`
-        # @return [String]
-        attr_accessor :language_code
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @alert_enrollments = args[:alert_enrollments] if args.key?(:alert_enrollments)
-          @alert_policy = args[:alert_policy] if args.key?(:alert_policy)
-          @contact_details = args[:contact_details] if args.key?(:contact_details)
-          @language_code = args[:language_code] if args.key?(:language_code)
-        end
-      end
-      
-      # The alert enrollment status.
-      class GoogleCloudDiscoveryengineV1AlertPolicyResourceConfigAlertEnrollment
-        include Google::Apis::Core::Hashable
-      
-        # Immutable. The id of an alert.
-        # Corresponds to the JSON property `alertId`
-        # @return [String]
-        attr_accessor :alert_id
-      
-        # Required. The enrollment status of a customer.
-        # Corresponds to the JSON property `enrollState`
-        # @return [String]
-        attr_accessor :enroll_state
-      
-        # Optional. Parameters used to instantiate a notification. Used for
-        # notifications that are triggered when registered. Not stored. * Gemini
-        # Business welcome emails. * Gemini Business user invitation emails.
-        # Corresponds to the JSON property `notificationParams`
-        # @return [Hash<String,String>]
-        attr_accessor :notification_params
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @alert_id = args[:alert_id] if args.key?(:alert_id)
-          @enroll_state = args[:enroll_state] if args.key?(:enroll_state)
-          @notification_params = args[:notification_params] if args.key?(:notification_params)
-        end
-      end
-      
       # The specification for answer generation.
       class GoogleCloudDiscoveryengineV1AnswerGenerationSpec
         include Google::Apis::Core::Hashable
@@ -2521,27 +2450,6 @@ module Google
         def update!(**args)
           @end_time = args[:end_time] if args.key?(:end_time)
           @start_time = args[:start_time] if args.key?(:start_time)
-        end
-      end
-      
-      # The contact info stored in resource level. If both project level and resource
-      # level is populated, the resource level contact info will override the project
-      # level contact info.
-      class GoogleCloudDiscoveryengineV1ContactDetails
-        include Google::Apis::Core::Hashable
-      
-        # Optional. The email address of the contact.
-        # Corresponds to the JSON property `emailAddress`
-        # @return [String]
-        attr_accessor :email_address
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @email_address = args[:email_address] if args.key?(:email_address)
         end
       end
       
@@ -3559,6 +3467,11 @@ module Google
         # @return [String]
         attr_accessor :configurable_billing_approach
       
+        # Output only. The timestamp when configurable_billing_approach was last updated.
+        # Corresponds to the JSON property `configurableBillingApproachUpdateTime`
+        # @return [String]
+        attr_accessor :configurable_billing_approach_update_time
+      
         # Immutable. The content config of the data store. If this field is unset, the
         # server behavior defaults to ContentConfig.NO_CONTENT.
         # Corresponds to the JSON property `contentConfig`
@@ -3663,6 +3576,7 @@ module Google
           @billing_estimation = args[:billing_estimation] if args.key?(:billing_estimation)
           @cmek_config = args[:cmek_config] if args.key?(:cmek_config)
           @configurable_billing_approach = args[:configurable_billing_approach] if args.key?(:configurable_billing_approach)
+          @configurable_billing_approach_update_time = args[:configurable_billing_approach_update_time] if args.key?(:configurable_billing_approach_update_time)
           @content_config = args[:content_config] if args.key?(:content_config)
           @create_time = args[:create_time] if args.key?(:create_time)
           @default_schema_id = args[:default_schema_id] if args.key?(:default_schema_id)
@@ -5259,12 +5173,6 @@ module Google
       class GoogleCloudDiscoveryengineV1LicenseConfig
         include Google::Apis::Core::Hashable
       
-        # The resource level alert config. Used in: * UserLicense * EngineUserData The
-        # AlertPolicyConfig in data connector is of same usage. No easy way to migrate.
-        # Corresponds to the JSON property `alertPolicyResourceConfig`
-        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1AlertPolicyResourceConfig]
-        attr_accessor :alert_policy_resource_config
-      
         # Optional. Whether the license config should be auto renewed when it reaches
         # the end date.
         # Corresponds to the JSON property `autoRenew`
@@ -5289,6 +5197,12 @@ module Google
         # @return [Boolean]
         attr_accessor :free_trial
         alias_method :free_trial?, :free_trial
+      
+        # Output only. Whether the license config is for Gemini bundle.
+        # Corresponds to the JSON property `geminiBundle`
+        # @return [Boolean]
+        attr_accessor :gemini_bundle
+        alias_method :gemini_bundle?, :gemini_bundle
       
         # Required. Number of licenses purchased.
         # Corresponds to the JSON property `licenseCount`
@@ -5335,10 +5249,10 @@ module Google
       
         # Update properties of this object
         def update!(**args)
-          @alert_policy_resource_config = args[:alert_policy_resource_config] if args.key?(:alert_policy_resource_config)
           @auto_renew = args[:auto_renew] if args.key?(:auto_renew)
           @end_date = args[:end_date] if args.key?(:end_date)
           @free_trial = args[:free_trial] if args.key?(:free_trial)
+          @gemini_bundle = args[:gemini_bundle] if args.key?(:gemini_bundle)
           @license_count = args[:license_count] if args.key?(:license_count)
           @name = args[:name] if args.key?(:name)
           @start_date = args[:start_date] if args.key?(:start_date)
@@ -5351,6 +5265,16 @@ module Google
       # Metadata and configurations for a Google Cloud project in the service.
       class GoogleCloudDiscoveryengineV1Project
         include Google::Apis::Core::Hashable
+      
+        # Represents the currently effective configurable billing parameters. These
+        # values are derived from the customer's subscription history stored internally
+        # and reflect the thresholds actively being used for billing purposes at the
+        # time of the GetProject call. This includes the start_time of the subscription
+        # and may differ from the values in `customer_provided_config` due to billing
+        # rules (e.g., scale-downs taking effect only at the start of a new month).
+        # Corresponds to the JSON property `configurableBillingStatus`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1ProjectConfigurableBillingStatus]
+        attr_accessor :configurable_billing_status
       
         # Output only. The timestamp when this project is created.
         # Corresponds to the JSON property `createTime`
@@ -5386,11 +5310,52 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @configurable_billing_status = args[:configurable_billing_status] if args.key?(:configurable_billing_status)
           @create_time = args[:create_time] if args.key?(:create_time)
           @customer_provided_config = args[:customer_provided_config] if args.key?(:customer_provided_config)
           @name = args[:name] if args.key?(:name)
           @provision_completion_time = args[:provision_completion_time] if args.key?(:provision_completion_time)
           @service_terms_map = args[:service_terms_map] if args.key?(:service_terms_map)
+        end
+      end
+      
+      # Represents the currently effective configurable billing parameters. These
+      # values are derived from the customer's subscription history stored internally
+      # and reflect the thresholds actively being used for billing purposes at the
+      # time of the GetProject call. This includes the start_time of the subscription
+      # and may differ from the values in `customer_provided_config` due to billing
+      # rules (e.g., scale-downs taking effect only at the start of a new month).
+      class GoogleCloudDiscoveryengineV1ProjectConfigurableBillingStatus
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The currently effective Indexing Core threshold. This is the
+        # threshold against which Indexing Core usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveIndexingCoreThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_indexing_core_threshold
+      
+        # Optional. The currently effective Search QPM threshold in queries per minute.
+        # This is the threshold against which QPM usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveSearchQpmThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_search_qpm_threshold
+      
+        # Optional. The start time of the currently active billing subscription.
+        # Corresponds to the JSON property `startTime`
+        # @return [String]
+        attr_accessor :start_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @effective_indexing_core_threshold = args[:effective_indexing_core_threshold] if args.key?(:effective_indexing_core_threshold)
+          @effective_search_qpm_threshold = args[:effective_search_qpm_threshold] if args.key?(:effective_search_qpm_threshold)
+          @start_time = args[:start_time] if args.key?(:start_time)
         end
       end
       
@@ -5423,6 +5388,13 @@ module Google
         # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1ProjectCustomerProvidedConfigNotebooklmConfigModelArmorConfig]
         attr_accessor :model_armor_config
       
+        # Optional. Whether to disable the notebook sharing feature for the project.
+        # Default to false if not specified.
+        # Corresponds to the JSON property `optOutNotebookSharing`
+        # @return [Boolean]
+        attr_accessor :opt_out_notebook_sharing
+        alias_method :opt_out_notebook_sharing?, :opt_out_notebook_sharing
+      
         def initialize(**args)
            update!(**args)
         end
@@ -5430,6 +5402,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @model_armor_config = args[:model_armor_config] if args.key?(:model_armor_config)
+          @opt_out_notebook_sharing = args[:opt_out_notebook_sharing] if args.key?(:opt_out_notebook_sharing)
         end
       end
       
@@ -6877,6 +6850,62 @@ module Google
         end
       end
       
+      # Configures metadata that is used for End User entities.
+      class GoogleCloudDiscoveryengineV1UserStore
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The default subscription LicenseConfig for the UserStore, if
+        # UserStore.enable_license_auto_register is true, new users will automatically
+        # register under the default subscription. If default LicenseConfig doesn't have
+        # remaining license seats left, new users will not be assigned with license and
+        # will be blocked for Vertex AI Search features. This is used if `
+        # license_assignment_tier_rules` is not configured.
+        # Corresponds to the JSON property `defaultLicenseConfig`
+        # @return [String]
+        attr_accessor :default_license_config
+      
+        # The display name of the User Store.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Optional. Whether to enable license auto update for users in this User Store.
+        # If true, users with expired licenses will automatically be updated to use the
+        # default license config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableExpiredLicenseAutoUpdate`
+        # @return [Boolean]
+        attr_accessor :enable_expired_license_auto_update
+        alias_method :enable_expired_license_auto_update?, :enable_expired_license_auto_update
+      
+        # Optional. Whether to enable license auto register for users in this User Store.
+        # If true, new users will automatically register under the default license
+        # config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableLicenseAutoRegister`
+        # @return [Boolean]
+        attr_accessor :enable_license_auto_register
+        alias_method :enable_license_auto_register?, :enable_license_auto_register
+      
+        # Immutable. The full resource name of the User Store, in the format of `
+        # projects/`project`/locations/`location`/userStores/`user_store``. This field
+        # must be a UTF-8 encoded string with a length limit of 1024 characters.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @default_license_config = args[:default_license_config] if args.key?(:default_license_config)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @enable_expired_license_auto_update = args[:enable_expired_license_auto_update] if args.key?(:enable_expired_license_auto_update)
+          @enable_license_auto_register = args[:enable_license_auto_register] if args.key?(:enable_license_auto_register)
+          @name = args[:name] if args.key?(:name)
+        end
+      end
+      
       # Config to store data store type configuration for workspace data
       class GoogleCloudDiscoveryengineV1WorkspaceConfig
         include Google::Apis::Core::Hashable
@@ -6915,6 +6944,25 @@ module Google
           @super_admin_email_address = args[:super_admin_email_address] if args.key?(:super_admin_email_address)
           @super_admin_service_account = args[:super_admin_service_account] if args.key?(:super_admin_service_account)
           @type = args[:type] if args.key?(:type)
+        end
+      end
+      
+      # Stored definition of an agent that uses A2A.
+      class GoogleCloudDiscoveryengineV1alphaA2AAgentDefinition
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The agent card is a JSON string.
+        # Corresponds to the JSON property `jsonAgentCard`
+        # @return [String]
+        attr_accessor :json_agent_card
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @json_agent_card = args[:json_agent_card] if args.key?(:json_agent_card)
         end
       end
       
@@ -7033,6 +7081,52 @@ module Google
         end
       end
       
+      # Stores the definition of an agent that uses ADK and is deployed to Agent
+      # Engine (formerly known as Reasoning Engine).
+      class GoogleCloudDiscoveryengineV1alphaAdkAgentDefinition
+        include Google::Apis::Core::Hashable
+      
+        # Keeps track of the reasoning engine that the agent is connected to. This
+        # message is not intended to keep track of agent's lifecycle. Instead it is only
+        # used to define parameters to connect to the agent that is already deployed to
+        # a reasoning engine.
+        # Corresponds to the JSON property `provisionedReasoningEngine`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAdkAgentDefinitionProvisionedReasoningEngine]
+        attr_accessor :provisioned_reasoning_engine
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @provisioned_reasoning_engine = args[:provisioned_reasoning_engine] if args.key?(:provisioned_reasoning_engine)
+        end
+      end
+      
+      # Keeps track of the reasoning engine that the agent is connected to. This
+      # message is not intended to keep track of agent's lifecycle. Instead it is only
+      # used to define parameters to connect to the agent that is already deployed to
+      # a reasoning engine.
+      class GoogleCloudDiscoveryengineV1alphaAdkAgentDefinitionProvisionedReasoningEngine
+        include Google::Apis::Core::Hashable
+      
+        # Required. The reasoning engine that the agent is connected to. Format: `
+        # projects/`project`/locations/`location`/reasoningEngines/`reasoning_engine``
+        # Corresponds to the JSON property `reasoningEngine`
+        # @return [String]
+        attr_accessor :reasoning_engine
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @reasoning_engine = args[:reasoning_engine] if args.key?(:reasoning_engine)
+        end
+      end
+      
       # Request message for CompletionService.AdvancedCompleteQuery method. .
       class GoogleCloudDiscoveryengineV1alphaAdvancedCompleteQueryRequest
         include Google::Apis::Core::Hashable
@@ -7096,9 +7190,9 @@ module Google
         # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaUserInfo]
         attr_accessor :user_info
       
-        # A unique identifier for tracking visitors. For example, this could be
-        # implemented with an HTTP cookie, which should be able to uniquely identify a
-        # visitor on a single device. This unique identifier should not change if the
+        # Optional. A unique identifier for tracking visitors. For example, this could
+        # be implemented with an HTTP cookie, which should be able to uniquely identify
+        # a visitor on a single device. This unique identifier should not change if the
         # visitor logs in or out of the website. This field should NOT have a fixed
         # value such as `unknown_visitor`. This should be the same identifier as
         # UserEvent.user_pseudo_id and SearchRequest.user_pseudo_id. The field must be a
@@ -7462,6 +7556,210 @@ module Google
         def update!(**args)
           @disable_automatic_refresh = args[:disable_automatic_refresh] if args.key?(:disable_automatic_refresh)
           @disable_initial_index = args[:disable_initial_index] if args.key?(:disable_initial_index)
+        end
+      end
+      
+      # Performs a predefined, specific task.
+      class GoogleCloudDiscoveryengineV1alphaAgent
+        include Google::Apis::Core::Hashable
+      
+        # Stored definition of an agent that uses A2A.
+        # Corresponds to the JSON property `a2aAgentDefinition`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaA2AAgentDefinition]
+        attr_accessor :a2a_agent_definition
+      
+        # Stores the definition of an agent that uses ADK and is deployed to Agent
+        # Engine (formerly known as Reasoning Engine).
+        # Corresponds to the JSON property `adkAgentDefinition`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAdkAgentDefinition]
+        attr_accessor :adk_agent_definition
+      
+        # Describes the authorizations required.
+        # Corresponds to the JSON property `authorizationConfig`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAuthorizationConfig]
+        attr_accessor :authorization_config
+      
+        # Output only. Timestamp when this Agent was created.
+        # Corresponds to the JSON property `createTime`
+        # @return [String]
+        attr_accessor :create_time
+      
+        # Optional. The custom placeholder text that appears in the text box before the
+        # user enters any text.
+        # Corresponds to the JSON property `customPlaceholderText`
+        # @return [String]
+        attr_accessor :custom_placeholder_text
+      
+        # Output only. The reason why the agent deployment failed. Only set if the state
+        # is DEPLOYMENT_FAILED.
+        # Corresponds to the JSON property `deploymentFailureReason`
+        # @return [String]
+        attr_accessor :deployment_failure_reason
+      
+        # Required. Human-readable description of the agent. This might be used by an
+        # LLM to automatically select an agent to respond to a user query.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # Stored definition of an agent that uses a Dialogflow agent.
+        # Corresponds to the JSON property `dialogflowAgentDefinition`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaDialogflowAgentDefinition]
+        attr_accessor :dialogflow_agent_definition
+      
+        # Required. Display name of the agent. This might be used by an LLM to
+        # automatically select an agent to respond to a user query.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Represents an image.
+        # Corresponds to the JSON property `icon`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAgentImage]
+        attr_accessor :icon
+      
+        # Optional. The code of the language of the text in the description,
+        # display_name and starter_prompts fields.
+        # Corresponds to the JSON property `languageCode`
+        # @return [String]
+        attr_accessor :language_code
+      
+        # Identifier. Resource name of the agent. Format: `projects/`project`/locations/`
+        # location`/collections/`collection`/engines/`engine`/assistants/`assistant`/
+        # agents/`agent``
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Output only. The reason why the agent was rejected. Only set if the state is
+        # PRIVATE, and got there via rejection.
+        # Corresponds to the JSON property `rejectionReason`
+        # @return [String]
+        attr_accessor :rejection_reason
+      
+        # Optional. The starter prompt suggestions to show the user on the landing page
+        # of the agent.
+        # Corresponds to the JSON property `starterPrompts`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAgentStarterPrompt>]
+        attr_accessor :starter_prompts
+      
+        # Output only. The lifecycle state of the agent.
+        # Corresponds to the JSON property `state`
+        # @return [String]
+        attr_accessor :state
+      
+        # Output only. The reason why the agent was suspended. Only set if the state is
+        # SUSPENDED.
+        # Corresponds to the JSON property `suspensionReason`
+        # @return [String]
+        attr_accessor :suspension_reason
+      
+        # Output only. Timestamp when this Agent was most recently updated.
+        # Corresponds to the JSON property `updateTime`
+        # @return [String]
+        attr_accessor :update_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @a2a_agent_definition = args[:a2a_agent_definition] if args.key?(:a2a_agent_definition)
+          @adk_agent_definition = args[:adk_agent_definition] if args.key?(:adk_agent_definition)
+          @authorization_config = args[:authorization_config] if args.key?(:authorization_config)
+          @create_time = args[:create_time] if args.key?(:create_time)
+          @custom_placeholder_text = args[:custom_placeholder_text] if args.key?(:custom_placeholder_text)
+          @deployment_failure_reason = args[:deployment_failure_reason] if args.key?(:deployment_failure_reason)
+          @description = args[:description] if args.key?(:description)
+          @dialogflow_agent_definition = args[:dialogflow_agent_definition] if args.key?(:dialogflow_agent_definition)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @icon = args[:icon] if args.key?(:icon)
+          @language_code = args[:language_code] if args.key?(:language_code)
+          @name = args[:name] if args.key?(:name)
+          @rejection_reason = args[:rejection_reason] if args.key?(:rejection_reason)
+          @starter_prompts = args[:starter_prompts] if args.key?(:starter_prompts)
+          @state = args[:state] if args.key?(:state)
+          @suspension_reason = args[:suspension_reason] if args.key?(:suspension_reason)
+          @update_time = args[:update_time] if args.key?(:update_time)
+        end
+      end
+      
+      # Describes a file used internally by an agent as a context on each invocation.
+      class GoogleCloudDiscoveryengineV1alphaAgentFile
+        include Google::Apis::Core::Hashable
+      
+        # Required. The name of the file.
+        # Corresponds to the JSON property `fileName`
+        # @return [String]
+        attr_accessor :file_name
+      
+        # Immutable. The content type of the file.
+        # Corresponds to the JSON property `mimeType`
+        # @return [String]
+        attr_accessor :mime_type
+      
+        # Identifier. The resource name of the file. Format: `projects/`project`/
+        # locations/`location`/collections/`collection`/engines/`engine`/assistants/`
+        # assistant`/agents/`agent`/files/`file``
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @file_name = args[:file_name] if args.key?(:file_name)
+          @mime_type = args[:mime_type] if args.key?(:mime_type)
+          @name = args[:name] if args.key?(:name)
+        end
+      end
+      
+      # Represents an image.
+      class GoogleCloudDiscoveryengineV1alphaAgentImage
+        include Google::Apis::Core::Hashable
+      
+        # Base64-encoded image file contents.
+        # Corresponds to the JSON property `content`
+        # @return [String]
+        attr_accessor :content
+      
+        # Image URI.
+        # Corresponds to the JSON property `uri`
+        # @return [String]
+        attr_accessor :uri
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @content = args[:content] if args.key?(:content)
+          @uri = args[:uri] if args.key?(:uri)
+        end
+      end
+      
+      # The starter prompt suggestion to show the user on the landing page of the
+      # agent.
+      class GoogleCloudDiscoveryengineV1alphaAgentStarterPrompt
+        include Google::Apis::Core::Hashable
+      
+        # Required. The text of the starter prompt.
+        # Corresponds to the JSON property `text`
+        # @return [String]
+        attr_accessor :text
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @text = args[:text] if args.key?(:text)
         end
       end
       
@@ -9980,6 +10278,11 @@ module Google
       class GoogleCloudDiscoveryengineV1alphaAssistantGroundedContent
         include Google::Apis::Core::Hashable
       
+        # A collection of source attributions for a piece of content.
+        # Corresponds to the JSON property `citationMetadata`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCitationMetadata]
+        attr_accessor :citation_metadata
+      
         # Multi-modal content.
         # Corresponds to the JSON property `content`
         # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAssistantContent]
@@ -9996,6 +10299,7 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @citation_metadata = args[:citation_metadata] if args.key?(:citation_metadata)
           @content = args[:content] if args.key?(:content)
           @text_grounding_metadata = args[:text_grounding_metadata] if args.key?(:text_grounding_metadata)
         end
@@ -10192,6 +10496,117 @@ module Google
         # Update properties of this object
         def update!(**args)
           @tool_info = args[:tool_info] if args.key?(:tool_info)
+        end
+      end
+      
+      # Discovery Engine Authorization resource.
+      class GoogleCloudDiscoveryengineV1alphaAuthorization
+        include Google::Apis::Core::Hashable
+      
+        # Required. The display name of the authorization. It must be a UTF-8 encoded
+        # string with a length limit of 128 characters.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Identifier. Resource name of the authorization. Format: `projects/`project`/
+        # locations/`location`/authorizations/`authorization`` It must be a UTF-8
+        # encoded string with a length limit of 1024 characters.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # OAuth2 configuration.
+        # Corresponds to the JSON property `serverSideOauth2`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAuthorizationServerSideOAuth2]
+        attr_accessor :server_side_oauth2
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @name = args[:name] if args.key?(:name)
+          @server_side_oauth2 = args[:server_side_oauth2] if args.key?(:server_side_oauth2)
+        end
+      end
+      
+      # Describes the authorizations required.
+      class GoogleCloudDiscoveryengineV1alphaAuthorizationConfig
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The authorization that is required to invoke the agent. Auth tokens
+        # will be passed to the agent as part of the request auth header.
+        # Corresponds to the JSON property `agentAuthorization`
+        # @return [String]
+        attr_accessor :agent_authorization
+      
+        # Optional. List of required authorizations for agent to access other resources.
+        # Auth tokens will be passed to the agent as part of the request body.
+        # Corresponds to the JSON property `toolAuthorizations`
+        # @return [Array<String>]
+        attr_accessor :tool_authorizations
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @agent_authorization = args[:agent_authorization] if args.key?(:agent_authorization)
+          @tool_authorizations = args[:tool_authorizations] if args.key?(:tool_authorizations)
+        end
+      end
+      
+      # OAuth2 configuration.
+      class GoogleCloudDiscoveryengineV1alphaAuthorizationServerSideOAuth2
+        include Google::Apis::Core::Hashable
+      
+        # Required. The URI the user is directed to when they need to authorize. Should
+        # include everything required for a successful authorization: OAuth ID, extra
+        # flags, etc. Example: `https://accounts.google.com/o/oauth2/v2/auth?client_id=
+        # OAUTH_ID&scope=https://www.googleapis.com/auth/calendar.events&response_type=
+        # code&access_type=offline&prompt=consent` The `redirect_uri` parameter will be
+        # overwritten by the Vertex AI Search frontend.
+        # Corresponds to the JSON property `authorizationUri`
+        # @return [String]
+        attr_accessor :authorization_uri
+      
+        # Required. The OAuth2 client ID.
+        # Corresponds to the JSON property `clientId`
+        # @return [String]
+        attr_accessor :client_id
+      
+        # Required. The OAuth2 client secret. Encrypted at rest.
+        # Corresponds to the JSON property `clientSecret`
+        # @return [String]
+        attr_accessor :client_secret
+      
+        # Required. The scopes to request. Example: `https://www.googleapis.com/auth/
+        # calendar.events`
+        # Corresponds to the JSON property `scopes`
+        # @return [Array<String>]
+        attr_accessor :scopes
+      
+        # Required. The HTTP endpoint that exchanges a client authorization for an
+        # access token.
+        # Corresponds to the JSON property `tokenUri`
+        # @return [String]
+        attr_accessor :token_uri
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @authorization_uri = args[:authorization_uri] if args.key?(:authorization_uri)
+          @client_id = args[:client_id] if args.key?(:client_id)
+          @client_secret = args[:client_secret] if args.key?(:client_secret)
+          @scopes = args[:scopes] if args.key?(:scopes)
+          @token_uri = args[:token_uri] if args.key?(:token_uri)
         end
       end
       
@@ -10757,6 +11172,120 @@ module Google
         end
       end
       
+      # Information about license configs at billing account level.
+      class GoogleCloudDiscoveryengineV1alphaBillingAccountLicenseConfig
+        include Google::Apis::Core::Hashable
+      
+        # Whether the BillingAccountLicenseConfig is auto renewed when it reaches the
+        # end date.
+        # Corresponds to the JSON property `autoRenew`
+        # @return [Boolean]
+        attr_accessor :auto_renew
+        alias_method :auto_renew?, :auto_renew
+      
+        # Represents a whole or partial calendar date, such as a birthday. The time of
+        # day and time zone are either specified elsewhere or are insignificant. The
+        # date is relative to the Gregorian Calendar. This can represent one of the
+        # following: * A full date, with non-zero year, month, and day values. * A month
+        # and day, with a zero year (for example, an anniversary). * A year on its own,
+        # with a zero month and a zero day. * A year and month, with a zero day (for
+        # example, a credit card expiration date). Related types: * google.type.
+        # TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+        # Corresponds to the JSON property `endDate`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleTypeDate]
+        attr_accessor :end_date
+      
+        # Whether the license config is for Gemini bundle.
+        # Corresponds to the JSON property `geminiBundle`
+        # @return [Boolean]
+        attr_accessor :gemini_bundle
+        alias_method :gemini_bundle?, :gemini_bundle
+      
+        # A map of LicenseConfig names to the number of licenses distributed to each.
+        # The key is the full resource name of the LicenseConfig, such as `projects/`
+        # project`/locations/`location`/licenseConfigs/`license_config``. The value is
+        # the count of licenses allocated to it.
+        # Corresponds to the JSON property `licenseConfigDistributions`
+        # @return [Hash<String,Fixnum>]
+        attr_accessor :license_config_distributions
+      
+        # Required. The number of licenses purchased under this billing account license
+        # config.
+        # Corresponds to the JSON property `licenseCount`
+        # @return [Fixnum]
+        attr_accessor :license_count
+      
+        # Immutable. Identifier. The fully qualified resource name of the billing
+        # account license config. Format: `billingAccounts/`billing_account`/
+        # billingAccountLicenseConfigs/`billing_account_license_config``.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # The procurement entitlement id of the subscription.
+        # Corresponds to the JSON property `procurementEntitlementId`
+        # @return [String]
+        attr_accessor :procurement_entitlement_id
+      
+        # Represents a whole or partial calendar date, such as a birthday. The time of
+        # day and time zone are either specified elsewhere or are insignificant. The
+        # date is relative to the Gregorian Calendar. This can represent one of the
+        # following: * A full date, with non-zero year, month, and day values. * A month
+        # and day, with a zero year (for example, an anniversary). * A year on its own,
+        # with a zero month and a zero day. * A year and month, with a zero day (for
+        # example, a credit card expiration date). Related types: * google.type.
+        # TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+        # Corresponds to the JSON property `startDate`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleTypeDate]
+        attr_accessor :start_date
+      
+        # Output only. The state of the BillingAccountLicenseConfig.
+        # Corresponds to the JSON property `state`
+        # @return [String]
+        attr_accessor :state
+      
+        # The subscription display name.
+        # Corresponds to the JSON property `subscriptionDisplayName`
+        # @return [String]
+        attr_accessor :subscription_display_name
+      
+        # Output only. The corresponding SubV3 subscription name.
+        # Corresponds to the JSON property `subscriptionName`
+        # @return [String]
+        attr_accessor :subscription_name
+      
+        # Required. The subscription term.
+        # Corresponds to the JSON property `subscriptionTerm`
+        # @return [String]
+        attr_accessor :subscription_term
+      
+        # Required. The subscription tier.
+        # Corresponds to the JSON property `subscriptionTier`
+        # @return [String]
+        attr_accessor :subscription_tier
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @auto_renew = args[:auto_renew] if args.key?(:auto_renew)
+          @end_date = args[:end_date] if args.key?(:end_date)
+          @gemini_bundle = args[:gemini_bundle] if args.key?(:gemini_bundle)
+          @license_config_distributions = args[:license_config_distributions] if args.key?(:license_config_distributions)
+          @license_count = args[:license_count] if args.key?(:license_count)
+          @name = args[:name] if args.key?(:name)
+          @procurement_entitlement_id = args[:procurement_entitlement_id] if args.key?(:procurement_entitlement_id)
+          @start_date = args[:start_date] if args.key?(:start_date)
+          @state = args[:state] if args.key?(:state)
+          @subscription_display_name = args[:subscription_display_name] if args.key?(:subscription_display_name)
+          @subscription_name = args[:subscription_name] if args.key?(:subscription_name)
+          @subscription_term = args[:subscription_term] if args.key?(:subscription_term)
+          @subscription_tier = args[:subscription_tier] if args.key?(:subscription_tier)
+        end
+      end
+      
       # A data branch that stores Documents.
       class GoogleCloudDiscoveryengineV1alphaBranch
         include Google::Apis::Core::Hashable
@@ -10822,6 +11351,140 @@ module Google
         # Update properties of this object
         def update!(**args)
           @document_counts = args[:document_counts] if args.key?(:document_counts)
+        end
+      end
+      
+      # Canned query resource of Assistant. It represents a short-cut to a predefined
+      # conversation start.
+      class GoogleCloudDiscoveryengineV1alphaCannedQuery
+        include Google::Apis::Core::Hashable
+      
+        # The text pieces for the canned query, which can be localized.
+        # Corresponds to the JSON property `defaultTexts`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCannedQueryCannedQueryTexts]
+        attr_accessor :default_texts
+      
+        # The display name of the canned query. It must be a UTF-8 encoded string with a
+        # length limit of 128 characters.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Whether this canned query is enabled.
+        # Corresponds to the JSON property `enabled`
+        # @return [Boolean]
+        attr_accessor :enabled
+        alias_method :enabled?, :enabled
+      
+        # Output only. Whether this is a Google-defined, read-only canned query.
+        # Corresponds to the JSON property `googleDefined`
+        # @return [Boolean]
+        attr_accessor :google_defined
+        alias_method :google_defined?, :google_defined
+      
+        # Optional. The translations of the text attributes. The keys should be BCP-47
+        # language codes.
+        # Corresponds to the JSON property `localizedTexts`
+        # @return [Hash<String,Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCannedQueryCannedQueryTexts>]
+        attr_accessor :localized_texts
+      
+        # Immutable. Resource name of the canned query. Format: `projects/`project`/
+        # locations/`location`/collections/`collection`/engines/`engine`/assistants/`
+        # assistant`/cannedQueries/`canned_query`` It must be a UTF-8 encoded string
+        # with a length limit of 1024 characters.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Optional. The capabilities the Assistant needs to have to use this canned
+        # query.
+        # Corresponds to the JSON property `requiredCapabilities`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCannedQueryAssistantCapability>]
+        attr_accessor :required_capabilities
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @default_texts = args[:default_texts] if args.key?(:default_texts)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @enabled = args[:enabled] if args.key?(:enabled)
+          @google_defined = args[:google_defined] if args.key?(:google_defined)
+          @localized_texts = args[:localized_texts] if args.key?(:localized_texts)
+          @name = args[:name] if args.key?(:name)
+          @required_capabilities = args[:required_capabilities] if args.key?(:required_capabilities)
+        end
+      end
+      
+      # Capability of an assistant needed to use this canned query.
+      class GoogleCloudDiscoveryengineV1alphaCannedQueryAssistantCapability
+        include Google::Apis::Core::Hashable
+      
+        # The name of the action that the Assistant needs to have set up to use this
+        # canned query.
+        # Corresponds to the JSON property `actionName`
+        # @return [String]
+        attr_accessor :action_name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @action_name = args[:action_name] if args.key?(:action_name)
+        end
+      end
+      
+      # The text pieces for the canned query, which can be localized.
+      class GoogleCloudDiscoveryengineV1alphaCannedQueryCannedQueryTexts
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The prefix that `suggested_prompts` should start with.
+        # Corresponds to the JSON property `prefix`
+        # @return [String]
+        attr_accessor :prefix
+      
+        # Required. The prompts the canned query will offer to the user.
+        # Corresponds to the JSON property `suggestedPrompts`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCannedQuerySuggestedPrompt>]
+        attr_accessor :suggested_prompts
+      
+        # Required. The title that is for the end user.
+        # Corresponds to the JSON property `title`
+        # @return [String]
+        attr_accessor :title
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @prefix = args[:prefix] if args.key?(:prefix)
+          @suggested_prompts = args[:suggested_prompts] if args.key?(:suggested_prompts)
+          @title = args[:title] if args.key?(:title)
+        end
+      end
+      
+      # A suggested prompt for the canned query.
+      class GoogleCloudDiscoveryengineV1alphaCannedQuerySuggestedPrompt
+        include Google::Apis::Core::Hashable
+      
+        # Required. The text of the suggested prompt.
+        # Corresponds to the JSON property `promptText`
+        # @return [String]
+        attr_accessor :prompt_text
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @prompt_text = args[:prompt_text] if args.key?(:prompt_text)
         end
       end
       
@@ -11029,6 +11692,25 @@ module Google
         def update!(**args)
           @citation_threshold = args[:citation_threshold] if args.key?(:citation_threshold)
           @enable_claim_level_score = args[:enable_claim_level_score] if args.key?(:enable_claim_level_score)
+        end
+      end
+      
+      # Response message for the DataConnectorService.CheckRefreshToken method.
+      class GoogleCloudDiscoveryengineV1alphaCheckRefreshTokenResponse
+        include Google::Apis::Core::Hashable
+      
+        # Describes a refresh token.
+        # Corresponds to the JSON property `refreshTokenInfo`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaRefreshTokenInfo]
+        attr_accessor :refresh_token_info
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @refresh_token_info = args[:refresh_token_info] if args.key?(:refresh_token_info)
         end
       end
       
@@ -11408,6 +12090,81 @@ module Google
         def update!(**args)
           @content = args[:content] if args.key?(:content)
           @structure_type = args[:structure_type] if args.key?(:structure_type)
+        end
+      end
+      
+      # Source attributions for content.
+      class GoogleCloudDiscoveryengineV1alphaCitation
+        include Google::Apis::Core::Hashable
+      
+        # Output only. End index into the content.
+        # Corresponds to the JSON property `endIndex`
+        # @return [Fixnum]
+        attr_accessor :end_index
+      
+        # Output only. License of the attribution.
+        # Corresponds to the JSON property `license`
+        # @return [String]
+        attr_accessor :license
+      
+        # Represents a whole or partial calendar date, such as a birthday. The time of
+        # day and time zone are either specified elsewhere or are insignificant. The
+        # date is relative to the Gregorian Calendar. This can represent one of the
+        # following: * A full date, with non-zero year, month, and day values. * A month
+        # and day, with a zero year (for example, an anniversary). * A year on its own,
+        # with a zero month and a zero day. * A year and month, with a zero day (for
+        # example, a credit card expiration date). Related types: * google.type.
+        # TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+        # Corresponds to the JSON property `publicationDate`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleTypeDate]
+        attr_accessor :publication_date
+      
+        # Output only. Start index into the content.
+        # Corresponds to the JSON property `startIndex`
+        # @return [Fixnum]
+        attr_accessor :start_index
+      
+        # Output only. Title of the attribution.
+        # Corresponds to the JSON property `title`
+        # @return [String]
+        attr_accessor :title
+      
+        # Output only. Url reference of the attribution.
+        # Corresponds to the JSON property `uri`
+        # @return [String]
+        attr_accessor :uri
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @end_index = args[:end_index] if args.key?(:end_index)
+          @license = args[:license] if args.key?(:license)
+          @publication_date = args[:publication_date] if args.key?(:publication_date)
+          @start_index = args[:start_index] if args.key?(:start_index)
+          @title = args[:title] if args.key?(:title)
+          @uri = args[:uri] if args.key?(:uri)
+        end
+      end
+      
+      # A collection of source attributions for a piece of content.
+      class GoogleCloudDiscoveryengineV1alphaCitationMetadata
+        include Google::Apis::Core::Hashable
+      
+        # Output only. List of citations.
+        # Corresponds to the JSON property `citations`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCitation>]
+        attr_accessor :citations
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @citations = args[:citations] if args.key?(:citations)
         end
       end
       
@@ -11809,6 +12566,97 @@ module Google
         def update!(**args)
           @end_time = args[:end_time] if args.key?(:end_time)
           @start_time = args[:start_time] if args.key?(:start_time)
+        end
+      end
+      
+      # Response for [EstimateBillingService.GetConfigurablePricingUsageStats] method.
+      class GoogleCloudDiscoveryengineV1alphaConfigurablePricingUsageStats
+        include Google::Apis::Core::Hashable
+      
+        # A list of metric usages, one for each requested resource type that has data in
+        # the requested time range.
+        # Corresponds to the JSON property `metricUsages`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaConfigurablePricingUsageStatsMetricUsage>]
+        attr_accessor :metric_usages
+      
+        # Identifier. The name of the ConfigurablePricingUsageStats. Format: projects/`
+        # project`/locations/`location`/configurablePricingUsageStats
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @metric_usages = args[:metric_usages] if args.key?(:metric_usages)
+          @name = args[:name] if args.key?(:name)
+        end
+      end
+      
+      # A list of usages for a specific day.
+      class GoogleCloudDiscoveryengineV1alphaConfigurablePricingUsageStatsDatedUsage
+        include Google::Apis::Core::Hashable
+      
+        # Represents a whole or partial calendar date, such as a birthday. The time of
+        # day and time zone are either specified elsewhere or are insignificant. The
+        # date is relative to the Gregorian Calendar. This can represent one of the
+        # following: * A full date, with non-zero year, month, and day values. * A month
+        # and day, with a zero year (for example, an anniversary). * A year on its own,
+        # with a zero month and a zero day. * A year and month, with a zero day (for
+        # example, a credit card expiration date). Related types: * google.type.
+        # TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+        # Corresponds to the JSON property `date`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleTypeDate]
+        attr_accessor :date
+      
+        # The usage value on the date.
+        # Corresponds to the JSON property `usage`
+        # @return [Float]
+        attr_accessor :usage
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @date = args[:date] if args.key?(:date)
+          @usage = args[:usage] if args.key?(:usage)
+        end
+      end
+      
+      # The usage of a metric over a list of days.
+      class GoogleCloudDiscoveryengineV1alphaConfigurablePricingUsageStatsMetricUsage
+        include Google::Apis::Core::Hashable
+      
+        # The list of usages for this resource type, chronologically sorted by date.
+        # This is populated for metrics with daily aggregation like DAILY_MDN_QPM.
+        # Corresponds to the JSON property `datedUsages`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaConfigurablePricingUsageStatsDatedUsage>]
+        attr_accessor :dated_usages
+      
+        # The metric type.
+        # Corresponds to the JSON property `metricType`
+        # @return [String]
+        attr_accessor :metric_type
+      
+        # The list of total usages for this resource type
+        # Corresponds to the JSON property `totalUsages`
+        # @return [Array<Float>]
+        attr_accessor :total_usages
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @dated_usages = args[:dated_usages] if args.key?(:dated_usages)
+          @metric_type = args[:metric_type] if args.key?(:metric_type)
+          @total_usages = args[:total_usages] if args.key?(:total_usages)
         end
       end
       
@@ -13461,6 +14309,11 @@ module Google
         # @return [String]
         attr_accessor :configurable_billing_approach
       
+        # Output only. The timestamp when configurable_billing_approach was last updated.
+        # Corresponds to the JSON property `configurableBillingApproachUpdateTime`
+        # @return [String]
+        attr_accessor :configurable_billing_approach_update_time
+      
         # Immutable. The content config of the data store. If this field is unset, the
         # server behavior defaults to ContentConfig.NO_CONTENT.
         # Corresponds to the JSON property `contentConfig`
@@ -13580,6 +14433,7 @@ module Google
           @billing_estimation = args[:billing_estimation] if args.key?(:billing_estimation)
           @cmek_config = args[:cmek_config] if args.key?(:cmek_config)
           @configurable_billing_approach = args[:configurable_billing_approach] if args.key?(:configurable_billing_approach)
+          @configurable_billing_approach_update_time = args[:configurable_billing_approach_update_time] if args.key?(:configurable_billing_approach_update_time)
           @content_config = args[:content_config] if args.key?(:content_config)
           @create_time = args[:create_time] if args.key?(:create_time)
           @default_schema_id = args[:default_schema_id] if args.key?(:default_schema_id)
@@ -13707,6 +14561,33 @@ module Google
           @auto_refresh_crawl_rate = args[:auto_refresh_crawl_rate] if args.key?(:auto_refresh_crawl_rate)
           @user_triggered_crawl_error_rate = args[:user_triggered_crawl_error_rate] if args.key?(:user_triggered_crawl_error_rate)
           @user_triggered_crawl_rate = args[:user_triggered_crawl_rate] if args.key?(:user_triggered_crawl_rate)
+        end
+      end
+      
+      # Metadata related to the progress of the AgentService.DeleteAgent operation.
+      # This will be returned by the google.longrunning.Operation.metadata field.
+      class GoogleCloudDiscoveryengineV1alphaDeleteAgentMetadata
+        include Google::Apis::Core::Hashable
+      
+        # Operation create time.
+        # Corresponds to the JSON property `createTime`
+        # @return [String]
+        attr_accessor :create_time
+      
+        # Operation last update time. If the operation is done, this is also the finish
+        # time.
+        # Corresponds to the JSON property `updateTime`
+        # @return [String]
+        attr_accessor :update_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @create_time = args[:create_time] if args.key?(:create_time)
+          @update_time = args[:update_time] if args.key?(:update_time)
         end
       end
       
@@ -13952,6 +14833,35 @@ module Google
         end
       end
       
+      # Metadata related to the progress of the UserStoreService.DeleteUserStore
+      # operation. This will be returned by the google.longrunning.Operation.metadata
+      # field. Delete UserStore will delete all the end users under the user store,
+      # return the number of end users successfully deleted or failed to delete in the
+      # metadata.
+      class GoogleCloudDiscoveryengineV1alphaDeleteUserStoreMetadata
+        include Google::Apis::Core::Hashable
+      
+        # The number of end users under the user store that failed to be deleted.
+        # Corresponds to the JSON property `failureCount`
+        # @return [Fixnum]
+        attr_accessor :failure_count
+      
+        # The number of end users under the user store that were successfully deleted.
+        # Corresponds to the JSON property `successCount`
+        # @return [Fixnum]
+        attr_accessor :success_count
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @failure_count = args[:failure_count] if args.key?(:failure_count)
+          @success_count = args[:success_count] if args.key?(:success_count)
+        end
+      end
+      
       # Defines target endpoints used to connect to third-party sources.
       class GoogleCloudDiscoveryengineV1alphaDestinationConfig
         include Google::Apis::Core::Hashable
@@ -14015,6 +14925,26 @@ module Google
         end
       end
       
+      # Stored definition of an agent that uses a Dialogflow agent.
+      class GoogleCloudDiscoveryengineV1alphaDialogflowAgentDefinition
+        include Google::Apis::Core::Hashable
+      
+        # Required. Resource name of the underlying Dialogflow Agent. Format: `projects/`
+        # project`/locations/`location`/agents/`agent``
+        # Corresponds to the JSON property `dialogflowAgent`
+        # @return [String]
+        attr_accessor :dialogflow_agent
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @dialogflow_agent = args[:dialogflow_agent] if args.key?(:dialogflow_agent)
+        end
+      end
+      
       # Metadata related to the progress of the SiteSearchEngineService.
       # DisableAdvancedSiteSearch operation. This will be returned by the google.
       # longrunning.Operation.metadata field.
@@ -14066,6 +14996,64 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+        end
+      end
+      
+      # Request message for LicenseConfigService.DistributeLicenseConfig method.
+      class GoogleCloudDiscoveryengineV1alphaDistributeLicenseConfigRequest
+        include Google::Apis::Core::Hashable
+      
+        # Optional. Distribute seats to this license config instead of creating a new
+        # one. If not specified, a new license config will be created from the billing
+        # account license config.
+        # Corresponds to the JSON property `licenseConfigId`
+        # @return [String]
+        attr_accessor :license_config_id
+      
+        # Required. The number of licenses to distribute.
+        # Corresponds to the JSON property `licenseCount`
+        # @return [Fixnum]
+        attr_accessor :license_count
+      
+        # Required. The target GCP project region to distribute the license config to.
+        # Corresponds to the JSON property `location`
+        # @return [String]
+        attr_accessor :location
+      
+        # Required. The target GCP project number to distribute the license config to.
+        # Corresponds to the JSON property `projectNumber`
+        # @return [Fixnum]
+        attr_accessor :project_number
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @license_config_id = args[:license_config_id] if args.key?(:license_config_id)
+          @license_count = args[:license_count] if args.key?(:license_count)
+          @location = args[:location] if args.key?(:location)
+          @project_number = args[:project_number] if args.key?(:project_number)
+        end
+      end
+      
+      # Response message for LicenseConfigService.DistributeLicenseConfig method.
+      class GoogleCloudDiscoveryengineV1alphaDistributeLicenseConfigResponse
+        include Google::Apis::Core::Hashable
+      
+        # Information about users' licenses.
+        # Corresponds to the JSON property `licenseConfig`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaLicenseConfig]
+        attr_accessor :license_config
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @license_config = args[:license_config] if args.key?(:license_config)
         end
       end
       
@@ -16559,6 +17547,52 @@ module Google
         end
       end
       
+      # Request for the AgentService.ImportAgentFile method.
+      class GoogleCloudDiscoveryengineV1alphaImportAgentFileRequest
+        include Google::Apis::Core::Hashable
+      
+        # Required. The name of the file.
+        # Corresponds to the JSON property `fileName`
+        # @return [String]
+        attr_accessor :file_name
+      
+        # Optional. The content type of the file, see https://www.iana.org/assignments/
+        # media-types/media-types.xhtml. This field is required when the data source
+        # does not provide the content type.
+        # Corresponds to the JSON property `mimeType`
+        # @return [String]
+        attr_accessor :mime_type
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @file_name = args[:file_name] if args.key?(:file_name)
+          @mime_type = args[:mime_type] if args.key?(:mime_type)
+        end
+      end
+      
+      # Response for the AgentService.ImportAgentFile method.
+      class GoogleCloudDiscoveryengineV1alphaImportAgentFileResponse
+        include Google::Apis::Core::Hashable
+      
+        # Describes a file used internally by an agent as a context on each invocation.
+        # Corresponds to the JSON property `agentFile`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAgentFile]
+        attr_accessor :agent_file
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @agent_file = args[:agent_file] if args.key?(:agent_file)
+        end
+      end
+      
       # Metadata related to the progress of the ImportCompletionSuggestions operation.
       # This will be returned by the google.longrunning.Operation.metadata field.
       class GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsMetadata
@@ -17461,6 +18495,12 @@ module Google
         attr_accessor :free_trial
         alias_method :free_trial?, :free_trial
       
+        # Output only. Whether the license config is for Gemini bundle.
+        # Corresponds to the JSON property `geminiBundle`
+        # @return [Boolean]
+        attr_accessor :gemini_bundle
+        alias_method :gemini_bundle?, :gemini_bundle
+      
         # Required. Number of licenses purchased.
         # Corresponds to the JSON property `licenseCount`
         # @return [Fixnum]
@@ -17510,12 +18550,93 @@ module Google
           @auto_renew = args[:auto_renew] if args.key?(:auto_renew)
           @end_date = args[:end_date] if args.key?(:end_date)
           @free_trial = args[:free_trial] if args.key?(:free_trial)
+          @gemini_bundle = args[:gemini_bundle] if args.key?(:gemini_bundle)
           @license_count = args[:license_count] if args.key?(:license_count)
           @name = args[:name] if args.key?(:name)
           @start_date = args[:start_date] if args.key?(:start_date)
           @state = args[:state] if args.key?(:state)
           @subscription_term = args[:subscription_term] if args.key?(:subscription_term)
           @subscription_tier = args[:subscription_tier] if args.key?(:subscription_tier)
+        end
+      end
+      
+      # Response message for the AgentService.ListAgents method.
+      class GoogleCloudDiscoveryengineV1alphaListAgentsResponse
+        include Google::Apis::Core::Hashable
+      
+        # The agents visible to the caller under the parent Assistant.
+        # Corresponds to the JSON property `agents`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAgent>]
+        attr_accessor :agents
+      
+        # A token that can be sent as ListAgentsRequest.page_token to retrieve the next
+        # page. If this field is omitted, there are no subsequent pages.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @agents = args[:agents] if args.key?(:agents)
+          @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
+        end
+      end
+      
+      # Response message for the AuthorizationService.ListAuthorizations method.
+      class GoogleCloudDiscoveryengineV1alphaListAuthorizationsResponse
+        include Google::Apis::Core::Hashable
+      
+        # All the customer's Authorizations.
+        # Corresponds to the JSON property `authorizations`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAuthorization>]
+        attr_accessor :authorizations
+      
+        # A token that can be sent as ListAuthorizationsRequest.page_token to retrieve
+        # the next page. If this field is omitted, there are no subsequent pages.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @authorizations = args[:authorizations] if args.key?(:authorizations)
+          @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
+        end
+      end
+      
+      # Response message for LicenseConfigService.ListBillingAccountLicenseConfigs
+      # method.
+      class GoogleCloudDiscoveryengineV1alphaListBillingAccountLicenseConfigsResponse
+        include Google::Apis::Core::Hashable
+      
+        # All BillingAccountLicenseConfigs for the given billing account.
+        # Corresponds to the JSON property `billingAccountLicenseConfigs`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaBillingAccountLicenseConfig>]
+        attr_accessor :billing_account_license_configs
+      
+        # A token that can be sent as ListBillingAccountLicenseConfigsRequest.page_token
+        # to retrieve the next page. If this field is omitted, there are no subsequent
+        # pages.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @billing_account_license_configs = args[:billing_account_license_configs] if args.key?(:billing_account_license_configs)
+          @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
         end
       end
       
@@ -17535,6 +18656,32 @@ module Google
         # Update properties of this object
         def update!(**args)
           @branches = args[:branches] if args.key?(:branches)
+        end
+      end
+      
+      # Response message for the CannedQueryService.ListCannedQueries method.
+      class GoogleCloudDiscoveryengineV1alphaListCannedQueriesResponse
+        include Google::Apis::Core::Hashable
+      
+        # The list of CannedQuerys matching the request.
+        # Corresponds to the JSON property `cannedQueries`
+        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaCannedQuery>]
+        attr_accessor :canned_queries
+      
+        # A token that can be sent as ListCannedQueriesRequest.page_token to retrieve
+        # the next page. If this field is omitted, there are no subsequent pages.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @canned_queries = args[:canned_queries] if args.key?(:canned_queries)
+          @next_page_token = args[:next_page_token] if args.key?(:next_page_token)
         end
       end
       
@@ -18530,6 +19677,16 @@ module Google
       class GoogleCloudDiscoveryengineV1alphaProject
         include Google::Apis::Core::Hashable
       
+        # Represents the currently effective configurable billing parameters. These
+        # values are derived from the customer's subscription history stored internally
+        # and reflect the thresholds actively being used for billing purposes at the
+        # time of the GetProject call. This includes the start_time of the subscription
+        # and may differ from the values in `customer_provided_config` due to billing
+        # rules (e.g., scale-downs taking effect only at the start of a new month).
+        # Corresponds to the JSON property `configurableBillingStatus`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaProjectConfigurableBillingStatus]
+        attr_accessor :configurable_billing_status
+      
         # Output only. The timestamp when this project is created.
         # Corresponds to the JSON property `createTime`
         # @return [String]
@@ -18564,11 +19721,52 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @configurable_billing_status = args[:configurable_billing_status] if args.key?(:configurable_billing_status)
           @create_time = args[:create_time] if args.key?(:create_time)
           @customer_provided_config = args[:customer_provided_config] if args.key?(:customer_provided_config)
           @name = args[:name] if args.key?(:name)
           @provision_completion_time = args[:provision_completion_time] if args.key?(:provision_completion_time)
           @service_terms_map = args[:service_terms_map] if args.key?(:service_terms_map)
+        end
+      end
+      
+      # Represents the currently effective configurable billing parameters. These
+      # values are derived from the customer's subscription history stored internally
+      # and reflect the thresholds actively being used for billing purposes at the
+      # time of the GetProject call. This includes the start_time of the subscription
+      # and may differ from the values in `customer_provided_config` due to billing
+      # rules (e.g., scale-downs taking effect only at the start of a new month).
+      class GoogleCloudDiscoveryengineV1alphaProjectConfigurableBillingStatus
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The currently effective Indexing Core threshold. This is the
+        # threshold against which Indexing Core usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveIndexingCoreThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_indexing_core_threshold
+      
+        # Optional. The currently effective Search QPM threshold in queries per minute.
+        # This is the threshold against which QPM usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveSearchQpmThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_search_qpm_threshold
+      
+        # Optional. The start time of the currently active billing subscription.
+        # Corresponds to the JSON property `startTime`
+        # @return [String]
+        attr_accessor :start_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @effective_indexing_core_threshold = args[:effective_indexing_core_threshold] if args.key?(:effective_indexing_core_threshold)
+          @effective_search_qpm_threshold = args[:effective_search_qpm_threshold] if args.key?(:effective_search_qpm_threshold)
+          @start_time = args[:start_time] if args.key?(:start_time)
         end
       end
       
@@ -18601,6 +19799,13 @@ module Google
         # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaProjectCustomerProvidedConfigNotebooklmConfigModelArmorConfig]
         attr_accessor :model_armor_config
       
+        # Optional. Whether to disable the notebook sharing feature for the project.
+        # Default to false if not specified.
+        # Corresponds to the JSON property `optOutNotebookSharing`
+        # @return [Boolean]
+        attr_accessor :opt_out_notebook_sharing
+        alias_method :opt_out_notebook_sharing?, :opt_out_notebook_sharing
+      
         def initialize(**args)
            update!(**args)
         end
@@ -18608,6 +19813,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @model_armor_config = args[:model_armor_config] if args.key?(:model_armor_config)
+          @opt_out_notebook_sharing = args[:opt_out_notebook_sharing] if args.key?(:opt_out_notebook_sharing)
         end
       end
       
@@ -20332,6 +21538,60 @@ module Google
         end
       end
       
+      # Request message for LicenseConfigService.RetractLicenseConfig method.
+      class GoogleCloudDiscoveryengineV1alphaRetractLicenseConfigRequest
+        include Google::Apis::Core::Hashable
+      
+        # Optional. If set to true, retract the entire license config. Otherwise,
+        # retract the specified license count.
+        # Corresponds to the JSON property `fullRetract`
+        # @return [Boolean]
+        attr_accessor :full_retract
+        alias_method :full_retract?, :full_retract
+      
+        # Required. Full resource name of LicenseConfig. Format: `projects/`project`/
+        # locations/`location`/licenseConfigs/`license_config_id``.
+        # Corresponds to the JSON property `licenseConfig`
+        # @return [String]
+        attr_accessor :license_config
+      
+        # Optional. The number of licenses to retract. Only used when full_retract is
+        # false.
+        # Corresponds to the JSON property `licenseCount`
+        # @return [Fixnum]
+        attr_accessor :license_count
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @full_retract = args[:full_retract] if args.key?(:full_retract)
+          @license_config = args[:license_config] if args.key?(:license_config)
+          @license_count = args[:license_count] if args.key?(:license_count)
+        end
+      end
+      
+      # Response message for LicenseConfigService.RetractLicenseConfig method.
+      class GoogleCloudDiscoveryengineV1alphaRetractLicenseConfigResponse
+        include Google::Apis::Core::Hashable
+      
+        # Information about users' licenses.
+        # Corresponds to the JSON property `licenseConfig`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaLicenseConfig]
+        attr_accessor :license_config
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @license_config = args[:license_config] if args.key?(:license_config)
+        end
+      end
+      
       # Safety rating corresponding to the generated content.
       class GoogleCloudDiscoveryengineV1alphaSafetyRating
         include Google::Apis::Core::Hashable
@@ -20993,9 +22253,9 @@ module Google
         # @return [Hash<String,String>]
         attr_accessor :user_labels
       
-        # A unique identifier for tracking visitors. For example, this could be
-        # implemented with an HTTP cookie, which should be able to uniquely identify a
-        # visitor on a single device. This unique identifier should not change if the
+        # Optional. A unique identifier for tracking visitors. For example, this could
+        # be implemented with an HTTP cookie, which should be able to uniquely identify
+        # a visitor on a single device. This unique identifier should not change if the
         # visitor logs in or out of the website. This field should NOT have a fixed
         # value such as `unknown_visitor`. This should be the same identifier as
         # UserEvent.user_pseudo_id and CompleteQueryRequest.user_pseudo_id The field
@@ -23452,6 +24712,12 @@ module Google
         attr_accessor :is_pinned
         alias_method :is_pinned?, :is_pinned
       
+        # Optional. The labels for the session. Can be set as filter in
+        # ListSessionsRequest.
+        # Corresponds to the JSON property `labels`
+        # @return [Array<String>]
+        attr_accessor :labels
+      
         # Immutable. Fully qualified name `projects/`project`/locations/global/
         # collections/`collection`/engines/`engine`/sessions/*`
         # Corresponds to the JSON property `name`
@@ -23487,6 +24753,7 @@ module Google
           @display_name = args[:display_name] if args.key?(:display_name)
           @end_time = args[:end_time] if args.key?(:end_time)
           @is_pinned = args[:is_pinned] if args.key?(:is_pinned)
+          @labels = args[:labels] if args.key?(:labels)
           @name = args[:name] if args.key?(:name)
           @start_time = args[:start_time] if args.key?(:start_time)
           @state = args[:state] if args.key?(:state)
@@ -24837,6 +26104,63 @@ module Google
         end
       end
       
+      # Request message for the AgentService.UploadAgentFile method.
+      class GoogleCloudDiscoveryengineV1alphaUploadAgentFileRequest
+        include Google::Apis::Core::Hashable
+      
+        # A reference to data stored on the filesystem, on GFS or in blobstore.
+        # Corresponds to the JSON property `blob`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GdataMedia]
+        attr_accessor :blob
+      
+        # Extra information added to operations that support Scotty media requests.
+        # Corresponds to the JSON property `mediaRequestInfo`
+        # @return [Google::Apis::DiscoveryengineV1alpha::ApiservingMediaRequestInfo]
+        attr_accessor :media_request_info
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @blob = args[:blob] if args.key?(:blob)
+          @media_request_info = args[:media_request_info] if args.key?(:media_request_info)
+        end
+      end
+      
+      # Response message for the AgentService.UploadAgentFile method.
+      class GoogleCloudDiscoveryengineV1alphaUploadAgentFileResponse
+        include Google::Apis::Core::Hashable
+      
+        # Describes a file used internally by an agent as a context on each invocation.
+        # Corresponds to the JSON property `agentFile`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaAgentFile]
+        attr_accessor :agent_file
+      
+        # This message is for backends to pass their scotty media specific fields to ESF.
+        # Backend will include this in their response message to ESF. Example:
+        # ExportFile is an rpc defined for upload using scotty from ESF. rpc ExportFile(
+        # ExportFileRequest) returns (ExportFileResponse) Message ExportFileResponse
+        # will include apiserving.MediaResponseInfo to tell ESF about data like
+        # dynamic_dropzone it needs to pass to Scotty. message ExportFileResponse `
+        # optional gdata.Media blob = 1; optional apiserving.MediaResponseInfo
+        # media_response_info = 2 `
+        # Corresponds to the JSON property `mediaResponseInfo`
+        # @return [Google::Apis::DiscoveryengineV1alpha::ApiservingMediaResponseInfo]
+        attr_accessor :media_response_info
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @agent_file = args[:agent_file] if args.key?(:agent_file)
+          @media_response_info = args[:media_response_info] if args.key?(:media_response_info)
+        end
+      end
+      
       # Request for the AssistantService.UploadSessionFile method.
       class GoogleCloudDiscoveryengineV1alphaUploadSessionFileRequest
         include Google::Apis::Core::Hashable
@@ -25230,6 +26554,62 @@ module Google
         end
       end
       
+      # Configures metadata that is used for End User entities.
+      class GoogleCloudDiscoveryengineV1alphaUserStore
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The default subscription LicenseConfig for the UserStore, if
+        # UserStore.enable_license_auto_register is true, new users will automatically
+        # register under the default subscription. If default LicenseConfig doesn't have
+        # remaining license seats left, new users will not be assigned with license and
+        # will be blocked for Vertex AI Search features. This is used if `
+        # license_assignment_tier_rules` is not configured.
+        # Corresponds to the JSON property `defaultLicenseConfig`
+        # @return [String]
+        attr_accessor :default_license_config
+      
+        # The display name of the User Store.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Optional. Whether to enable license auto update for users in this User Store.
+        # If true, users with expired licenses will automatically be updated to use the
+        # default license config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableExpiredLicenseAutoUpdate`
+        # @return [Boolean]
+        attr_accessor :enable_expired_license_auto_update
+        alias_method :enable_expired_license_auto_update?, :enable_expired_license_auto_update
+      
+        # Optional. Whether to enable license auto register for users in this User Store.
+        # If true, new users will automatically register under the default license
+        # config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableLicenseAutoRegister`
+        # @return [Boolean]
+        attr_accessor :enable_license_auto_register
+        alias_method :enable_license_auto_register?, :enable_license_auto_register
+      
+        # Immutable. The full resource name of the User Store, in the format of `
+        # projects/`project`/locations/`location`/userStores/`user_store``. This field
+        # must be a UTF-8 encoded string with a length limit of 1024 characters.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @default_license_config = args[:default_license_config] if args.key?(:default_license_config)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @enable_expired_license_auto_update = args[:enable_expired_license_auto_update] if args.key?(:enable_expired_license_auto_update)
+          @enable_license_auto_register = args[:enable_license_auto_register] if args.key?(:enable_license_auto_register)
+          @name = args[:name] if args.key?(:name)
+        end
+      end
+      
       # Standard characteristics of a video media view.
       class GoogleCloudDiscoveryengineV1alphaVideoCharacteristics
         include Google::Apis::Core::Hashable
@@ -25432,11 +26812,6 @@ module Google
         attr_accessor :enable_web_app
         alias_method :enable_web_app?, :enable_web_app
       
-        # Allows to toggle unstable/experimental features in the widget (or web app)
-        # Corresponds to the JSON property `experimentalFeatures`
-        # @return [Hash<String,String>]
-        attr_accessor :experimental_features
-      
         # The configuration and appearance of facets in the end user view.
         # Corresponds to the JSON property `facetField`
         # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaWidgetConfigFacetField>]
@@ -25450,6 +26825,12 @@ module Google
         # Corresponds to the JSON property `fieldsUiComponentsMap`
         # @return [Hash<String,Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaWidgetConfigUiComponentField>]
         attr_accessor :fields_ui_components_map
+      
+        # Output only. Whether the subscription is gemini bundle or not.
+        # Corresponds to the JSON property `geminiBundle`
+        # @return [Boolean]
+        attr_accessor :gemini_bundle
+        alias_method :gemini_bundle?, :gemini_bundle
       
         # Describes the homepage setting of the widget. It includes all homepage related
         # settings and configurations, such as shortcuts.
@@ -25541,9 +26922,9 @@ module Google
           @enable_snippet_result_summary = args[:enable_snippet_result_summary] if args.key?(:enable_snippet_result_summary)
           @enable_summarization = args[:enable_summarization] if args.key?(:enable_summarization)
           @enable_web_app = args[:enable_web_app] if args.key?(:enable_web_app)
-          @experimental_features = args[:experimental_features] if args.key?(:experimental_features)
           @facet_field = args[:facet_field] if args.key?(:facet_field)
           @fields_ui_components_map = args[:fields_ui_components_map] if args.key?(:fields_ui_components_map)
+          @gemini_bundle = args[:gemini_bundle] if args.key?(:gemini_bundle)
           @homepage_setting = args[:homepage_setting] if args.key?(:homepage_setting)
           @industry_vertical = args[:industry_vertical] if args.key?(:industry_vertical)
           @llm_enabled = args[:llm_enabled] if args.key?(:llm_enabled)
@@ -25874,10 +27255,7 @@ module Google
       class GoogleCloudDiscoveryengineV1alphaWidgetConfigHomepageSetting
         include Google::Apis::Core::Hashable
       
-        # Optional. The shortcuts to display on the homepage. LINT.IfChange(
-        # max_shortcuts_number) LINT.ThenChange(//depot/google3/cloud/console/web/ai/
-        # unified_cloud_search/components/widget_preview/
-        # widget_homepage_shortcut_config_form.ts:max_shortcuts_number)
+        # Optional. The shortcuts to display on the homepage.
         # Corresponds to the JSON property `shortcuts`
         # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaWidgetConfigHomepageSettingShortcut>]
         attr_accessor :shortcuts
@@ -26090,6 +27468,12 @@ module Google
         # @return [String]
         attr_accessor :result_description_type
       
+        # SearchAddonSpec is used to disable add-ons for search. By default, if this
+        # field is not specified, add-ons are enabled wherever applicable.
+        # Corresponds to the JSON property `searchAddonSpec`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1alphaWidgetConfigUiSettingsSearchAddonSpec]
+        attr_accessor :search_addon_spec
+      
         def initialize(**args)
            update!(**args)
         end
@@ -26110,6 +27494,7 @@ module Google
           @generative_answer_config = args[:generative_answer_config] if args.key?(:generative_answer_config)
           @interaction_type = args[:interaction_type] if args.key?(:interaction_type)
           @result_description_type = args[:result_description_type] if args.key?(:result_description_type)
+          @search_addon_spec = args[:search_addon_spec] if args.key?(:search_addon_spec)
         end
       end
       
@@ -26198,6 +27583,44 @@ module Google
         end
       end
       
+      # SearchAddonSpec is used to disable add-ons for search. By default, if this
+      # field is not specified, add-ons are enabled wherever applicable.
+      class GoogleCloudDiscoveryengineV1alphaWidgetConfigUiSettingsSearchAddonSpec
+        include Google::Apis::Core::Hashable
+      
+        # Optional. If true, generative answer add-on is disabled. Generative answer add-
+        # on includes natural language to filters and simple answers.
+        # Corresponds to the JSON property `generativeAnswerAddOnDisabled`
+        # @return [Boolean]
+        attr_accessor :generative_answer_add_on_disabled
+        alias_method :generative_answer_add_on_disabled?, :generative_answer_add_on_disabled
+      
+        # Optional. If true, disables event re-ranking and personalization to optimize
+        # KPIs & personalize results.
+        # Corresponds to the JSON property `kpiPersonalizationAddOnDisabled`
+        # @return [Boolean]
+        attr_accessor :kpi_personalization_add_on_disabled
+        alias_method :kpi_personalization_add_on_disabled?, :kpi_personalization_add_on_disabled
+      
+        # Optional. If true, semantic add-on is disabled. Semantic add-on includes
+        # embeddings and jetstream.
+        # Corresponds to the JSON property `semanticAddOnDisabled`
+        # @return [Boolean]
+        attr_accessor :semantic_add_on_disabled
+        alias_method :semantic_add_on_disabled?, :semantic_add_on_disabled
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @generative_answer_add_on_disabled = args[:generative_answer_add_on_disabled] if args.key?(:generative_answer_add_on_disabled)
+          @kpi_personalization_add_on_disabled = args[:kpi_personalization_add_on_disabled] if args.key?(:kpi_personalization_add_on_disabled)
+          @semantic_add_on_disabled = args[:semantic_add_on_disabled] if args.key?(:semantic_add_on_disabled)
+        end
+      end
+      
       # Config to store data store type configuration for workspace data
       class GoogleCloudDiscoveryengineV1alphaWorkspaceConfig
         include Google::Apis::Core::Hashable
@@ -26236,6 +27659,26 @@ module Google
           @super_admin_email_address = args[:super_admin_email_address] if args.key?(:super_admin_email_address)
           @super_admin_service_account = args[:super_admin_service_account] if args.key?(:super_admin_service_account)
           @type = args[:type] if args.key?(:type)
+        end
+      end
+      
+      # Workspace settings for the end user.
+      class GoogleCloudDiscoveryengineV1alphaWorkspaceSettings
+        include Google::Apis::Core::Hashable
+      
+        # Whether an end user has workspace access enabled.
+        # Corresponds to the JSON property `workspaceAccessEnabled`
+        # @return [Boolean]
+        attr_accessor :workspace_access_enabled
+        alias_method :workspace_access_enabled?, :workspace_access_enabled
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @workspace_access_enabled = args[:workspace_access_enabled] if args.key?(:workspace_access_enabled)
         end
       end
       
@@ -26290,77 +27733,6 @@ module Google
         def update!(**args)
           @disable_automatic_refresh = args[:disable_automatic_refresh] if args.key?(:disable_automatic_refresh)
           @disable_initial_index = args[:disable_initial_index] if args.key?(:disable_initial_index)
-        end
-      end
-      
-      # The resource level alert config. Used in: * UserLicense * EngineUserData The
-      # AlertPolicyConfig in data connector is of same usage. No easy way to migrate.
-      class GoogleCloudDiscoveryengineV1betaAlertPolicyResourceConfig
-        include Google::Apis::Core::Hashable
-      
-        # Optional. The enrollment state of each alert.
-        # Corresponds to the JSON property `alertEnrollments`
-        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1betaAlertPolicyResourceConfigAlertEnrollment>]
-        attr_accessor :alert_enrollments
-      
-        # Immutable. The fully qualified resource name of the AlertPolicy.
-        # Corresponds to the JSON property `alertPolicy`
-        # @return [String]
-        attr_accessor :alert_policy
-      
-        # Optional. The contact details for each alert policy.
-        # Corresponds to the JSON property `contactDetails`
-        # @return [Array<Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1betaContactDetails>]
-        attr_accessor :contact_details
-      
-        # Optional. The language code used for notifications
-        # Corresponds to the JSON property `languageCode`
-        # @return [String]
-        attr_accessor :language_code
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @alert_enrollments = args[:alert_enrollments] if args.key?(:alert_enrollments)
-          @alert_policy = args[:alert_policy] if args.key?(:alert_policy)
-          @contact_details = args[:contact_details] if args.key?(:contact_details)
-          @language_code = args[:language_code] if args.key?(:language_code)
-        end
-      end
-      
-      # The alert enrollment status.
-      class GoogleCloudDiscoveryengineV1betaAlertPolicyResourceConfigAlertEnrollment
-        include Google::Apis::Core::Hashable
-      
-        # Immutable. The id of an alert.
-        # Corresponds to the JSON property `alertId`
-        # @return [String]
-        attr_accessor :alert_id
-      
-        # Required. The enrollment status of a customer.
-        # Corresponds to the JSON property `enrollState`
-        # @return [String]
-        attr_accessor :enroll_state
-      
-        # Optional. Parameters used to instantiate a notification. Used for
-        # notifications that are triggered when registered. Not stored. * Gemini
-        # Business welcome emails. * Gemini Business user invitation emails.
-        # Corresponds to the JSON property `notificationParams`
-        # @return [Hash<String,String>]
-        attr_accessor :notification_params
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @alert_id = args[:alert_id] if args.key?(:alert_id)
-          @enroll_state = args[:enroll_state] if args.key?(:enroll_state)
-          @notification_params = args[:notification_params] if args.key?(:notification_params)
         end
       end
       
@@ -26627,27 +27999,6 @@ module Google
         def update!(**args)
           @end_time = args[:end_time] if args.key?(:end_time)
           @start_time = args[:start_time] if args.key?(:start_time)
-        end
-      end
-      
-      # The contact info stored in resource level. If both project level and resource
-      # level is populated, the resource level contact info will override the project
-      # level contact info.
-      class GoogleCloudDiscoveryengineV1betaContactDetails
-        include Google::Apis::Core::Hashable
-      
-        # Optional. The email address of the contact.
-        # Corresponds to the JSON property `emailAddress`
-        # @return [String]
-        attr_accessor :email_address
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @email_address = args[:email_address] if args.key?(:email_address)
         end
       end
       
@@ -27183,6 +28534,11 @@ module Google
         # @return [String]
         attr_accessor :configurable_billing_approach
       
+        # Output only. The timestamp when configurable_billing_approach was last updated.
+        # Corresponds to the JSON property `configurableBillingApproachUpdateTime`
+        # @return [String]
+        attr_accessor :configurable_billing_approach_update_time
+      
         # Immutable. The content config of the data store. If this field is unset, the
         # server behavior defaults to ContentConfig.NO_CONTENT.
         # Corresponds to the JSON property `contentConfig`
@@ -27297,6 +28653,7 @@ module Google
           @billing_estimation = args[:billing_estimation] if args.key?(:billing_estimation)
           @cmek_config = args[:cmek_config] if args.key?(:cmek_config)
           @configurable_billing_approach = args[:configurable_billing_approach] if args.key?(:configurable_billing_approach)
+          @configurable_billing_approach_update_time = args[:configurable_billing_approach_update_time] if args.key?(:configurable_billing_approach_update_time)
           @content_config = args[:content_config] if args.key?(:content_config)
           @create_time = args[:create_time] if args.key?(:create_time)
           @default_schema_id = args[:default_schema_id] if args.key?(:default_schema_id)
@@ -29039,12 +30396,6 @@ module Google
       class GoogleCloudDiscoveryengineV1betaLicenseConfig
         include Google::Apis::Core::Hashable
       
-        # The resource level alert config. Used in: * UserLicense * EngineUserData The
-        # AlertPolicyConfig in data connector is of same usage. No easy way to migrate.
-        # Corresponds to the JSON property `alertPolicyResourceConfig`
-        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1betaAlertPolicyResourceConfig]
-        attr_accessor :alert_policy_resource_config
-      
         # Optional. Whether the license config should be auto renewed when it reaches
         # the end date.
         # Corresponds to the JSON property `autoRenew`
@@ -29069,6 +30420,12 @@ module Google
         # @return [Boolean]
         attr_accessor :free_trial
         alias_method :free_trial?, :free_trial
+      
+        # Output only. Whether the license config is for Gemini bundle.
+        # Corresponds to the JSON property `geminiBundle`
+        # @return [Boolean]
+        attr_accessor :gemini_bundle
+        alias_method :gemini_bundle?, :gemini_bundle
       
         # Required. Number of licenses purchased.
         # Corresponds to the JSON property `licenseCount`
@@ -29115,10 +30472,10 @@ module Google
       
         # Update properties of this object
         def update!(**args)
-          @alert_policy_resource_config = args[:alert_policy_resource_config] if args.key?(:alert_policy_resource_config)
           @auto_renew = args[:auto_renew] if args.key?(:auto_renew)
           @end_date = args[:end_date] if args.key?(:end_date)
           @free_trial = args[:free_trial] if args.key?(:free_trial)
+          @gemini_bundle = args[:gemini_bundle] if args.key?(:gemini_bundle)
           @license_count = args[:license_count] if args.key?(:license_count)
           @name = args[:name] if args.key?(:name)
           @start_date = args[:start_date] if args.key?(:start_date)
@@ -29229,6 +30586,16 @@ module Google
       class GoogleCloudDiscoveryengineV1betaProject
         include Google::Apis::Core::Hashable
       
+        # Represents the currently effective configurable billing parameters. These
+        # values are derived from the customer's subscription history stored internally
+        # and reflect the thresholds actively being used for billing purposes at the
+        # time of the GetProject call. This includes the start_time of the subscription
+        # and may differ from the values in `customer_provided_config` due to billing
+        # rules (e.g., scale-downs taking effect only at the start of a new month).
+        # Corresponds to the JSON property `configurableBillingStatus`
+        # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1betaProjectConfigurableBillingStatus]
+        attr_accessor :configurable_billing_status
+      
         # Output only. The timestamp when this project is created.
         # Corresponds to the JSON property `createTime`
         # @return [String]
@@ -29263,11 +30630,52 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @configurable_billing_status = args[:configurable_billing_status] if args.key?(:configurable_billing_status)
           @create_time = args[:create_time] if args.key?(:create_time)
           @customer_provided_config = args[:customer_provided_config] if args.key?(:customer_provided_config)
           @name = args[:name] if args.key?(:name)
           @provision_completion_time = args[:provision_completion_time] if args.key?(:provision_completion_time)
           @service_terms_map = args[:service_terms_map] if args.key?(:service_terms_map)
+        end
+      end
+      
+      # Represents the currently effective configurable billing parameters. These
+      # values are derived from the customer's subscription history stored internally
+      # and reflect the thresholds actively being used for billing purposes at the
+      # time of the GetProject call. This includes the start_time of the subscription
+      # and may differ from the values in `customer_provided_config` due to billing
+      # rules (e.g., scale-downs taking effect only at the start of a new month).
+      class GoogleCloudDiscoveryengineV1betaProjectConfigurableBillingStatus
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The currently effective Indexing Core threshold. This is the
+        # threshold against which Indexing Core usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveIndexingCoreThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_indexing_core_threshold
+      
+        # Optional. The currently effective Search QPM threshold in queries per minute.
+        # This is the threshold against which QPM usage is compared for overage
+        # calculations.
+        # Corresponds to the JSON property `effectiveSearchQpmThreshold`
+        # @return [Fixnum]
+        attr_accessor :effective_search_qpm_threshold
+      
+        # Optional. The start time of the currently active billing subscription.
+        # Corresponds to the JSON property `startTime`
+        # @return [String]
+        attr_accessor :start_time
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @effective_indexing_core_threshold = args[:effective_indexing_core_threshold] if args.key?(:effective_indexing_core_threshold)
+          @effective_search_qpm_threshold = args[:effective_search_qpm_threshold] if args.key?(:effective_search_qpm_threshold)
+          @start_time = args[:start_time] if args.key?(:start_time)
         end
       end
       
@@ -29300,6 +30708,13 @@ module Google
         # @return [Google::Apis::DiscoveryengineV1alpha::GoogleCloudDiscoveryengineV1betaProjectCustomerProvidedConfigNotebooklmConfigModelArmorConfig]
         attr_accessor :model_armor_config
       
+        # Optional. Whether to disable the notebook sharing feature for the project.
+        # Default to false if not specified.
+        # Corresponds to the JSON property `optOutNotebookSharing`
+        # @return [Boolean]
+        attr_accessor :opt_out_notebook_sharing
+        alias_method :opt_out_notebook_sharing?, :opt_out_notebook_sharing
+      
         def initialize(**args)
            update!(**args)
         end
@@ -29307,6 +30722,7 @@ module Google
         # Update properties of this object
         def update!(**args)
           @model_armor_config = args[:model_armor_config] if args.key?(:model_armor_config)
+          @opt_out_notebook_sharing = args[:opt_out_notebook_sharing] if args.key?(:opt_out_notebook_sharing)
         end
       end
       
@@ -30081,9 +31497,9 @@ module Google
         # @return [Hash<String,String>]
         attr_accessor :user_labels
       
-        # A unique identifier for tracking visitors. For example, this could be
-        # implemented with an HTTP cookie, which should be able to uniquely identify a
-        # visitor on a single device. This unique identifier should not change if the
+        # Optional. A unique identifier for tracking visitors. For example, this could
+        # be implemented with an HTTP cookie, which should be able to uniquely identify
+        # a visitor on a single device. This unique identifier should not change if the
         # visitor logs in or out of the website. This field should NOT have a fixed
         # value such as `unknown_visitor`. This should be the same identifier as
         # UserEvent.user_pseudo_id and CompleteQueryRequest.user_pseudo_id The field
@@ -31702,6 +33118,62 @@ module Google
           @update_time = args[:update_time] if args.key?(:update_time)
           @user_principal = args[:user_principal] if args.key?(:user_principal)
           @user_profile = args[:user_profile] if args.key?(:user_profile)
+        end
+      end
+      
+      # Configures metadata that is used for End User entities.
+      class GoogleCloudDiscoveryengineV1betaUserStore
+        include Google::Apis::Core::Hashable
+      
+        # Optional. The default subscription LicenseConfig for the UserStore, if
+        # UserStore.enable_license_auto_register is true, new users will automatically
+        # register under the default subscription. If default LicenseConfig doesn't have
+        # remaining license seats left, new users will not be assigned with license and
+        # will be blocked for Vertex AI Search features. This is used if `
+        # license_assignment_tier_rules` is not configured.
+        # Corresponds to the JSON property `defaultLicenseConfig`
+        # @return [String]
+        attr_accessor :default_license_config
+      
+        # The display name of the User Store.
+        # Corresponds to the JSON property `displayName`
+        # @return [String]
+        attr_accessor :display_name
+      
+        # Optional. Whether to enable license auto update for users in this User Store.
+        # If true, users with expired licenses will automatically be updated to use the
+        # default license config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableExpiredLicenseAutoUpdate`
+        # @return [Boolean]
+        attr_accessor :enable_expired_license_auto_update
+        alias_method :enable_expired_license_auto_update?, :enable_expired_license_auto_update
+      
+        # Optional. Whether to enable license auto register for users in this User Store.
+        # If true, new users will automatically register under the default license
+        # config as long as the default license config has seats left.
+        # Corresponds to the JSON property `enableLicenseAutoRegister`
+        # @return [Boolean]
+        attr_accessor :enable_license_auto_register
+        alias_method :enable_license_auto_register?, :enable_license_auto_register
+      
+        # Immutable. The full resource name of the User Store, in the format of `
+        # projects/`project`/locations/`location`/userStores/`user_store``. This field
+        # must be a UTF-8 encoded string with a length limit of 1024 characters.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @default_license_config = args[:default_license_config] if args.key?(:default_license_config)
+          @display_name = args[:display_name] if args.key?(:display_name)
+          @enable_expired_license_auto_update = args[:enable_expired_license_auto_update] if args.key?(:enable_expired_license_auto_update)
+          @enable_license_auto_register = args[:enable_license_auto_register] if args.key?(:enable_license_auto_register)
+          @name = args[:name] if args.key?(:name)
         end
       end
       

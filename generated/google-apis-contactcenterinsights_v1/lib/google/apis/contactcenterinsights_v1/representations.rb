@@ -454,7 +454,37 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudContactcenterinsightsV1DimensionClientSentimentCategoryDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationProfileDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsPlaybookDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsToolDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudContactcenterinsightsV1DimensionIssueDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionMediumDimensionMetadata
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -917,12 +947,6 @@ module Google
       end
       
       class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValue
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1546,7 +1570,37 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionClientSentimentCategoryDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationProfileDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsPlaybookDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsToolDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudContactcenterinsightsV1alpha1DimensionIssueDimensionMetadata
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionMediumDimensionMetadata
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1841,12 +1895,6 @@ module Google
       end
       
       class GoogleCloudContactcenterinsightsV1alpha1QaAnswerAnswerValue
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class GoogleCloudContactcenterinsightsV1alpha1QaAnswerAnswerValueQaAnswerRationale
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -2890,8 +2938,18 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :agent_dimension_metadata, as: 'agentDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionAgentDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionAgentDimensionMetadata::Representation
       
+          property :client_sentiment_category_dimension_metadata, as: 'clientSentimentCategoryDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionClientSentimentCategoryDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionClientSentimentCategoryDimensionMetadata::Representation
+      
+          property :conversation_profile_dimension_metadata, as: 'conversationProfileDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationProfileDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationProfileDimensionMetadata::Representation
+      
+          property :conversational_agents_playbook_dimension_metadata, as: 'conversationalAgentsPlaybookDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsPlaybookDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsPlaybookDimensionMetadata::Representation
+      
+          property :conversational_agents_tool_dimension_metadata, as: 'conversationalAgentsToolDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsToolDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsToolDimensionMetadata::Representation
+      
           property :dimension_key, as: 'dimensionKey'
           property :issue_dimension_metadata, as: 'issueDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionIssueDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionIssueDimensionMetadata::Representation
+      
+          property :medium_dimension_metadata, as: 'mediumDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionMediumDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionMediumDimensionMetadata::Representation
       
           property :qa_question_answer_dimension_metadata, as: 'qaQuestionAnswerDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionQaQuestionAnswerDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1DimensionQaQuestionAnswerDimensionMetadata::Representation
       
@@ -2915,12 +2973,49 @@ module Google
         end
       end
       
+      class GoogleCloudContactcenterinsightsV1DimensionClientSentimentCategoryDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :sentiment_category, as: 'sentimentCategory'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationProfileDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :conversation_profile_id, as: 'conversationProfileId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsPlaybookDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :playbook_display_name, as: 'playbookDisplayName'
+          property :playbook_id, as: 'playbookId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionConversationalAgentsToolDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :tool_display_name, as: 'toolDisplayName'
+          property :tool_id, as: 'toolId'
+        end
+      end
+      
       class GoogleCloudContactcenterinsightsV1DimensionIssueDimensionMetadata
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :issue_display_name, as: 'issueDisplayName'
           property :issue_id, as: 'issueId'
           property :issue_model_id, as: 'issueModelId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1DimensionMediumDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :medium, as: 'medium'
         end
       end
       
@@ -3647,18 +3742,9 @@ module Google
           property :normalized_score, as: 'normalizedScore'
           property :num_value, as: 'numValue'
           property :potential_score, as: 'potentialScore'
-          property :rationale, as: 'rationale', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale::Representation
-      
           property :score, as: 'score'
           property :skip_value, as: 'skipValue'
           property :str_value, as: 'strValue'
-        end
-      end
-      
-      class GoogleCloudContactcenterinsightsV1QaAnswerAnswerValueQaAnswerRationale
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :rationale, as: 'rationale'
         end
       end
       
@@ -4057,6 +4143,7 @@ module Google
           hash :pubsub_notification_settings, as: 'pubsubNotificationSettings'
           property :redaction_config, as: 'redactionConfig', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1RedactionConfig, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1RedactionConfig::Representation
       
+          property :screen_recording_bucket_uri, as: 'screenRecordingBucketUri'
           property :speech_config, as: 'speechConfig', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1SpeechConfig, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1SpeechConfig::Representation
       
           property :update_time, as: 'updateTime'
@@ -4755,8 +4842,18 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :agent_dimension_metadata, as: 'agentDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionAgentDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionAgentDimensionMetadata::Representation
       
+          property :client_sentiment_category_dimension_metadata, as: 'clientSentimentCategoryDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionClientSentimentCategoryDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionClientSentimentCategoryDimensionMetadata::Representation
+      
+          property :conversation_profile_dimension_metadata, as: 'conversationProfileDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationProfileDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationProfileDimensionMetadata::Representation
+      
+          property :conversational_agents_playbook_dimension_metadata, as: 'conversationalAgentsPlaybookDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsPlaybookDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsPlaybookDimensionMetadata::Representation
+      
+          property :conversational_agents_tool_dimension_metadata, as: 'conversationalAgentsToolDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsToolDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsToolDimensionMetadata::Representation
+      
           property :dimension_key, as: 'dimensionKey'
           property :issue_dimension_metadata, as: 'issueDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionIssueDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionIssueDimensionMetadata::Representation
+      
+          property :medium_dimension_metadata, as: 'mediumDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionMediumDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionMediumDimensionMetadata::Representation
       
           property :qa_question_answer_dimension_metadata, as: 'qaQuestionAnswerDimensionMetadata', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionQaQuestionAnswerDimensionMetadata, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1DimensionQaQuestionAnswerDimensionMetadata::Representation
       
@@ -4780,12 +4877,49 @@ module Google
         end
       end
       
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionClientSentimentCategoryDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :sentiment_category, as: 'sentimentCategory'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationProfileDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :conversation_profile_id, as: 'conversationProfileId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsPlaybookDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :playbook_display_name, as: 'playbookDisplayName'
+          property :playbook_id, as: 'playbookId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionConversationalAgentsToolDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :tool_display_name, as: 'toolDisplayName'
+          property :tool_id, as: 'toolId'
+        end
+      end
+      
       class GoogleCloudContactcenterinsightsV1alpha1DimensionIssueDimensionMetadata
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :issue_display_name, as: 'issueDisplayName'
           property :issue_id, as: 'issueId'
           property :issue_model_id, as: 'issueModelId'
+        end
+      end
+      
+      class GoogleCloudContactcenterinsightsV1alpha1DimensionMediumDimensionMetadata
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :medium, as: 'medium'
         end
       end
       
@@ -5259,18 +5393,9 @@ module Google
           property :normalized_score, as: 'normalizedScore'
           property :num_value, as: 'numValue'
           property :potential_score, as: 'potentialScore'
-          property :rationale, as: 'rationale', class: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1QaAnswerAnswerValueQaAnswerRationale, decorator: Google::Apis::ContactcenterinsightsV1::GoogleCloudContactcenterinsightsV1alpha1QaAnswerAnswerValueQaAnswerRationale::Representation
-      
           property :score, as: 'score'
           property :skip_value, as: 'skipValue'
           property :str_value, as: 'strValue'
-        end
-      end
-      
-      class GoogleCloudContactcenterinsightsV1alpha1QaAnswerAnswerValueQaAnswerRationale
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :rationale, as: 'rationale'
         end
       end
       

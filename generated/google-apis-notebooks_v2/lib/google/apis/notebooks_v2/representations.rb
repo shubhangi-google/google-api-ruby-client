@@ -436,6 +436,7 @@ module Google
           property :disk_size_gb, :numeric_string => true, as: 'diskSizeGb'
           property :disk_type, as: 'diskType'
           property :kms_key, as: 'kmsKey'
+          collection :resource_policies, as: 'resourcePolicies'
         end
       end
       
@@ -516,6 +517,7 @@ module Google
           property :enable_ip_forwarding, as: 'enableIpForwarding'
           property :gpu_driver_config, as: 'gpuDriverConfig', class: Google::Apis::NotebooksV2::GpuDriverConfig, decorator: Google::Apis::NotebooksV2::GpuDriverConfig::Representation
       
+          property :instance_id, as: 'instanceId'
           property :machine_type, as: 'machineType'
           hash :metadata, as: 'metadata'
           property :min_cpu_platform, as: 'minCpuPlatform'
@@ -611,6 +613,7 @@ module Google
           property :next_page_token, as: 'nextPageToken'
           collection :operations, as: 'operations', class: Google::Apis::NotebooksV2::Operation, decorator: Google::Apis::NotebooksV2::Operation::Representation
       
+          collection :unreachable, as: 'unreachable'
         end
       end
       

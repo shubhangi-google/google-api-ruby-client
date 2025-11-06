@@ -158,9 +158,7 @@ module Google
         # @return [String]
         attr_accessor :account_id
       
-        # Optional. The annotation that is assigned to the Event. This field can be left
-        # empty to provide reasons that apply to an event without concluding whether the
-        # event is legitimate or fraudulent.
+        # 
         # Corresponds to the JSON property `annotation`
         # @return [String]
         attr_accessor :annotation
@@ -179,7 +177,7 @@ module Google
         # @return [Google::Apis::RecaptchaenterpriseV1::GoogleCloudRecaptchaenterpriseV1PhoneAuthenticationEvent]
         attr_accessor :phone_authentication_event
       
-        # Optional. Reasons for the annotation that are assigned to the event.
+        # 
         # Corresponds to the JSON property `reasons`
         # @return [Array<String>]
         attr_accessor :reasons
@@ -346,9 +344,7 @@ module Google
         # Optional. Identifies the client module initiating the CreateAssessment request.
         # This can be the link to the client module's project. Examples include: - "
         # github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager" - "
-        # cloud.google.com/recaptcha/docs/implement-waf-akamai" - "cloud.google.com/
-        # recaptcha/docs/implement-waf-cloudflare" - "wordpress.org/plugins/recaptcha-
-        # something"
+        # wordpress.org/plugins/recaptcha-something"
         # Corresponds to the JSON property `client`
         # @return [String]
         attr_accessor :client
@@ -570,8 +566,9 @@ module Google
         # @return [String]
         attr_accessor :user_ip_address
       
-        # Optional. Flag for running WAF token assessment. If enabled, the token must be
-        # specified, and have been created by a WAF-enabled key.
+        # Optional. Flag for running Web Application Firewall (WAF) token assessment. If
+        # enabled, the token must be specified, and have been created by a WAF-enabled
+        # key.
         # Corresponds to the JSON property `wafTokenAssessment`
         # @return [Boolean]
         attr_accessor :waf_token_assessment
@@ -2330,12 +2327,13 @@ module Google
       class GoogleCloudRecaptchaenterpriseV1WafSettings
         include Google::Apis::Core::Hashable
       
-        # Required. The WAF feature for which this key is enabled.
+        # Required. The Web Application Firewall (WAF) feature for which this key is
+        # enabled.
         # Corresponds to the JSON property `wafFeature`
         # @return [String]
         attr_accessor :waf_feature
       
-        # Required. The WAF service that uses this key.
+        # Required. The Web Application Firewall (WAF) service that uses this key.
         # Corresponds to the JSON property `wafService`
         # @return [String]
         attr_accessor :waf_service

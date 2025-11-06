@@ -346,6 +346,18 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class ContextualKeyword
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class ContextualKeywordTargeting
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class Conversion
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -598,6 +610,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class DfareportingStudioCreativeAssetsInsertRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class DfpSettings
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -671,6 +689,12 @@ module Google
       end
       
       class DynamicProfileFeedSettings
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class DynamicProfileGenerateCodeResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1462,6 +1486,30 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class StudioCreative
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class StudioCreativeAsset
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class StudioCreativeAssetsResponse
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class StudioCreativeDimension
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class Subaccount
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -1654,6 +1702,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class VideoProcessingData
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class VideoSettings
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -1817,6 +1871,8 @@ module Google
       
           property :comments, as: 'comments'
           property :compatibility, as: 'compatibility'
+          property :contextual_keyword_targeting, as: 'contextualKeywordTargeting', class: Google::Apis::DfareportingV4::ContextualKeywordTargeting, decorator: Google::Apis::DfareportingV4::ContextualKeywordTargeting::Representation
+      
           property :create_info, as: 'createInfo', class: Google::Apis::DfareportingV4::LastModifiedInfo, decorator: Google::Apis::DfareportingV4::LastModifiedInfo::Representation
       
           collection :creative_group_assignments, as: 'creativeGroupAssignments', class: Google::Apis::DfareportingV4::CreativeGroupAssignment, decorator: Google::Apis::DfareportingV4::CreativeGroupAssignment::Representation
@@ -2385,6 +2441,21 @@ module Google
           collection :field_names, as: 'fieldNames'
           property :row_number, as: 'rowNumber'
           property :separator, as: 'separator'
+        end
+      end
+      
+      class ContextualKeyword
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :keyword, as: 'keyword'
+        end
+      end
+      
+      class ContextualKeywordTargeting
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :keywords, as: 'keywords', class: Google::Apis::DfareportingV4::ContextualKeyword, decorator: Google::Apis::DfareportingV4::ContextualKeyword::Representation
+      
         end
       end
       
@@ -3011,6 +3082,15 @@ module Google
         end
       end
       
+      class DfareportingStudioCreativeAssetsInsertRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :studio_account_id, :numeric_string => true, as: 'studioAccountId'
+          property :studio_advertiser_id, :numeric_string => true, as: 'studioAdvertiserId'
+          property :studio_creative_id, :numeric_string => true, as: 'studioCreativeId'
+        end
+      end
+      
       class DfpSettings
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -3174,6 +3254,13 @@ module Google
           property :dynamic_rules, as: 'dynamicRules', class: Google::Apis::DfareportingV4::DynamicRules, decorator: Google::Apis::DfareportingV4::DynamicRules::Representation
       
           property :quantity, as: 'quantity'
+        end
+      end
+      
+      class DynamicProfileGenerateCodeResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :code, as: 'code'
         end
       end
       
@@ -4925,6 +5012,63 @@ module Google
         end
       end
       
+      class StudioCreative
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :asset_ids, as: 'assetIds'
+          property :backup_image_asset_id, :numeric_string => true, as: 'backupImageAssetId'
+          property :created_info, as: 'createdInfo', class: Google::Apis::DfareportingV4::LastModifiedInfo, decorator: Google::Apis::DfareportingV4::LastModifiedInfo::Representation
+      
+          property :dimension, as: 'dimension', class: Google::Apis::DfareportingV4::StudioCreativeDimension, decorator: Google::Apis::DfareportingV4::StudioCreativeDimension::Representation
+      
+          property :dynamic_profile_id, :numeric_string => true, as: 'dynamicProfileId'
+          property :format, as: 'format'
+          property :id, :numeric_string => true, as: 'id'
+          property :last_modified_info, as: 'lastModifiedInfo', class: Google::Apis::DfareportingV4::LastModifiedInfo, decorator: Google::Apis::DfareportingV4::LastModifiedInfo::Representation
+      
+          property :name, as: 'name'
+          property :status, as: 'status'
+          property :studio_account_id, :numeric_string => true, as: 'studioAccountId'
+          property :studio_advertiser_id, :numeric_string => true, as: 'studioAdvertiserId'
+          property :studio_campaign_id, :numeric_string => true, as: 'studioCampaignId'
+        end
+      end
+      
+      class StudioCreativeAsset
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :create_info, as: 'createInfo', class: Google::Apis::DfareportingV4::LastModifiedInfo, decorator: Google::Apis::DfareportingV4::LastModifiedInfo::Representation
+      
+          property :filename, as: 'filename'
+          property :filesize, :numeric_string => true, as: 'filesize'
+          property :id, :numeric_string => true, as: 'id'
+          property :last_modified_info, as: 'lastModifiedInfo', class: Google::Apis::DfareportingV4::LastModifiedInfo, decorator: Google::Apis::DfareportingV4::LastModifiedInfo::Representation
+      
+          property :studio_account_id, :numeric_string => true, as: 'studioAccountId'
+          property :studio_advertiser_id, :numeric_string => true, as: 'studioAdvertiserId'
+          property :studio_creative_id, :numeric_string => true, as: 'studioCreativeId'
+          property :type, as: 'type'
+          property :video_processing_data, as: 'videoProcessingData', class: Google::Apis::DfareportingV4::VideoProcessingData, decorator: Google::Apis::DfareportingV4::VideoProcessingData::Representation
+      
+        end
+      end
+      
+      class StudioCreativeAssetsResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :assets, as: 'assets', class: Google::Apis::DfareportingV4::StudioCreativeAsset, decorator: Google::Apis::DfareportingV4::StudioCreativeAsset::Representation
+      
+        end
+      end
+      
+      class StudioCreativeDimension
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :height, as: 'height'
+          property :width, as: 'width'
+        end
+      end
+      
       class Subaccount
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -5019,6 +5163,8 @@ module Google
           property :account_id, :numeric_string => true, as: 'accountId'
           property :advertiser_id, :numeric_string => true, as: 'advertiserId'
           property :advertiser_id_dimension_value, as: 'advertiserIdDimensionValue', class: Google::Apis::DfareportingV4::DimensionValue, decorator: Google::Apis::DfareportingV4::DimensionValue::Representation
+      
+          property :contextual_keyword_targeting, as: 'contextualKeywordTargeting', class: Google::Apis::DfareportingV4::ContextualKeywordTargeting, decorator: Google::Apis::DfareportingV4::ContextualKeywordTargeting::Representation
       
           property :day_part_targeting, as: 'dayPartTargeting', class: Google::Apis::DfareportingV4::DayPartTargeting, decorator: Google::Apis::DfareportingV4::DayPartTargeting::Representation
       
@@ -5274,6 +5420,14 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :offset_percentage, as: 'offsetPercentage'
           property :offset_seconds, as: 'offsetSeconds'
+        end
+      end
+      
+      class VideoProcessingData
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :error_reason, as: 'errorReason'
+          property :processing_state, as: 'processingState'
         end
       end
       

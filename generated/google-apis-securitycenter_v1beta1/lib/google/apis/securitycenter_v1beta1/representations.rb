@@ -946,6 +946,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudSecuritycenterV2InfoType
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudSecuritycenterV2IpRule
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -1001,6 +1007,30 @@ module Google
       end
       
       class GoogleCloudSecuritycenterV2IssueResourceApplication
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1270,6 +1300,12 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
+      class GoogleCloudSecuritycenterV2SensitivityScore
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
       class GoogleCloudSecuritycenterV2ServiceAccountDelegationInfo
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
@@ -1361,6 +1397,12 @@ module Google
       end
       
       class Indicator
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class InfoType
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -1619,6 +1661,12 @@ module Google
       end
       
       class SecurityPosture
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class SensitivityScore
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -2015,6 +2063,8 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :data_profile, as: 'dataProfile'
+          collection :info_types, as: 'infoTypes', class: Google::Apis::SecuritycenterV1beta1::InfoType, decorator: Google::Apis::SecuritycenterV1beta1::InfoType::Representation
+      
           property :parent_type, as: 'parentType'
         end
       end
@@ -3054,6 +3104,8 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :data_profile, as: 'dataProfile'
+          collection :info_types, as: 'infoTypes', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2InfoType, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2InfoType::Representation
+      
           property :parent_type, as: 'parentType'
         end
       end
@@ -3512,6 +3564,16 @@ module Google
         end
       end
       
+      class GoogleCloudSecuritycenterV2InfoType
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :name, as: 'name'
+          property :sensitivity_score, as: 'sensitivityScore', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2SensitivityScore, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2SensitivityScore::Representation
+      
+          property :version, as: 'version'
+        end
+      end
+      
       class GoogleCloudSecuritycenterV2IpRule
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -3627,7 +3689,46 @@ module Google
       class GoogleCloudSecuritycenterV2IssueResourceApplication
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :attributes, as: 'attributes', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes::Representation
+      
           property :name, as: 'name'
+        end
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributes
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :business_owners, as: 'businessOwners', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo::Representation
+      
+          property :criticality, as: 'criticality', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality::Representation
+      
+          collection :developer_owners, as: 'developerOwners', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo::Representation
+      
+          property :environment, as: 'environment', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment::Representation
+      
+          collection :operator_owners, as: 'operatorOwners', class: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo, decorator: Google::Apis::SecuritycenterV1beta1::GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo::Representation
+      
+        end
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesContactInfo
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :email, as: 'email'
+        end
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesCriticality
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :type, as: 'type'
+        end
+      end
+      
+      class GoogleCloudSecuritycenterV2IssueResourceApplicationAttributesEnvironment
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :type, as: 'type'
         end
       end
       
@@ -4084,6 +4185,13 @@ module Google
         end
       end
       
+      class GoogleCloudSecuritycenterV2SensitivityScore
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :score, as: 'score'
+        end
+      end
+      
       class GoogleCloudSecuritycenterV2ServiceAccountDelegationInfo
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -4243,6 +4351,16 @@ module Google
         end
       end
       
+      class InfoType
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :name, as: 'name'
+          property :sensitivity_score, as: 'sensitivityScore', class: Google::Apis::SecuritycenterV1beta1::SensitivityScore, decorator: Google::Apis::SecuritycenterV1beta1::SensitivityScore::Representation
+      
+          property :version, as: 'version'
+        end
+      end
+      
       class IpRule
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -4356,6 +4474,7 @@ module Google
           property :next_page_token, as: 'nextPageToken'
           collection :operations, as: 'operations', class: Google::Apis::SecuritycenterV1beta1::Operation, decorator: Google::Apis::SecuritycenterV1beta1::Operation::Representation
       
+          collection :unreachable, as: 'unreachable'
         end
       end
       
@@ -4678,6 +4797,13 @@ module Google
           property :posture_deployment, as: 'postureDeployment'
           property :posture_deployment_resource, as: 'postureDeploymentResource'
           property :revision_id, as: 'revisionId'
+        end
+      end
+      
+      class SensitivityScore
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :score, as: 'score'
         end
       end
       

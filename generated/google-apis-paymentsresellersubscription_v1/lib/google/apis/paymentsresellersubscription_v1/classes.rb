@@ -110,6 +110,11 @@ module Google
       class CreateSubscriptionIntent
         include Google::Apis::Core::Hashable
       
+        # The cycle options when starting and resuming a subscription.
+        # Corresponds to the JSON property `cycleOptions`
+        # @return [Google::Apis::PaymentsresellersubscriptionV1::CycleOptions]
+        attr_accessor :cycle_options
+      
         # Required. The parent resource name, which is the identifier of the partner.
         # Corresponds to the JSON property `parent`
         # @return [String]
@@ -142,9 +147,29 @@ module Google
       
         # Update properties of this object
         def update!(**args)
+          @cycle_options = args[:cycle_options] if args.key?(:cycle_options)
           @parent = args[:parent] if args.key?(:parent)
           @subscription = args[:subscription] if args.key?(:subscription)
           @subscription_id = args[:subscription_id] if args.key?(:subscription_id)
+        end
+      end
+      
+      # The cycle options when starting and resuming a subscription.
+      class CycleOptions
+        include Google::Apis::Core::Hashable
+      
+        # Describes the length of a period of a time.
+        # Corresponds to the JSON property `initialCycleDuration`
+        # @return [Google::Apis::PaymentsresellersubscriptionV1::Duration]
+        attr_accessor :initial_cycle_duration
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @initial_cycle_duration = args[:initial_cycle_duration] if args.key?(:initial_cycle_duration)
         end
       end
       
@@ -616,6 +641,11 @@ module Google
         # @return [Google::Apis::PaymentsresellersubscriptionV1::EntitleSubscriptionIntent]
         attr_accessor :entitle_intent
       
+        # The options for the intent.
+        # Corresponds to the JSON property `intentOptions`
+        # @return [Google::Apis::PaymentsresellersubscriptionV1::IntentPayloadIntentOptions]
+        attr_accessor :intent_options
+      
         def initialize(**args)
            update!(**args)
         end
@@ -624,6 +654,29 @@ module Google
         def update!(**args)
           @create_intent = args[:create_intent] if args.key?(:create_intent)
           @entitle_intent = args[:entitle_intent] if args.key?(:entitle_intent)
+          @intent_options = args[:intent_options] if args.key?(:intent_options)
+        end
+      end
+      
+      # The options for the intent.
+      class IntentPayloadIntentOptions
+        include Google::Apis::Core::Hashable
+      
+        # Optional. If true, Google may use a different product and promotion id from
+        # the ones in the `create_intent` based on the user's eligibility. Only
+        # applicable for certain YouTube free trial offers.
+        # Corresponds to the JSON property `enableOfferOverride`
+        # @return [Boolean]
+        attr_accessor :enable_offer_override
+        alias_method :enable_offer_override?, :enable_offer_override
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @enable_offer_override = args[:enable_offer_override] if args.key?(:enable_offer_override)
         end
       end
       
@@ -1004,12 +1057,18 @@ module Google
       class ResumeSubscriptionRequest
         include Google::Apis::Core::Hashable
       
+        # The cycle options when starting and resuming a subscription.
+        # Corresponds to the JSON property `cycleOptions`
+        # @return [Google::Apis::PaymentsresellersubscriptionV1::CycleOptions]
+        attr_accessor :cycle_options
+      
         def initialize(**args)
            update!(**args)
         end
       
         # Update properties of this object
         def update!(**args)
+          @cycle_options = args[:cycle_options] if args.key?(:cycle_options)
         end
       end
       
@@ -1302,6 +1361,12 @@ module Google
         # @return [Array<Google::Apis::PaymentsresellersubscriptionV1::SubscriptionPromotionSpec>]
         attr_accessor :line_item_promotion_specs
       
+        # Identifier. Resource name of the line item. Format: partners/`partner`/
+        # subscriptions/`subscription`/lineItems/`lineItem`
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
         # Details for a ONE_TIME recurrence line item.
         # Corresponds to the JSON property `oneTimeRecurrenceDetails`
         # @return [Google::Apis::PaymentsresellersubscriptionV1::SubscriptionLineItemOneTimeRecurrenceDetails]
@@ -1341,6 +1406,7 @@ module Google
           @line_item_free_trial_end_time = args[:line_item_free_trial_end_time] if args.key?(:line_item_free_trial_end_time)
           @line_item_index = args[:line_item_index] if args.key?(:line_item_index)
           @line_item_promotion_specs = args[:line_item_promotion_specs] if args.key?(:line_item_promotion_specs)
+          @name = args[:name] if args.key?(:name)
           @one_time_recurrence_details = args[:one_time_recurrence_details] if args.key?(:one_time_recurrence_details)
           @product = args[:product] if args.key?(:product)
           @product_payload = args[:product_payload] if args.key?(:product_payload)

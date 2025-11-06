@@ -650,6 +650,11 @@ module Google
         # @return [String]
         attr_accessor :compatibility
       
+        # Contextual Keyword Targeting.
+        # Corresponds to the JSON property `contextualKeywordTargeting`
+        # @return [Google::Apis::DfareportingV4::ContextualKeywordTargeting]
+        attr_accessor :contextual_keyword_targeting
+      
         # Modification timestamp.
         # Corresponds to the JSON property `createInfo`
         # @return [Google::Apis::DfareportingV4::LastModifiedInfo]
@@ -820,6 +825,7 @@ module Google
           @click_through_url_suffix_properties = args[:click_through_url_suffix_properties] if args.key?(:click_through_url_suffix_properties)
           @comments = args[:comments] if args.key?(:comments)
           @compatibility = args[:compatibility] if args.key?(:compatibility)
+          @contextual_keyword_targeting = args[:contextual_keyword_targeting] if args.key?(:contextual_keyword_targeting)
           @create_info = args[:create_info] if args.key?(:create_info)
           @creative_group_assignments = args[:creative_group_assignments] if args.key?(:creative_group_assignments)
           @creative_rotation = args[:creative_rotation] if args.key?(:creative_rotation)
@@ -2856,6 +2862,44 @@ module Google
           @field_names = args[:field_names] if args.key?(:field_names)
           @row_number = args[:row_number] if args.key?(:row_number)
           @separator = args[:separator] if args.key?(:separator)
+        end
+      end
+      
+      # Contains information about a Contextual Keyword that can be targeted by ads.
+      class ContextualKeyword
+        include Google::Apis::Core::Hashable
+      
+        # The keyword that can be targeted by ads.
+        # Corresponds to the JSON property `keyword`
+        # @return [String]
+        attr_accessor :keyword
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @keyword = args[:keyword] if args.key?(:keyword)
+        end
+      end
+      
+      # Contextual Keyword Targeting.
+      class ContextualKeywordTargeting
+        include Google::Apis::Core::Hashable
+      
+        # Contextual keywords that this ad targets
+        # Corresponds to the JSON property `keywords`
+        # @return [Array<Google::Apis::DfareportingV4::ContextualKeyword>]
+        attr_accessor :keywords
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @keywords = args[:keywords] if args.key?(:keywords)
         end
       end
       
@@ -5583,6 +5627,39 @@ module Google
         end
       end
       
+      # Request message for DfareportingStudioCreativeAssets.Insert.
+      class DfareportingStudioCreativeAssetsInsertRequest
+        include Google::Apis::Core::Hashable
+      
+        # Optional. Studio account ID of the studio creative asset. It is a optional.
+        # Corresponds to the JSON property `studioAccountId`
+        # @return [Fixnum]
+        attr_accessor :studio_account_id
+      
+        # Required. Studio advertiser ID of the studio creative asset. It is a required
+        # field on insertion.
+        # Corresponds to the JSON property `studioAdvertiserId`
+        # @return [Fixnum]
+        attr_accessor :studio_advertiser_id
+      
+        # Optional. Studio creative ID of the studio creative asset. It is a optional
+        # field. If it is set, the asset will be associated to the creative.
+        # Corresponds to the JSON property `studioCreativeId`
+        # @return [Fixnum]
+        attr_accessor :studio_creative_id
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @studio_account_id = args[:studio_account_id] if args.key?(:studio_account_id)
+          @studio_advertiser_id = args[:studio_advertiser_id] if args.key?(:studio_advertiser_id)
+          @studio_creative_id = args[:studio_creative_id] if args.key?(:studio_creative_id)
+        end
+      end
+      
       # Google Ad Manager Settings
       class DfpSettings
         include Google::Apis::Core::Hashable
@@ -6066,8 +6143,7 @@ module Google
       
       # Dynamic profile ID is required for dynamic feed insert as the current GPA API
       # only can create a dynamic feed under profile context,even though the dynnamic
-      # feed itself don't need the dynamic profile id. See go/cm3-dco-display-api-
-      # interface
+      # feed itself don't need the dynamic profile id. See
       class DynamicFeedsInsertRequest
         include Google::Apis::Core::Hashable
       
@@ -6204,6 +6280,25 @@ module Google
           @dynamic_feed_id = args[:dynamic_feed_id] if args.key?(:dynamic_feed_id)
           @dynamic_rules = args[:dynamic_rules] if args.key?(:dynamic_rules)
           @quantity = args[:quantity] if args.key?(:quantity)
+        end
+      end
+      
+      # Response message for DfareportingDynamicProfiles.GenerateCode.
+      class DynamicProfileGenerateCodeResponse
+        include Google::Apis::Core::Hashable
+      
+        # Generated code for the dynamic profile.
+        # Corresponds to the JSON property `code`
+        # @return [String]
+        attr_accessor :code
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @code = args[:code] if args.key?(:code)
         end
       end
       
@@ -9747,7 +9842,8 @@ module Google
         # DV360 (DBM) * `9`, Innovid * `10`, MediaMath * `11`, Roku OneView DSP * `12`,
         # TabMo Hawk * `13`, The Trade Desk * `14`, Xandr Invest DSP * `15`, Yahoo DSP *
         # `16`, Zeta Global * `17`, Scaleout * `18`, Bidtellect * `19`, Unicorn * `20`,
-        # Teads * `21`, Quantcast * `22`, Cognitiv
+        # Teads * `21`, Quantcast * `22`, Cognitiv * `23`, AdTheorent * `24`, DeepIntent
+        # * `25`, Pulsepoint
         # Corresponds to the JSON property `adServingPlatformId`
         # @return [Fixnum]
         attr_accessor :ad_serving_platform_id
@@ -12459,7 +12555,8 @@ module Google
         # Innovid * `10`, MediaMath * `11`, Roku OneView DSP * `12`, TabMo Hawk * `13`,
         # The Trade Desk * `14`, Xandr Invest DSP * `15`, Yahoo DSP * `16`, Zeta Global *
         # `17`, Scaleout * `18`, Bidtellect * `19`, Unicorn * `20`, Teads * `21`,
-        # Quantcast * `22`, Cognitiv
+        # Quantcast * `22`, Cognitiv * `23`, AdTheorent * `24`, DeepIntent * `25`,
+        # Pulsepoint
         # Corresponds to the JSON property `adServingPlatformId`
         # @return [Fixnum]
         attr_accessor :ad_serving_platform_id
@@ -13035,6 +13132,225 @@ module Google
         end
       end
       
+      # Contains studio creative information.
+      class StudioCreative
+        include Google::Apis::Core::Hashable
+      
+        # List of assets associated with this studio creative. It is a required field on
+        # insertion.
+        # Corresponds to the JSON property `assetIds`
+        # @return [Array<Fixnum>]
+        attr_accessor :asset_ids
+      
+        # Backup image asset ID of this studio creative.
+        # Corresponds to the JSON property `backupImageAssetId`
+        # @return [Fixnum]
+        attr_accessor :backup_image_asset_id
+      
+        # Modification timestamp.
+        # Corresponds to the JSON property `createdInfo`
+        # @return [Google::Apis::DfareportingV4::LastModifiedInfo]
+        attr_accessor :created_info
+      
+        # Dimension information for a studio creative.
+        # Corresponds to the JSON property `dimension`
+        # @return [Google::Apis::DfareportingV4::StudioCreativeDimension]
+        attr_accessor :dimension
+      
+        # Dynamic profile ID of this studio creative.
+        # Corresponds to the JSON property `dynamicProfileId`
+        # @return [Fixnum]
+        attr_accessor :dynamic_profile_id
+      
+        # Format of this studio creative. This is a required field on insertion.
+        # Corresponds to the JSON property `format`
+        # @return [String]
+        attr_accessor :format
+      
+        # Output only. Unique ID of this studio creative. This is a read-only, auto-
+        # generated field.
+        # Corresponds to the JSON property `id`
+        # @return [Fixnum]
+        attr_accessor :id
+      
+        # Modification timestamp.
+        # Corresponds to the JSON property `lastModifiedInfo`
+        # @return [Google::Apis::DfareportingV4::LastModifiedInfo]
+        attr_accessor :last_modified_info
+      
+        # Identifier. Name of this studio creative. This is a required field on
+        # insertion.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # Output only. Status of this studio creative. It is a read-only field.
+        # Corresponds to the JSON property `status`
+        # @return [String]
+        attr_accessor :status
+      
+        # Studio account ID of this creative. This field, if left unset, will be auto-
+        # populated.
+        # Corresponds to the JSON property `studioAccountId`
+        # @return [Fixnum]
+        attr_accessor :studio_account_id
+      
+        # Studio advertiser ID of this studio creative. This is a required field on
+        # insertion.
+        # Corresponds to the JSON property `studioAdvertiserId`
+        # @return [Fixnum]
+        attr_accessor :studio_advertiser_id
+      
+        # Studio campaign ID of this studio creative. This is a required field on
+        # insertion.
+        # Corresponds to the JSON property `studioCampaignId`
+        # @return [Fixnum]
+        attr_accessor :studio_campaign_id
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @asset_ids = args[:asset_ids] if args.key?(:asset_ids)
+          @backup_image_asset_id = args[:backup_image_asset_id] if args.key?(:backup_image_asset_id)
+          @created_info = args[:created_info] if args.key?(:created_info)
+          @dimension = args[:dimension] if args.key?(:dimension)
+          @dynamic_profile_id = args[:dynamic_profile_id] if args.key?(:dynamic_profile_id)
+          @format = args[:format] if args.key?(:format)
+          @id = args[:id] if args.key?(:id)
+          @last_modified_info = args[:last_modified_info] if args.key?(:last_modified_info)
+          @name = args[:name] if args.key?(:name)
+          @status = args[:status] if args.key?(:status)
+          @studio_account_id = args[:studio_account_id] if args.key?(:studio_account_id)
+          @studio_advertiser_id = args[:studio_advertiser_id] if args.key?(:studio_advertiser_id)
+          @studio_campaign_id = args[:studio_campaign_id] if args.key?(:studio_campaign_id)
+        end
+      end
+      
+      # Contains studio creative asset information.
+      class StudioCreativeAsset
+        include Google::Apis::Core::Hashable
+      
+        # Modification timestamp.
+        # Corresponds to the JSON property `createInfo`
+        # @return [Google::Apis::DfareportingV4::LastModifiedInfo]
+        attr_accessor :create_info
+      
+        # The filename of the studio creative asset. It is default to the original
+        # filename of the asset.
+        # Corresponds to the JSON property `filename`
+        # @return [String]
+        attr_accessor :filename
+      
+        # The filesize of the studio creative asset. This is a read-only field.
+        # Corresponds to the JSON property `filesize`
+        # @return [Fixnum]
+        attr_accessor :filesize
+      
+        # Output only. Unique ID of this studio creative asset. This is a read-only,
+        # auto-generated field.
+        # Corresponds to the JSON property `id`
+        # @return [Fixnum]
+        attr_accessor :id
+      
+        # Modification timestamp.
+        # Corresponds to the JSON property `lastModifiedInfo`
+        # @return [Google::Apis::DfareportingV4::LastModifiedInfo]
+        attr_accessor :last_modified_info
+      
+        # Studio account ID of this studio creative asset. This field, if left unset,
+        # will be auto-populated..
+        # Corresponds to the JSON property `studioAccountId`
+        # @return [Fixnum]
+        attr_accessor :studio_account_id
+      
+        # Studio advertiser ID of this studio creative asset. This is a required field
+        # on insertion.
+        # Corresponds to the JSON property `studioAdvertiserId`
+        # @return [Fixnum]
+        attr_accessor :studio_advertiser_id
+      
+        # Studio creative ID of this studio creative asset. The asset will be associated
+        # to the creative if creative id is set.
+        # Corresponds to the JSON property `studioCreativeId`
+        # @return [Fixnum]
+        attr_accessor :studio_creative_id
+      
+        # The type of the studio creative asset. It is a auto-generated, read-only field.
+        # Corresponds to the JSON property `type`
+        # @return [String]
+        attr_accessor :type
+      
+        # Contains processing data for a video asset.
+        # Corresponds to the JSON property `videoProcessingData`
+        # @return [Google::Apis::DfareportingV4::VideoProcessingData]
+        attr_accessor :video_processing_data
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @create_info = args[:create_info] if args.key?(:create_info)
+          @filename = args[:filename] if args.key?(:filename)
+          @filesize = args[:filesize] if args.key?(:filesize)
+          @id = args[:id] if args.key?(:id)
+          @last_modified_info = args[:last_modified_info] if args.key?(:last_modified_info)
+          @studio_account_id = args[:studio_account_id] if args.key?(:studio_account_id)
+          @studio_advertiser_id = args[:studio_advertiser_id] if args.key?(:studio_advertiser_id)
+          @studio_creative_id = args[:studio_creative_id] if args.key?(:studio_creative_id)
+          @type = args[:type] if args.key?(:type)
+          @video_processing_data = args[:video_processing_data] if args.key?(:video_processing_data)
+        end
+      end
+      
+      # Response message for DfareportingStudioCreativeAssets.Insert.
+      class StudioCreativeAssetsResponse
+        include Google::Apis::Core::Hashable
+      
+        # The list of studio creative assets.
+        # Corresponds to the JSON property `assets`
+        # @return [Array<Google::Apis::DfareportingV4::StudioCreativeAsset>]
+        attr_accessor :assets
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @assets = args[:assets] if args.key?(:assets)
+        end
+      end
+      
+      # Dimension information for a studio creative.
+      class StudioCreativeDimension
+        include Google::Apis::Core::Hashable
+      
+        # Height of the studio creative.
+        # Corresponds to the JSON property `height`
+        # @return [Fixnum]
+        attr_accessor :height
+      
+        # Width of the studio creative.
+        # Corresponds to the JSON property `width`
+        # @return [Fixnum]
+        attr_accessor :width
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @height = args[:height] if args.key?(:height)
+          @width = args[:width] if args.key?(:width)
+        end
+      end
+      
       # Contains properties of a Campaign Manager subaccount.
       class Subaccount
         include Google::Apis::Core::Hashable
@@ -13418,6 +13734,11 @@ module Google
         # @return [Google::Apis::DfareportingV4::DimensionValue]
         attr_accessor :advertiser_id_dimension_value
       
+        # Contextual Keyword Targeting.
+        # Corresponds to the JSON property `contextualKeywordTargeting`
+        # @return [Google::Apis::DfareportingV4::ContextualKeywordTargeting]
+        attr_accessor :contextual_keyword_targeting
+      
         # Day Part Targeting.
         # Corresponds to the JSON property `dayPartTargeting`
         # @return [Google::Apis::DfareportingV4::DayPartTargeting]
@@ -13480,6 +13801,7 @@ module Google
           @account_id = args[:account_id] if args.key?(:account_id)
           @advertiser_id = args[:advertiser_id] if args.key?(:advertiser_id)
           @advertiser_id_dimension_value = args[:advertiser_id_dimension_value] if args.key?(:advertiser_id_dimension_value)
+          @contextual_keyword_targeting = args[:contextual_keyword_targeting] if args.key?(:contextual_keyword_targeting)
           @day_part_targeting = args[:day_part_targeting] if args.key?(:day_part_targeting)
           @geo_targeting = args[:geo_targeting] if args.key?(:geo_targeting)
           @id = args[:id] if args.key?(:id)
@@ -14345,6 +14667,31 @@ module Google
         def update!(**args)
           @offset_percentage = args[:offset_percentage] if args.key?(:offset_percentage)
           @offset_seconds = args[:offset_seconds] if args.key?(:offset_seconds)
+        end
+      end
+      
+      # Contains processing data for a video asset.
+      class VideoProcessingData
+        include Google::Apis::Core::Hashable
+      
+        # For a FAILED processing state, the error reason discovered.
+        # Corresponds to the JSON property `errorReason`
+        # @return [String]
+        attr_accessor :error_reason
+      
+        # Output only. The processing state of the studio creative asset.
+        # Corresponds to the JSON property `processingState`
+        # @return [String]
+        attr_accessor :processing_state
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @error_reason = args[:error_reason] if args.key?(:error_reason)
+          @processing_state = args[:processing_state] if args.key?(:processing_state)
         end
       end
       

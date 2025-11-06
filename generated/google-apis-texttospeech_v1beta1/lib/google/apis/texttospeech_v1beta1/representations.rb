@@ -164,6 +164,7 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :low_latency_journey_synthesis, as: 'lowLatencyJourneySynthesis'
+          property :relax_safety_filters, as: 'relaxSafetyFilters'
         end
       end
       
@@ -219,6 +220,7 @@ module Google
           property :next_page_token, as: 'nextPageToken'
           collection :operations, as: 'operations', class: Google::Apis::TexttospeechV1beta1::Operation, decorator: Google::Apis::TexttospeechV1beta1::Operation::Representation
       
+          collection :unreachable, as: 'unreachable'
         end
       end
       
