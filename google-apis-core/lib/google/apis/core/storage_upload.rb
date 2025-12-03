@@ -176,13 +176,19 @@ module Google
           request_header = header.dup
           request_header[CONTENT_RANGE_HEADER] = get_content_range_header current_chunk_size
           request_header[CONTENT_LENGTH_HEADER] = current_chunk_size.to_s
+          last_chunk= remaining_content_size <= current_chunk_size
+          hash_data= JSON.parse(body)
+          target_keys = ["crc32c", "md5Hash"]
+          formatted_string = hash_data.slice(*target_keys).map { |key, value| "#{key}=#{value}" }.join(',')
+          request_header['X-Goog-Hash'] = formatted_string if last_chunk
+  
           chunk_body =
             if @upload_chunk_size == 0
               upload_io
             else
               StringIO.new(upload_io.read(current_chunk_size))
             end
-
+          binding.pry if last_chunk
           response = client.put(@upload_url, chunk_body, request_header)
 
           result = process_response(response.status.to_i, response.headers, response.body)
@@ -191,7 +197,7 @@ module Google
           success(result)
         rescue => e
           logger.warn {
-            "error occured please use uploadId-#{response.headers['X-GUploader-UploadID']} to resume your upload"
+            "error occurred please use uploadId-#{response.headers['X-GUploader-UploadID']} to resume your upload , error==> #{e}"
           } unless response.nil?
           upload_io.pos = @offset
           error(e, rethrow: true)
@@ -246,7 +252,7 @@ module Google
 
         def handle_resumable_upload_http_response_codes(response)
           code = response.status.to_i
-
+          binding.pry
           case code
           when 308
             if response.headers['Range']
@@ -262,6 +268,7 @@ module Google
             @upload_incomplete = false
           when 200, 201
             # Upload is complete.
+            binding.pry
             @upload_incomplete = false
           else
             logger.debug { sprintf("Unexpected response: #{response.status.to_i} - #{response.body}") }
