@@ -32,6 +32,7 @@ module Google
         CONTENT_RANGE_HEADER = "Content-Range"
         RESUMABLE = "resumable"
         OK_STATUS = 200
+        UPLOAD_MISMATCH = "The uploaded data did not match the data from the server."
 
         # File name or IO containing the content to upload
         # @return [String, File, #read]
@@ -178,8 +179,13 @@ module Google
           request_header[CONTENT_LENGTH_HEADER] = current_chunk_size.to_s
           last_chunk= remaining_content_size <= current_chunk_size
           hash_data= JSON.parse(body)
-          target_keys = ["crc32c", "md5Hash"]
-          formatted_string = hash_data.slice(*target_keys).map { |key, value| "#{key}=#{value}" }.join(',')
+
+          target_keys = ["crc32c", "md5Hash", "md5"]
+          selected_keys = hash_data.slice(*target_keys)
+          formatted_string = selected_keys.map do |key, value|
+            output_key = (key == "md5Hash") ? "md5" : key
+            "#{output_key}=#{value}"
+          end.join(',')
           request_header['X-Goog-Hash'] = formatted_string if last_chunk
   
           chunk_body =
@@ -188,13 +194,24 @@ module Google
             else
               StringIO.new(upload_io.read(current_chunk_size))
             end
-          binding.pry if last_chunk
           response = client.put(@upload_url, chunk_body, request_header)
-
+          # binding.pry
           result = process_response(response.status.to_i, response.headers, response.body)
+          
           @upload_incomplete = false if response.status.to_i.eql? OK_STATUS
           @offset += current_chunk_size if @upload_incomplete
-          success(result)
+          if last_chunk
+            response_data = JSON.parse(response.body)
+            target_keys= selected_keys.keys
+            selected_keys_res= response_data.slice(*target_keys)
+
+            if selected_keys_res == selected_keys
+              success(result)
+            else
+              raise error UPLOAD_MISMATCH
+            end
+          end
+          
         rescue => e
           logger.warn {
             "error occurred please use uploadId-#{response.headers['X-GUploader-UploadID']} to resume your upload , error==> #{e}"
@@ -252,7 +269,6 @@ module Google
 
         def handle_resumable_upload_http_response_codes(response)
           code = response.status.to_i
-          binding.pry
           case code
           when 308
             if response.headers['Range']
@@ -268,7 +284,6 @@ module Google
             @upload_incomplete = false
           when 200, 201
             # Upload is complete.
-            binding.pry
             @upload_incomplete = false
           else
             logger.debug { sprintf("Unexpected response: #{response.status.to_i} - #{response.body}") }
