@@ -195,21 +195,10 @@ module Google
               StringIO.new(upload_io.read(current_chunk_size))
             end
           response = client.put(@upload_url, chunk_body, request_header)
-          # binding.pry
           result = process_response(response.status.to_i, response.headers, response.body)
-          
           @upload_incomplete = false if response.status.to_i.eql? OK_STATUS
           @offset += current_chunk_size if @upload_incomplete
-          if last_chunk
-            response_data = JSON.parse(response.body)
-            target_keys= selected_keys.keys
-            selected_keys_res= response_data.slice(*target_keys)
-
-            if selected_keys_res == selected_keys
-              success(result)
-            else
-              raise error UPLOAD_MISMATCH
-            end
+          success(result)
           end
           
         rescue => e
