@@ -32,7 +32,6 @@ module Google
         CONTENT_RANGE_HEADER = "Content-Range"
         RESUMABLE = "resumable"
         OK_STATUS = 200
-        UPLOAD_MISMATCH = "The uploaded data did not match the data from the server."
 
         # File name or IO containing the content to upload
         # @return [String, File, #read]
@@ -199,7 +198,6 @@ module Google
           @upload_incomplete = false if response.status.to_i.eql? OK_STATUS
           @offset += current_chunk_size if @upload_incomplete
           success(result)
-          end
           
         rescue => e
           logger.warn {
