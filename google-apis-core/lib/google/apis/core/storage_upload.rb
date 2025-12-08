@@ -177,7 +177,7 @@ module Google
           request_header[CONTENT_RANGE_HEADER] = get_content_range_header current_chunk_size
           request_header[CONTENT_LENGTH_HEADER] = current_chunk_size.to_s
           last_chunk= remaining_content_size <= current_chunk_size
-          hash_data= JSON.parse(body)
+          hash_data = body.to_s.empty? ? {} : JSON.parse(body)
 
           target_keys = ["crc32c", "md5Hash", "md5"]
           selected_keys = hash_data.slice(*target_keys)
