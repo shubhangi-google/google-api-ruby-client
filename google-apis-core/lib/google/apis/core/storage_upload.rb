@@ -136,6 +136,8 @@ module Google
           request_header[CONTENT_LENGTH_HEADER] = upload_io.size.to_s
           request_header[CONTENT_TYPE_HEADER] = JSON_CONTENT_TYPE
           request_header[UPLOAD_CONTENT_TYPE_HEADER] = upload_content_type unless upload_content_type.nil?
+          formatted_string = formatted_checksum_header
+          request_header['X-Goog-Hash'] = formatted_string unless formatted_string.empty?
 
           response = client.post(url.to_s, body, request_header) do |request|
             request.params.replace(request_query)
@@ -177,15 +179,8 @@ module Google
           request_header[CONTENT_RANGE_HEADER] = get_content_range_header current_chunk_size
           request_header[CONTENT_LENGTH_HEADER] = current_chunk_size.to_s
           last_chunk= remaining_content_size <= current_chunk_size
-          hash_data = body.to_s.empty? ? {} : JSON.parse(body)
-
-          target_keys = ["crc32c", "md5Hash", "md5"]
-          selected_keys = hash_data.slice(*target_keys)
-          formatted_string = selected_keys.map do |key, value|
-            output_key = (key == "md5Hash") ? "md5" : key
-            "#{output_key}=#{value}"
-          end.join(',')
-          request_header['X-Goog-Hash'] = formatted_string if last_chunk
+          formatted_string = formatted_checksum_header
+          request_header['X-Goog-Hash'] = formatted_string if (last_chunk && !formatted_string.empty?)
   
           chunk_body =
             if @upload_chunk_size == 0
@@ -298,6 +293,30 @@ module Google
             numerator = sprintf("%d-%d", @offset, @offset+current_chunk_size-1)
           end
           sprintf('bytes %s/%d', numerator, upload_io.size)
+        end
+
+        # Generates a formatted checksum header string from the request body.
+        #
+        # Parses the body as JSON and extracts checksum values for the keys "crc32c", "md5Hash", and "md5".
+        # The "md5Hash" key is renamed to "md5" in the output.
+        # Returns a comma-separated string in the format "key=value" for each present checksum.
+        #
+        # @example
+        #   If the body contains:
+        #   { "md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
+        #     "crc32c": "AAAAAA==" }
+        #   The method returns:
+        #   "crc32c=AAAAAA==,md5=1B2M2Y8AsgTpgAmY7PhCfg=="
+        # @return [String] the formatted checksum header, or an empty string if no relevant keys are present
+        def formatted_checksum_header
+          hash_data = body.to_s.empty? ? {} : JSON.parse(body)
+          target_keys = ["crc32c", "md5Hash", "md5"]
+          selected_keys = hash_data.slice(*target_keys)
+          formatted_string = selected_keys.map do |key, value|
+            output_key = (key == "md5Hash") ? "md5" : key
+            "#{output_key}=#{value}"
+          end.join(',')
+          formatted_string
         end
       end
     end
