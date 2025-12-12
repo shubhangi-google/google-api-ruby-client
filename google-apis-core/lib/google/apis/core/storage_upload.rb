@@ -136,7 +136,7 @@ module Google
           request_header[CONTENT_LENGTH_HEADER] = upload_io.size.to_s
           request_header[CONTENT_TYPE_HEADER] = JSON_CONTENT_TYPE
           request_header[UPLOAD_CONTENT_TYPE_HEADER] = upload_content_type unless upload_content_type.nil?
-          
+
           response = client.post(url.to_s, body, request_header) do |request|
             request.params.replace(request_query)
           end
@@ -193,7 +193,6 @@ module Google
           @upload_incomplete = false if response.status.to_i.eql? OK_STATUS
           @offset += current_chunk_size if @upload_incomplete
           success(result)
-          
         rescue => e
           logger.warn {
             "error occurred please use uploadId-#{response.headers['X-GUploader-UploadID']} to resume your upload , error==> #{e}"
@@ -251,7 +250,7 @@ module Google
 
         def handle_resumable_upload_http_response_codes(response)
           code = response.status.to_i
-          
+
           case code
           when 308
             if response.headers['Range']
