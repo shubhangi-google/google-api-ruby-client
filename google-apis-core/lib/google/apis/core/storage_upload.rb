@@ -136,6 +136,7 @@ module Google
           request_header[CONTENT_LENGTH_HEADER] = upload_io.size.to_s
           request_header[CONTENT_TYPE_HEADER] = JSON_CONTENT_TYPE
           request_header[UPLOAD_CONTENT_TYPE_HEADER] = upload_content_type unless upload_content_type.nil?
+          
           response = client.post(url.to_s, body, request_header) do |request|
             request.params.replace(request_query)
           end
@@ -175,7 +176,7 @@ module Google
           request_header = header.dup
           request_header[CONTENT_RANGE_HEADER] = get_content_range_header current_chunk_size
           request_header[CONTENT_LENGTH_HEADER] = current_chunk_size.to_s
-          last_chunk= remaining_content_size <= current_chunk_size
+          last_chunk = remaining_content_size <= current_chunk_size
           formatted_string = formatted_checksum_header
           request_header['X-Goog-Hash'] = formatted_string if (last_chunk && !formatted_string.empty?)
   
@@ -185,7 +186,9 @@ module Google
             else
               StringIO.new(upload_io.read(current_chunk_size))
             end
+
           response = client.put(@upload_url, chunk_body, request_header)
+
           result = process_response(response.status.to_i, response.headers, response.body)
           @upload_incomplete = false if response.status.to_i.eql? OK_STATUS
           @offset += current_chunk_size if @upload_incomplete
@@ -248,6 +251,7 @@ module Google
 
         def handle_resumable_upload_http_response_codes(response)
           code = response.status.to_i
+          
           case code
           when 308
             if response.headers['Range']
